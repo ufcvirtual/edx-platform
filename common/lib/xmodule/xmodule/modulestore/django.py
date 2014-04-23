@@ -14,6 +14,7 @@ from django.dispatch import Signal
 import django.utils
 
 from xmodule.modulestore.loc_mapper_store import LocMapperStore
+from xmodule.modulestore.mongo.draft import DraftModuleStore
 from xmodule.util.django import get_current_request_hostname
 
 
@@ -219,3 +220,15 @@ class ModuleI18nService(object):
         # then Cale was a liar.
         from util.date_utils import strftime_localized
         return strftime_localized(*args, **kwargs)
+
+
+class LmsMetadataService(object):
+    """
+    Implement the XBlock runtime "Metadata" service.
+
+    Allows the retrieval of LMS specific metadata. Exposes methods specific to
+    the LMS configuration and requests.
+    """
+    def is_preview_enabled(self):
+        module_store = modulestore()
+        return isinstance(module_store, DraftModuleStore)

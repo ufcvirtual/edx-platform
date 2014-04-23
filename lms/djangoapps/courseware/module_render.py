@@ -34,7 +34,7 @@ from xblock.django.request import django_to_webob_request, webob_to_django_respo
 from xmodule.error_module import ErrorDescriptor, NonStaffErrorDescriptor
 from xmodule.exceptions import NotFoundError, ProcessingError
 from xmodule.modulestore import Location
-from xmodule.modulestore.django import modulestore, ModuleI18nService
+from xmodule.modulestore.django import modulestore, ModuleI18nService, LmsMetadataService
 from xmodule.modulestore.exceptions import ItemNotFoundError
 from xmodule.util.duedate import get_extended_due_date
 from xmodule_modifiers import replace_course_urls, replace_jump_to_id_urls, replace_static_urls, add_staff_markup, wrap_xblock
@@ -430,6 +430,7 @@ def get_module_for_descriptor_internal(user, descriptor, field_data_cache, cours
         get_real_user=user_by_anonymous_id,
         services={
             'i18n': ModuleI18nService(),
+            'metadata': LmsMetadataService(),
         },
         get_user_role=lambda: get_user_role(user, course_id),
         descriptor_runtime=descriptor.runtime,
