@@ -3,7 +3,7 @@ XFields for video module.
 """
 import datetime
 
-from xblock.fields import Scope, String, Float, Boolean, List, Dict
+from xblock.fields import Scope, String, Float, Integer, Boolean, List, Dict
 
 from xmodule.fields import RelativeTime
 
@@ -148,5 +148,24 @@ class VideoFields(object):
     handout = String(
         help="Upload a handout to accompany this video. Students can download the handout by clicking Download Handout under the video.",
         display_name="Upload Handout",
+        scope=Scope.settings,
+    )
+
+    is_gradable = Boolean(
+        help="Makes the video gradable.",
+        display_name="Grade",
+        scope=Scope.settings,
+    )
+
+    grade_on_ended = Boolean(
+        help="Grades the video on video end.",
+        display_name="Grade on video end.",
+        scope=Scope.settings,
+    )
+
+    grade_on_percent = Integer(
+        help="Defines percentage of time that students need to watch before the video will be graded.",
+        display_name="Grade watched parentage",
+        values={"min": 0, "max": 100},
         scope=Scope.settings,
     )
