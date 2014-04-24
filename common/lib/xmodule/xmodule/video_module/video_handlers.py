@@ -264,10 +264,39 @@ class VideoStudentViewHandlers(object):
         return response
 
 
+    @XBlock.handler
+    def grade_handler(self, request, dispatch):
+
+        def max_score():
+            return self.weight if self.is_scored else None
+
+        score  = request.POST.get('score')
+        if not score:
+            log.info("Invalid grade request: no score.")
+            return Response(status=400)
+
+        anon_user_id  = self.runtime.anonymous_student_id
+        assert anon_user_id is not None
+        real_user = self.system.get_real_user(anon_user_id)
+
+        self.system.publish(
+            self,
+            'grade',
+            {
+                'value': float(score) * max_score()
+                'max_value': max_score(),
+                'user_id': real_user,
+            }
+        )
+        log.debug("[Video]: Grade is saved.")
+        return Response(status=200)
+
+
 class VideoStudioViewHandlers(object):
     """
     Handlers for Studio view.
     """
+
     @XBlock.handler
     def studio_transcript(self, request, dispatch):
         """

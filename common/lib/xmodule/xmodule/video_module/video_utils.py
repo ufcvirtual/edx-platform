@@ -23,3 +23,18 @@ def create_youtube_string(module):
         in zip(youtube_speeds, youtube_ids)
         if pair[1]
     ])
+
+
+def grade_url(self):
+    """
+    Return grade url for 3rd party handler.
+
+    Should deprecated after https://github.com/edx/edx-platform/pull/2685 gets merged.
+    """
+    scheme = 'http' if 'sandbox' in self.system.hostname or self.system.debug else 'https'
+    uri = '{scheme}://{host}{path}'.format(
+    scheme=scheme,
+        host=self.system.hostname,
+        path=self.runtime.handler_url(self, 'grade_handler', thirdparty=True).rstrip('/?')
+        )
+    return uri

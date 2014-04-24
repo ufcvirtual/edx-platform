@@ -31,7 +31,7 @@ from xmodule.editing_module import TabsEditingDescriptor
 from xmodule.raw_module import EmptyDataRawDescriptor
 from xmodule.xml_module import is_pointer_tag, name_to_pathname, deserialize_field
 
-from .video_utils import create_youtube_string
+from .video_utils import create_youtube_string, grade_url
 from .video_xfields import VideoFields
 from .video_handlers import VideoStudentViewHandlers, VideoStudioViewHandlers
 
@@ -173,6 +173,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             'transcript_languages': json.dumps(sorted_languages),
             'transcript_translation_url': self.runtime.handler_url(self, 'transcript', 'translation').rstrip('/?'),
             'transcript_available_translations_url': self.runtime.handler_url(self, 'transcript', 'available_translations').rstrip('/?'),
+            'grade_url': self.grade_url
         })
 
 
@@ -182,6 +183,7 @@ class VideoDescriptor(VideoFields, VideoStudioViewHandlers, TabsEditingDescripto
     """
     module_class = VideoModule
     transcript = module_attr('transcript')
+    grade_handler = module_attr('grade_handler')
 
     tabs = [
         {
