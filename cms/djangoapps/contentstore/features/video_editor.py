@@ -143,6 +143,9 @@ def correct_video_settings(_step):
         ['Display Name', 'Video', False],
         ['Download Transcript', '', False],
         ['End Time', '00:00:00', False],
+        ['Scored', 'False', False],
+        ['Scored on video end', 'False', False],
+        ['Scored viewed parentage', '', False],
         ['Start Time', '00:00:00', False],
         ['Transcript (primary)', '', False],
         ['Transcript Display', 'True', False],
@@ -151,10 +154,11 @@ def correct_video_settings(_step):
         ['Upload Handout', '', False],
         ['Video Download Allowed', 'False', False],
         ['Video Sources', '', False],
+        ['Weight', '1', False],
         ['Youtube ID', 'OEoXaMPEzfM', False],
         ['Youtube ID for .75x speed', '', False],
         ['Youtube ID for 1.25x speed', '', False],
-        ['Youtube ID for 1.5x speed', '', False]
+        ['Youtube ID for 1.5x speed', '', False],
     ]
     world.verify_all_setting_entries(expected_entries)
 

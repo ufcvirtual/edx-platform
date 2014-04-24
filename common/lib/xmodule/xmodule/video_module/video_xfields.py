@@ -160,7 +160,7 @@ class VideoFields(object):
 
     scored_on_end = Boolean(
         help="Grades the video on video end.",
-        display_name="Scored on video end.",
+        display_name="Scored on video end",
         scope=Scope.settings,
         default=False,
     )
