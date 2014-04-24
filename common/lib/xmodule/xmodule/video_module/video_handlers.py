@@ -283,7 +283,7 @@ class VideoStudentViewHandlers(object):
             self,
             'grade',
             {
-                'value': float(score) * max_score()
+                'value': float(score) * max_score(),
                 'max_value': max_score(),
                 'user_id': real_user,
             }
