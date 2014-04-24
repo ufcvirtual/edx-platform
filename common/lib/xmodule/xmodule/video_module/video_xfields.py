@@ -151,21 +151,41 @@ class VideoFields(object):
         scope=Scope.settings,
     )
 
-    is_gradable = Boolean(
-        help="Makes the video gradable.",
-        display_name="Grade",
+    has_score = Boolean(
+        help="Select True if this component has a numerical score that will be included in the overall course grade.",
+        display_name="Scored",
         scope=Scope.settings,
+        default=False,
     )
 
-    grade_on_ended = Boolean(
+    scored_on_end = Boolean(
         help="Grades the video on video end.",
-        display_name="Grade on video end.",
+        display_name="Scored on video end.",
         scope=Scope.settings,
+        default=False,
     )
 
-    grade_on_percent = Integer(
-        help="Defines percentage of time that students need to watch before the video will be graded.",
-        display_name="Grade watched parentage",
+    scored_on_percent = Integer(
+        help="Defines percentage of time that students need to watch the video will be scored successfully.",
+        display_name="Scored viewed parentage",
         values={"min": 0, "max": 100},
         scope=Scope.settings,
+    )
+
+    module_score = Float(
+        help="The score kept in the xblock KVS -- duplicate of the published score in django DB",
+        default=None,
+        scope=Scope.user_state
+    )
+
+    weight = Float(
+        display_name="Weight",
+        help=(
+            "Enter the number of points possible for this component.  "
+            "The default value is 1.0.  "
+            "This setting is only used when Scored is set to True."
+        ),
+        default=1.0,
+        scope=Scope.settings,
+        values={"min": 0},
     )

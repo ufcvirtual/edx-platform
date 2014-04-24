@@ -92,6 +92,14 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
     ]}
     js_module_name = "Video"
 
+    @property
+    def graded(self):
+        """
+        Alias of the `has_score` property
+        """
+        return self.has_score
+
+
     def get_html(self):
         track_url = None
         transcript_download_format = self.transcript_download_format
