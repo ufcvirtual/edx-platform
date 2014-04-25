@@ -5,7 +5,7 @@
     <h2 class="video-header">${display_name}</h2>
 % endif
 
-% if has_score and weight:
+% if has_score and weight and grader_name:
     <div class="problem-progress">
         % if module_score is not None:
             ## Translators: "points" is the student's achieved score, and "total_points" is the maximum number of points achievable.
@@ -50,6 +50,7 @@
     data-max-score = "${weight}"
     data-score = "${json.dumps(module_score)}"
     data-has-score = "${json.dumps(has_score)}"
+    data-grader-name = "${grader_name}"
 
     ## For now, the option "data-autohide-html5" is hard coded. This option
     ## either enables or disables autohiding of controls and captions on mouse

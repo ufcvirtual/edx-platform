@@ -44,7 +44,7 @@
             'video/07_video_volume_control.js',
             'video/08_video_speed_control.js',
             'video/09_video_caption.js',
-            'video/10_grader.js'
+            'video/10_graders.js'
         ],
         function (
             initialize,
@@ -56,7 +56,7 @@
             VideoVolumeControl,
             VideoSpeedControl,
             VideoCaption,
-            Grader
+            VideoGraders
         ) {
             var youtubeXhr = null,
                 oldVideo = window.Video,
@@ -92,7 +92,7 @@
                     VideoVolumeControl,
                     VideoSpeedControl,
                     VideoCaption,
-                    Grader
+                    VideoGraders
                 ];
 
                 state.youtubeXhr = youtubeXhr;

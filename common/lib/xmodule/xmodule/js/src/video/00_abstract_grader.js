@@ -1,45 +1,47 @@
 (function (define) {
 'use strict';
 define(
-'video/10_grader.js',
+'video/00_abstract_grader.js',
 [],
-function () {
+function() {
     /**
-     * Grader module.
-     * @exports video/10_grader.js
+     * AbstractGrader module.
+     * @exports video/00_abstract_grader.js
      * @constructor
      * @param {object} state The object containing the state of the video
      * player.
      * @return {jquery Promise}
      */
-    var Grader = function (state) {
-        if (!(this instanceof Grader)) {
-            return new Grader(state);
+    var AbstractGrader = function () { };
+
+    AbstractGrader.extend = function (protoProps) {
+        var Parent = this,
+            Child = function () {
+                if ($.isFunction(this['initialize'])) {
+                    return this['initialize'].apply(this, arguments);
+                }
+            };
+
+        // inherit
+        var F = function () {};
+        F.prototype = Parent.prototype;
+        Child.prototype = new F();
+        Child.constructor = Parent;
+        Child.__super__ = Parent.prototype;
+
+        if (protoProps) {
+            $.extend(Child.prototype, protoProps);
         }
 
-        var i18n = {
-            // Translators: "points" is the student's achieved score, and "total_points" is the maximum number of points achievable.
-            '(%(points)s / %(total_points)s points)': gettext('(%(points)s / %(total_points)s points)'),
-            'Feedback on your work from the grader:': gettext('Feedback on your work from the grader:'),
-            'This problem was successfully scored!': gettext('This problem was successfully scored!'),
-            'Error happens. Sorry for the inconvenience, restart your page and try again.': gettext('Error happens. Sorry for the inconvenience, restart your page and try again.')
-        };
-
-        this.state = state;
-        this.state.videoGrader = this;
-
-        if (this.state.config.hasScore) {
-            this.initialize(i18n);
-        }
-
-        return $.Deferred().resolve().promise();
+        return Child;
     };
 
-    Grader.prototype = {
+    AbstractGrader.prototype = {
         /** Initializes the module. */
-        initialize: function (i18n) {
-            this.el = this.state.el;
+        initialize: function (state, i18n) {
+            this.state = state;
             this.i18n = i18n;
+            this.el = this.state.el;
             this.maxScore = this.state.config.maxScore;
             this.score = this.state.config.score;
             this.url = this.state.config.gradeUrl;
@@ -51,9 +53,11 @@ function () {
             if (this.score && isFinite(this.score)) {
                 this.setScore(this.score);
             } else {
-                this.grader = this.getGrader();
+                this.grader = this.getGrader(this.el, this.state);
                 this.grader.done(this.sendGrade.bind(this));
             }
+
+            return $.Deferred().resolve().promise();
         },
 
         /**
@@ -64,8 +68,8 @@ function () {
          *   this.el.on('play', dfd.resolve);
          *   return dfd.promise();
          */
-        getGrader: function () {
-            throw new Error('Please implement logic of `getGrader` method.');
+        getGrader: function (element, state) {
+            throw new Error('Please implement logic of the `getGrader` method.');
         },
 
         /**
@@ -73,9 +77,10 @@ function () {
          * @return {jquery Promise}
          */
         sendGrade: function () {
-            return $.ajax({
+            return $.ajaxWithPrefix({
                 url: this.url,
                 type: 'POST',
+                notifyOnError: false,
                 success: this.onSuccess.bind(this),
                 error: this.onError.bind(this)
             });
@@ -175,15 +180,14 @@ function () {
          * @param {string} errorThrown Textual portion of the HTTP status.
          */
         onError: function () {
-            var msg = this.i18n['Error happens. Sorry for the inconvenience,' +
-                ' restart your page and try again.'];
+            var msg = this.i18n['GRADER_ERROR'];
 
             this.updateStatusText(msg, 'error');
             this.el.addClass('is-error');
         }
     };
 
-    return Grader;
+    return AbstractGrader;
 });
+}(RequireJS.define));
 
-}(window.RequireJS.define));

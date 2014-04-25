@@ -70,6 +70,8 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             resource_string(module, 'js/src/video/00_video_storage.js'),
             resource_string(module, 'js/src/video/00_resizer.js'),
             resource_string(module, 'js/src/video/00_async_process.js'),
+            resource_string(module, 'js/src/video/00_i18n.js'),
+            resource_string(module, 'js/src/video/00_abstract_grader.js'),
             resource_string(module, 'js/src/video/00_sjson.js'),
             resource_string(module, 'js/src/video/00_iterator.js'),
             resource_string(module, 'js/src/video/01_initialize.js'),
@@ -83,7 +85,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             resource_string(module, 'js/src/video/07_video_volume_control.js'),
             resource_string(module, 'js/src/video/08_video_speed_control.js'),
             resource_string(module, 'js/src/video/09_video_caption.js'),
-            resource_string(module, 'js/src/video/10_grader.js'),
+            resource_string(module, 'js/src/video/10_graders.js'),
             resource_string(module, 'js/src/video/11_main.js'),
         ]
     }
@@ -99,6 +101,15 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
         Alias of the `has_score` property
         """
         return self.has_score
+
+    @property
+    def grader_name(self):
+        if self.scored_on_end:
+            return "GradeOnEnd"
+        elif self.scored_on_percent:
+            return "GradeOnPercent"
+        else:
+            return None
 
 
     def get_html(self):
@@ -178,6 +189,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             'has_score': self.has_score,
             'weight': self.weight,
             'module_score': self.module_score,
+            'grader_name': self.grader_name,
         })
 
 

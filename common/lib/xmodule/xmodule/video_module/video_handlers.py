@@ -274,7 +274,7 @@ class VideoStudentViewHandlers(object):
         assert anon_user_id is not None
         real_user = self.system.get_real_user(anon_user_id)
 
-        score  = max_score()
+        score = max_score()
         self.system.publish(
             self,
             'grade',
