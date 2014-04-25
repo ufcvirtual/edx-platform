@@ -65,7 +65,7 @@ function () {
          *   return dfd.promise();
          */
         getGrader: function () {
-            console.log('Please implement logic of `getGrader` method.');
+            throw new Error('Please implement logic of `getGrader` method.');
         },
 
         /**
@@ -133,7 +133,7 @@ function () {
                     this.createStatusElement(text);
                 }
 
-                if (type === "error") {
+                if (type === 'error') {
                     this.statusElement.addClass('is-error');
                 } else {
                     this.statusElement.removeClass('is-error');
@@ -160,7 +160,7 @@ function () {
         onSuccess: function (response) {
             if (isFinite(response)) {
                 this.setScore(response);
-                this.el.addClass('is-graded');
+                this.el.addClass('is-scored');
                 this.updateStatusText(
                     this.i18n['This problem was successfully scored!']
                 );
@@ -179,10 +179,11 @@ function () {
                 ' restart your page and try again.'];
 
             this.updateStatusText(msg, 'error');
+            this.el.addClass('is-error');
         }
     };
 
     return Grader;
 });
 
-}(RequireJS.define));
+}(window.RequireJS.define));

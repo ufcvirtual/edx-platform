@@ -77,6 +77,7 @@
                 if (previousState && previousState.videoPlayer) {
                     previousState.saveState(true);
                     $(window).off('unload', previousState.saveState);
+                    previousState.videoPlayer.destroy();
                 }
 
                 state = {};

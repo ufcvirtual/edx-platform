@@ -48,7 +48,7 @@ div.video {
     outline: none;
   }
 
-  &.is-graded {
+  &.is-scored {
     @include animation(gradeSuccess 2s cubic-bezier(0,0,0,1));
   }
 

@@ -268,7 +268,7 @@ class VideoStudentViewHandlers(object):
     def grade_handler(self, request, dispatch):
 
         def max_score():
-            return self.weight if self.is_scored else None
+            return self.weight if self.has_score else None
 
         anon_user_id  = self.runtime.anonymous_student_id
         assert anon_user_id is not None
@@ -284,6 +284,8 @@ class VideoStudentViewHandlers(object):
                 'user_id': real_user,
             }
         )
+
+        self.module_score = score
         log.debug("[Video]: Grade is saved.")
         return Response(json.dumps(score), status=200)
 

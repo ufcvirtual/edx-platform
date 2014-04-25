@@ -415,13 +415,8 @@ function (VideoPlayer, VideoStorage) {
                         return storage.getItem('score', true) || value;
                      },
                     'score': function (value) {
-                        value = parseInt(value, 10);
 
-                        if (!isFinite(value) || value === 0) {
-                            return null;
-                        }
-
-                        return value;
+                        return storage.getItem('score', true) || value;
                      }
                 },
                 config = {};
