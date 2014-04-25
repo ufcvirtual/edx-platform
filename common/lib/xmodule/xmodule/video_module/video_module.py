@@ -106,7 +106,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
     def grader_name(self):
         if self.scored_on_end:
             return "GradeOnEnd"
-        elif self.scored_on_percent:
+        elif self.scored_on_percent is not None:
             return "GradeOnPercent"
         else:
             return None
