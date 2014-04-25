@@ -337,6 +337,95 @@ class YouTubeVideoTest(VideoBaseTest):
         # check if video aligned correctly without enabled transcript
         self.assertTrue(self.video.is_aligned(False))
 
+    def test_multiple_videos_in_sequentials_load_and_work(self):
+        """
+        Scenario: Multiple videos in sequentials all load and work, switching between sequentials
+        Given
+            And it has videos "A,B" in "Youtube" mode in position "1" of sequential
+            And videos "E,F" in "Youtube" mode in position "2" of sequential
+        """
+        self.verticals = [
+            [{'display_name': 'A'}, {'display_name': 'B'}], [{'display_name': 'C'}, {'display_name': 'D'}]
+        ]
+
+        tab1_video_names = ['A', 'B']
+        tab2_video_names = ['C', 'D']
+
+        def execute_video_steps(video_names):
+            """
+            Execute video steps
+            :param video_names:
+            """
+            for video_name in video_names:
+                self.video.click_player_button('play', video_name)
+                self.assertIn(self.video.state(video_name), ['playing', 'buffering'])
+                self.video.click_player_button('pause', video_name)
+
+        # go to video
+        self.navigate_to_video()
+
+        # check if video "A" should start playing at speed "1.0"
+        self.assertEqual(self.video.get_speed('A'), '1.0x')
+
+        execute_video_steps(tab1_video_names)
+
+        # go to second sequential position
+        self.course_nav.go_to_sequential_position(2)
+        execute_video_steps(tab2_video_names)
+
+        # go back to first sequential position
+        # we are again playing tab 1 videos to ensure that switching didn't broke some video functionality.
+        self.course_nav.go_to_sequential_position(1)
+        execute_video_steps(tab1_video_names)
+
+    def test_download_transcript_button_works_correctly(self):
+        """
+        Scenario: Download Transcript button works correctly in Video component
+        Given
+           I have a "subs_OEoXaMPEzfM.srt.sjson" transcript file in assets
+           it has a video "A" in "Youtube" mode in position "1" of sequential
+           And a video "B" in "Youtube" mode in position "2" of sequential
+           And a video "C" in "Youtube" mode in position "3" of sequential
+        """
+
+        data_ab = {'sub': 'OEoXaMPEzfM', 'download_track': True}
+        youtube_ab_metadata = self.metadata_for_mode('youtube', additional_data=data_ab)
+
+        self.assets.append('subs_OEoXaMPEzfM.srt.sjson')
+
+        data_c = {'track': 'http://example.org/', 'download_track': True}
+        youtube_c_metadata = self.metadata_for_mode('youtube', additional_data=data_c)
+
+        self.verticals = [
+            [{'display_name': 'A', 'metadata': youtube_ab_metadata}],
+            [{'display_name': 'B', 'metadata': youtube_ab_metadata}],
+            [{'display_name': 'C', 'metadata': youtube_c_metadata}]
+        ]
+
+        # open the section with videos
+        self.navigate_to_video()
+
+        # check if we can download transcript in "srt" format that has text "00:00:00,270"
+        self.assertTrue(self.video.downloaded_transcript_contains_text('srt', '00:00:00,270'))
+
+        # select the transcript format "txt"
+        self.assertTrue(self.video.select_transcript_format('txt'))
+
+        # check if wwe can download transcript in "txt" format that has text "Hi, welcome to Edx."
+        self.assertTrue(self.video.downloaded_transcript_contains_text('txt', 'Hi, welcome to Edx.'))
+
+        # open video "B"
+        self.course_nav.go_to_sequential('B')
+
+        # check if we can download transcript in "txt" format that has text "Hi, welcome to Edx."
+        self.assertTrue(self.video.downloaded_transcript_contains_text('txt', 'Hi, welcome to Edx.'))
+
+        # open video "C"
+        self.course_nav.go_to_sequential('C')
+
+        # menu "download_transcript" doesn't exist
+        self.assertFalse(self.video.is_menu_exist('download_transcript'))
+
 
 class YouTubeHtml5VideoTest(VideoBaseTest):
     """ Test YouTube HTML5 Video Player """
