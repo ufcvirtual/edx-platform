@@ -31,7 +31,7 @@ from xmodule.editing_module import TabsEditingDescriptor
 from xmodule.raw_module import EmptyDataRawDescriptor
 from xmodule.xml_module import is_pointer_tag, name_to_pathname, deserialize_field
 
-from .video_utils import create_youtube_string, grade_url
+from .video_utils import create_youtube_string
 from .video_xfields import VideoFields
 from .video_handlers import VideoStudentViewHandlers, VideoStudioViewHandlers
 
@@ -83,7 +83,8 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             resource_string(module, 'js/src/video/07_video_volume_control.js'),
             resource_string(module, 'js/src/video/08_video_speed_control.js'),
             resource_string(module, 'js/src/video/09_video_caption.js'),
-            resource_string(module, 'js/src/video/10_main.js')
+            resource_string(module, 'js/src/video/10_grader.js'),
+            resource_string(module, 'js/src/video/11_main.js'),
         ]
     }
     css = {'scss': [
@@ -173,7 +174,10 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             'transcript_languages': json.dumps(sorted_languages),
             'transcript_translation_url': self.runtime.handler_url(self, 'transcript', 'translation').rstrip('/?'),
             'transcript_available_translations_url': self.runtime.handler_url(self, 'transcript', 'available_translations').rstrip('/?'),
-            'grade_url': grade_url(self)
+            'grade_url': self.runtime.handler_url(self, 'grade_handler', thirdparty=True).rstrip('/?'),
+            'has_score': self.has_score,
+            'weight': self.weight,
+            'module_score': self.module_score,
         })
 
 

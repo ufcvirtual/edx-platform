@@ -411,6 +411,10 @@ function (VideoPlayer, VideoStorage) {
                         return value;
                     },
                     'endTime': function (value) {
+
+                        return storage.getItem('score', true) || value;
+                     },
+                    'score': function (value) {
                         value = parseInt(value, 10);
 
                         if (!isFinite(value) || value === 0) {
@@ -479,6 +483,8 @@ function (VideoPlayer, VideoStorage) {
     function initialize(element) {
         var self = this,
             el = $(element).find('.video'),
+            progressElement = $(element).find('.problem-progress'),
+            statusElement = $(element).find('.problem-feedback'),
             container = el.find('.video-wrapper'),
             id = el.attr('id').replace(/video_/, ''),
             __dfd__ = $.Deferred(),
@@ -492,6 +498,8 @@ function (VideoPlayer, VideoStorage) {
         $.extend(this, {
             __dfd__: __dfd__,
             el: el,
+            progressElement: progressElement,
+            statusElement: statusElement,
             container: container,
             currentVolume: 100,
             id: id,

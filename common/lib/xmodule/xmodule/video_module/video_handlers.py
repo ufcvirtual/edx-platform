@@ -270,26 +270,22 @@ class VideoStudentViewHandlers(object):
         def max_score():
             return self.weight if self.is_scored else None
 
-        score  = request.POST.get('score')
-        if not score:
-            log.info("Invalid grade request: no score.")
-            return Response(status=400)
-
         anon_user_id  = self.runtime.anonymous_student_id
         assert anon_user_id is not None
         real_user = self.system.get_real_user(anon_user_id)
 
+        score  = max_score()
         self.system.publish(
             self,
             'grade',
             {
-                'value': float(score) * max_score(),
+                'value': score,
                 'max_value': max_score(),
                 'user_id': real_user,
             }
         )
         log.debug("[Video]: Grade is saved.")
-        return Response(status=200)
+        return Response(json.dumps(score), status=200)
 
 
 class VideoStudioViewHandlers(object):
@@ -325,8 +321,6 @@ class VideoStudioViewHandlers(object):
                     no SRT extension or not parse-able by PySRT
                 UnicodeDecodeError: non-UTF8 uploaded file content encoding.
         """
-        _ = self.runtime.service(self, "i18n").ugettext
-
         if dispatch.startswith('translation'):
             language = dispatch.replace('translation', '').strip('/')
 
