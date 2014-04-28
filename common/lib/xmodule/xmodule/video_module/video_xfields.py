@@ -167,7 +167,7 @@ class VideoFields(object):
 
     scored_on_percent = Integer(
         help="Defines percentage of time that students need to watch the video will be scored successfully.",
-        display_name="Scored viewed parentage",
+        display_name="Scored viewed percentage",
         values={"min": 0, "max": 100},
         scope=Scope.settings,
     )
