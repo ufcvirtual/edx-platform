@@ -79,6 +79,7 @@ class InheritanceMixin(XBlockMixin):
         help="Enable LaTeX templates?",
         default=False,
         scope=Scope.settings)
+    matlab_api_key = String(help="API key for Matlab problems", scope=Scope.settings)
 
 
 def compute_inherited_metadata(descriptor):

@@ -184,6 +184,7 @@ class CapaFields(object):
         default=False,
         scope=Scope.settings
     )
+    matlab_api_key = String(help="API key for Matlab problems", scope=Scope.settings)
 
 
 class CapaMixin(CapaFields):
@@ -287,6 +288,7 @@ class CapaMixin(CapaFields):
             seed=self.runtime.seed,      # Why do we do this if we have self.seed?
             STATIC_URL=self.runtime.STATIC_URL,
             xqueue=self.runtime.xqueue,
+            matlab_api_key=self.matlab_api_key
         )
 
         return LoncapaProblem(
