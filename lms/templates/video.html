@@ -5,14 +5,14 @@
     <h2 class="video-header">${display_name}</h2>
 % endif
 
-% if has_score and weight and grader_name:
+% if has_score and max_score and grader_name:
     <div class="problem-progress">
         % if module_score is not None:
             ## Translators: "points" is the student's achieved score, and "total_points" is the maximum number of points achievable.
-            (${_("{points} / {total_points} points").format(points=module_score, total_points=weight)})
+            (${_("{points} / {total_points} points").format(points=module_score, total_points=max_score)})
         % else:
             ## Translators: "total_points" is the maximum number of points achievable
-            (${_("{total_points} points possible").format(total_points=weight)})
+            (${_("{total_points} points possible").format(total_points=max_score)})
         % endif
     </div>
 % endif
