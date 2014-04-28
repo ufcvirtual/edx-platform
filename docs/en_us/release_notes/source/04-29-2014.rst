@@ -1,0 +1,32 @@
+###################################
+April 29, 2014
+###################################
+
+The following information reflects what is new in the edX Platform as of April
+23, 2014.  See previous pages in this document for a history of changes.
+
+**************************
+edX Documentation
+**************************
+
+
+
+
+
+
+*************
+edX Studio
+*************
+
+* 
+
+***************************************
+edX Learning Management System
+***************************************
+
+* Lines in bulk email messages were not wrapped at 998 characters, which caused
+  error messages and erroneous characters in some email programs. All lines are
+  now wrapped at 998 characters automatically, and this problem is
+  resolved.(LMS-1466)
+
+* https://github.com/edx/edx-platform/pull/2780
