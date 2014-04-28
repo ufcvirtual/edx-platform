@@ -263,11 +263,8 @@ class VideoStudentViewHandlers(object):
 
         return response
 
-
-
     def max_score(self):
         return self.weight if self.has_score else None
-
 
     @XBlock.handler
     def grade_handler(self, request, dispatch):

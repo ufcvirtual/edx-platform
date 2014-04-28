@@ -186,9 +186,9 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             'transcript_translation_url': self.runtime.handler_url(self, 'transcript', 'translation').rstrip('/?'),
             'transcript_available_translations_url': self.runtime.handler_url(self, 'transcript', 'available_translations').rstrip('/?'),
             'grade_url': self.runtime.handler_url(self, 'grade_handler', thirdparty=True).rstrip('/?'),
-            'has_score': self.has_score,
-            'weight': self.weight,
-            'module_score': self.module_score,
+            'has_score': json.dumps(self.has_score),
+            'weight': json.dumps(self.max_score()),
+            'module_score': json.dumps(self.module_score),
             'grader_name': self.grader_name,
         })
 
