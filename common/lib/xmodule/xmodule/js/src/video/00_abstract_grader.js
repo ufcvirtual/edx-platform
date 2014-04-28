@@ -167,7 +167,7 @@ function() {
                 this.setScore(response);
                 this.el.addClass('is-scored');
                 this.updateStatusText(
-                    this.i18n['This problem was successfully scored!']
+                    this.i18n['This video was successfully scored!']
                 );
             }
         },
