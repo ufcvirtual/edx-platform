@@ -3,11 +3,35 @@ April 29, 2014
 ###################################
 
 The following information reflects what is new in the edX Platform as of April
-23, 2014.  See previous pages in this document for a history of changes.
+29, 2014.  See previous pages in this document for a history of changes.
 
 **************************
 edX Documentation
 **************************
+
+You can access the `edX Status`_ page to get an up-
+to-date status for all services on edx.org and edX Edge. The page also includes
+the Twitter feed for @edXstatus, which the edX Operations team uses to post
+updates.
+
+You can access the public `edX roadmap`_ for
+details about the currently planned product direction.
+
+The following documentation is available:
+
+* `Building and Running an edX Course`_ 
+
+  You can also download the guide as a PDF from the edX Studio user interface.
+
+  Recent changes include: 
+
+  
+      
+
+* `edX Data Documentation`_
+
+* `edX Platform Developer Documentation`_
+
 
 
 
