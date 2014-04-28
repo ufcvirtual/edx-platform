@@ -132,6 +132,37 @@ def run_all_servers(options):
 @task
 @needs('pavelib.prereqs.install_prereqs')
 @cmdopts([
+    ("fast", "f", "Skip updating assets")
+])
+def dev(options):
+    """
+    Runs Celery workers, Studio, and LMS for local non vagrant environment.
+
+    Difference between `run_all_servers` is that LMS needs not 'dev' but 'cms.dev' settings,
+    to catch courses created in Studio started with 'dev' setings.
+    """
+
+    fast = getattr(options, 'fast', False)
+
+    if not fast:
+        args = ['lms', '--settings={}'.format('cms.dev'), '--skip-collect']
+        call_task('pavelib.assets.update_assets', args=args)
+
+        args = ['studio', '--settings={}'.format('dev'), '--skip-collect']
+        call_task('pavelib.assets.update_assets', args=args)
+
+        call_task('pavelib.assets.watch_assets', options={'background': True})
+
+    run_multi_processes([
+        django_cmd('lms', 'cms.dev', 'runserver', '--traceback', '--pythonpath=.', "0.0.0.0:{}".format(DEFAULT_PORT['lms'])),
+        django_cmd('studio', 'dev', 'runserver', '--traceback', '--pythonpath=.', "0.0.0.0:{}".format(DEFAULT_PORT['studio'])),
+        django_cmd('lms', 'celery', 'celery', 'worker', '--loglevel=INFO', '--pythonpath=.')
+    ])
+
+
+@task
+@needs('pavelib.prereqs.install_prereqs')
+@cmdopts([
     ("settings=", "s", "Django settings"),
 ])
 def update_db():
