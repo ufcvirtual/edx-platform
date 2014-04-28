@@ -6,9 +6,6 @@ from factory.django import DjangoModelFactory
 # Imported to re-export
 # pylint: disable=unused-import
 from student.tests.factories import UserFactory  # Imported to re-export
-from student.tests.factories import GroupFactory  # Imported to re-export
-from student.tests.factories import CourseEnrollmentAllowedFactory  # Imported to re-export
-from student.tests.factories import RegistrationFactory  # Imported to re-export
 # pylint: enable=unused-import
 
 from student.tests.factories import UserProfileFactory as StudentUserProfileFactory
@@ -23,10 +20,11 @@ from student.roles import (
     OrgInstructorRole,
 )
 
-from xmodule.modulestore import Location
+from xmodule.modulestore.locations import SlashSeparatedCourseKey
 
 
-location = partial(Location, 'i4x', 'edX', 'test_course', 'problem')
+course_id = SlashSeparatedCourseKey(u'edX', u'test_course', u'test')
+location = partial(course_id.make_usage_key, u'problem')
 
 
 class UserProfileFactory(StudentUserProfileFactory):
@@ -86,7 +84,7 @@ class OrgStaffFactory(UserFactory):
     def course(self, create, extracted, **kwargs):
         if extracted is None:
             raise ValueError("Must specify a course location for an org-staff user")
-        OrgStaffRole(extracted).add_users(self)
+        OrgStaffRole(extracted.org).add_users(self)
 
 
 class OrgInstructorFactory(UserFactory):
@@ -100,7 +98,7 @@ class OrgInstructorFactory(UserFactory):
     def course(self, create, extracted, **kwargs):
         if extracted is None:
             raise ValueError("Must specify a course location for an org-instructor user")
-        OrgInstructorRole(extracted).add_users(self)
+        OrgInstructorRole(extracted.org).add_users(self)
 
 
 class GlobalStaffFactory(UserFactory):
@@ -119,7 +117,7 @@ class StudentModuleFactory(DjangoModelFactory):
 
     module_type = "problem"
     student = factory.SubFactory(UserFactory)
-    course_id = "MITx/999/Robot_Super_Course"
+    course_id = SlashSeparatedCourseKey("MITx", "999", "Robot_Super_Course")
     state = None
     grade = None
     max_grade = None
@@ -131,7 +129,7 @@ class UserStateSummaryFactory(DjangoModelFactory):
 
     field_name = 'existing_field'
     value = json.dumps('old_value')
-    usage_id = location('usage_id').url()
+    usage_id = location('usage_id')
 
 
 class StudentPrefsFactory(DjangoModelFactory):
