@@ -69,18 +69,12 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
 
         # Pull up email view on instructor dashboard
         self.url = reverse('instructor_dashboard', kwargs={'course_id': self.course.id})
+        # Response loads the whole instructor dashboard, so no need to explicitly
+        # navigate to a particular email section
         response = self.client.get(self.url)
-        email_link = '<a href="#" onclick="goto(\'Email\')" class="None">Email</a>'
+        email_section = '<div class="vert-left send-email" id="section-send-email">'
         # If this fails, it is likely because ENABLE_INSTRUCTOR_EMAIL is set to False
-        self.assertTrue(email_link in response.content)
-
-        # Select the Email view of the instructor dash
-        session = self.client.session
-        session['idash_mode'] = 'Email'
-        session.save()
-        response = self.client.get(self.url)
-        selected_email_link = '<a href="#" onclick="goto(\'Email\')" class="selectedmode">Email</a>'
-        self.assertTrue(selected_email_link in response.content)
+        self.assertTrue(email_section in response.content)
 
     def tearDown(self):
         """
@@ -100,6 +94,7 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
             'subject': 'test subject for myself',
             'message': 'test message for myself'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(self.url, test_email)
 
         self.assertContains(response, "Your email was successfully queued for sending.")
@@ -124,6 +119,7 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
             'subject': 'test subject for staff',
             'message': 'test message for subject'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(self.url, test_email)
 
         self.assertContains(response, "Your email was successfully queued for sending.")
@@ -148,6 +144,7 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
             'subject': 'test subject for all',
             'message': 'test message for all'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(self.url, test_email)
 
         self.assertContains(response, "Your email was successfully queued for sending.")
@@ -172,6 +169,7 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
             'subject': uni_subject,
             'message': 'test message for all'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(self.url, test_email)
 
         self.assertContains(response, "Your email was successfully queued for sending.")
@@ -200,6 +198,7 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
             'subject': 'test subject for all',
             'message': uni_message
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(self.url, test_email)
 
         self.assertContains(response, "Your email was successfully queued for sending.")
@@ -231,6 +230,7 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
             'subject': 'test subject for all',
             'message': 'test message for all'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(self.url, test_email)
 
         self.assertContains(response, "Your email was successfully queued for sending.")
@@ -269,6 +269,7 @@ class TestEmailSendFromDashboard(ModuleStoreTestCase):
             'subject': 'test subject for all',
             'message': 'test message for all'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(self.url, test_email)
         self.assertContains(response, "Your email was successfully queued for sending.")
         self.assertEquals(mock_factory.emails_sent,

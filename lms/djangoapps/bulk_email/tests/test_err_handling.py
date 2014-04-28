@@ -69,6 +69,7 @@ class TestEmailErrors(ModuleStoreTestCase):
             'subject': 'test subject for myself',
             'message': 'test message for myself'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         self.client.post(self.url, test_email)
 
         # Test that we retry upon hitting a 4xx error
@@ -97,6 +98,7 @@ class TestEmailErrors(ModuleStoreTestCase):
             'subject': 'test subject for all',
             'message': 'test message for all'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         self.client.post(self.url, test_email)
 
         # We shouldn't retry when hitting a 5xx error
@@ -121,6 +123,7 @@ class TestEmailErrors(ModuleStoreTestCase):
             'subject': 'test subject for myself',
             'message': 'test message for myself'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         self.client.post(self.url, test_email)
 
         self.assertTrue(retry.called)
@@ -142,6 +145,7 @@ class TestEmailErrors(ModuleStoreTestCase):
             'subject': 'test subject for myself',
             'message': 'test message for myself'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         self.client.post(self.url, test_email)
 
         self.assertTrue(retry.called)

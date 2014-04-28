@@ -48,18 +48,12 @@ class TestOptoutCourseEmails(ModuleStoreTestCase):
         """Navigate to the instructor dash's email view"""
         # Pull up email view on instructor dashboard
         url = reverse('instructor_dashboard', kwargs={'course_id': self.course.id})
+        # Response loads the whole instructor dashboard, so no need to explicitly
+        # navigate to a particular email section
         response = self.client.get(url)
-        email_link = '<a href="#" onclick="goto(\'Email\')" class="None">Email</a>'
+        email_section = '<div class="vert-left send-email" id="section-send-email">'
         # If this fails, it is likely because ENABLE_INSTRUCTOR_EMAIL is set to False
-        self.assertTrue(email_link in response.content)
-
-        # Select the Email view of the instructor dash
-        session = self.client.session
-        session['idash_mode'] = 'Email'
-        session.save()
-        response = self.client.get(url)
-        selected_email_link = '<a href="#" onclick="goto(\'Email\')" class="selectedmode">Email</a>'
-        self.assertTrue(selected_email_link in response.content)
+        self.assertTrue(email_section in response.content)
 
     @patch.dict(settings.FEATURES, {'ENABLE_INSTRUCTOR_EMAIL': True, 'REQUIRE_COURSE_EMAIL_AUTH': False})
     def test_optout_course(self):
@@ -84,6 +78,7 @@ class TestOptoutCourseEmails(ModuleStoreTestCase):
             'subject': 'test subject for all',
             'message': 'test message for all'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(url, test_email)
         self.assertContains(response, "Your email was successfully queued for sending.")
 
@@ -113,8 +108,8 @@ class TestOptoutCourseEmails(ModuleStoreTestCase):
             'subject': 'test subject for all',
             'message': 'test message for all'
         }
+        # TODO This 'post' call won't work anymore, need to figure out how to re-write this test
         response = self.client.post(url, test_email)
-
         self.assertContains(response, "Your email was successfully queued for sending.")
 
         # Assert that self.student.email in mail.to
