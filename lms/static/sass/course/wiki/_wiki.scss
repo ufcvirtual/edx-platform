@@ -275,7 +275,7 @@ section.wiki {
     li {
       &.active {
         a {
-          color: $link-color;
+          color: $link-color-d1;
           font-weight: bold;
 
           .icon-view,
@@ -314,7 +314,7 @@ section.wiki {
       border-radius: 3px;
       font-size: 0.9em;
       line-height: 25px;
-      color: #8f8f8f;
+      color: $link-color;
 
       .icon {
         float: left;
