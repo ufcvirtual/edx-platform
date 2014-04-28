@@ -14,7 +14,7 @@ function() {
         // Translators: "points" is the student's achieved score, and "total_points" is the maximum number of points achievable.
         '(%(points)s / %(total_points)s points)': gettext('(%(points)s / %(total_points)s points)'),
         'Feedback on your work from the grader:': gettext('Feedback on your work from the grader:'),
-        'This problem was successfully scored!': gettext('This problem was successfully scored!'),
+        'This video was successfully scored!': gettext('This video was successfully scored!'),
         GRADER_ERROR: gettext('Error happens. Sorry for the inconvenience, restart the page and try again.')
     };
 });

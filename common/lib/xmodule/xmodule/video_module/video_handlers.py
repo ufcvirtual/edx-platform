@@ -271,7 +271,9 @@ class VideoStudentViewHandlers(object):
 
     @XBlock.handler
     def grade_handler(self, request, dispatch):
-
+        """
+        Save grade to database.
+        """
 
         anon_user_id  = self.runtime.anonymous_student_id
         assert anon_user_id is not None
@@ -292,7 +294,7 @@ class VideoStudentViewHandlers(object):
             {
                 'value': score,
                 'max_value': self.max_score(),
-                'user_id': real_user,
+                'user_id': real_user.id,
             }
         )
 
