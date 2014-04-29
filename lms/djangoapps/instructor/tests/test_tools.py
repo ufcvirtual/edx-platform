@@ -346,6 +346,7 @@ def get_extended_due(course, unit, student):
     if extended:
         return DATE_FIELD.from_json(extended)
 
+
 def msk_from_problem_urlname(course_id, urlname, block_type='problem'):
     """
     Convert a 'problem urlname' to a module state key (db field)

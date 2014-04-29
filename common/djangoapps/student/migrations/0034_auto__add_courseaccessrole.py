@@ -18,11 +18,9 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('student', ['CourseAccessRole'])
 
-
     def backwards(self, orm):
         # Deleting model 'CourseAccessRole'
         db.delete_table('student_courseaccessrole')
-
 
     models = {
         'auth.group': {

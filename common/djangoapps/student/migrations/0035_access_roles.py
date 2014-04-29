@@ -19,6 +19,7 @@ class Migration(DataMigration):
     """
 
     GROUP_ENTRY_RE = re.compile(r'(?P<role_id>staff|instructor|beta_testers|course_creator_group)_?(?P<course_id_string>.*)')
+
     def forwards(self, orm):
         """
         Converts group table entries for write access and beta_test roles to course access roles table.
