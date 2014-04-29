@@ -48,9 +48,9 @@ The following documentation is available:
 
 * `edX Platform Developer Documentation`_
   
-  Recent changes include
+  Recent changes include:
   
-  * Add the section `Contributing to Open edX`_
+  * Added the section `Contributing to Open edX`_
 
 
 
@@ -59,7 +59,7 @@ edX Studio
 *************
 
 * The HTML component editor is updated to provide a raw HTML editing option. For
-  more information, see: `Working with HTML Components`_. (STUD-1562)
+  more information, see `Working with HTML Components`_. (STUD-1562)
 
 ***************************************
 edX Learning Management System
@@ -67,8 +67,7 @@ edX Learning Management System
 
 * Lines in bulk email messages were not wrapped at 998 characters, which caused
   error messages and erroneous characters in some email programs. All lines are
-  now wrapped at 998 characters automatically, and this problem is
-  resolved.(LMS-1466)
+  now wrapped at 998 characters automatically. (LMS-1466)
 
 
 
