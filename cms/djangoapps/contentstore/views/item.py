@@ -123,7 +123,7 @@ def xblock_handler(request, usage_key_string):
             delete_children = str_to_bool(request.REQUEST.get('recurse', 'False'))
             delete_all_versions = str_to_bool(request.REQUEST.get('all_versions', 'False'))
 
-            return _delete_item_at_location(old_location, delete_children, delete_all_versions, request.user)
+            return _delete_item_at_location(usage_key, delete_children, delete_all_versions, request.user)
         else:  # Since we have a usage_key, we are updating an existing xblock.
             return _save_item(
                 request,
