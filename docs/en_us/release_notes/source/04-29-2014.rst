@@ -25,16 +25,32 @@ The following documentation is available:
 
   Recent changes include: 
 
-  
+  * Updated `Show or Hide the Course Wiki Page`_ to include a note about Wiki
+    content being available after you hide the Wiki page.
+
+  * Updated label information and added XML information to `Problem with
+    Adaptive Hint`_
+
+  * Updated `Beta Testing a Course`_ to reflect feature changes.
+    
+  * Expanded the `Grade and Answer Data`_ to include topics on interpreting the
+    grade reports and student progress page.
+
+  * Updated `Working with HTML Components`_ to reflect changes to the HTML
+    component editor.
+
+  * Reorganized information about problems into `Creating Exercises and Tools`_ section.
       
 
 * `edX Data Documentation`_
+  
+  * Added new event types to `Tracking Logs`_ for interactions with PDF files.
 
 * `edX Platform Developer Documentation`_
-
-
-
-
+  
+  Recent changes include
+  
+  * Add the section `Contributing to Open edX`_
 
 
 
@@ -42,7 +58,8 @@ The following documentation is available:
 edX Studio
 *************
 
-* 
+* The HTML component editor is updated to provide a raw HTML editing option. For
+  more information, see: `Working with HTML Components`_. (STUD-1562)
 
 ***************************************
 edX Learning Management System
@@ -53,4 +70,6 @@ edX Learning Management System
   now wrapped at 998 characters automatically, and this problem is
   resolved.(LMS-1466)
 
-* https://github.com/edx/edx-platform/pull/2780
+
+
+.. include:: links.rst
