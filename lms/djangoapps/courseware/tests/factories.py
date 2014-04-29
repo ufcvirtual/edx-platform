@@ -41,7 +41,7 @@ class InstructorFactory(UserFactory):
     @factory.post_generation
     def course(self, create, extracted, **kwargs):
         if extracted is None:
-            raise ValueError("Must specify a course location for a course instructor user")
+            raise ValueError("Must specify a CourseKey for a course instructor user")
         CourseInstructorRole(extracted).add_users(self)
 
 
@@ -55,7 +55,7 @@ class StaffFactory(UserFactory):
     @factory.post_generation
     def course(self, create, extracted, **kwargs):
         if extracted is None:
-            raise ValueError("Must specify a course location for a course staff user")
+            raise ValueError("Must specify a CourseKey for a course staff user")
         CourseStaffRole(extracted).add_users(self)
 
 
@@ -69,7 +69,7 @@ class BetaTesterFactory(UserFactory):
     @factory.post_generation
     def course(self, create, extracted, **kwargs):
         if extracted is None:
-            raise ValueError("Must specify a course location for a beta-tester user")
+            raise ValueError("Must specify a CourseKey for a beta-tester user")
         CourseBetaTesterRole(extracted).add_users(self)
 
 
@@ -83,7 +83,7 @@ class OrgStaffFactory(UserFactory):
     @factory.post_generation
     def course(self, create, extracted, **kwargs):
         if extracted is None:
-            raise ValueError("Must specify a course location for an org-staff user")
+            raise ValueError("Must specify a CourseKey for an org-staff user")
         OrgStaffRole(extracted.org).add_users(self)
 
 
@@ -97,7 +97,7 @@ class OrgInstructorFactory(UserFactory):
     @factory.post_generation
     def course(self, create, extracted, **kwargs):
         if extracted is None:
-            raise ValueError("Must specify a course location for an org-instructor user")
+            raise ValueError("Must specify a CourseKey for an org-instructor user")
         OrgInstructorRole(extracted.org).add_users(self)
 
 
