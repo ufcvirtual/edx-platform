@@ -186,10 +186,6 @@ class LocationBase(object):
         # Locations are both UsageKeys and DefinitionKeys
         return self
 
-    @property
-    def block_type(self):
-        return self.category
-
     def url(self):
         """
         Return a string containing the URL for this location

@@ -52,7 +52,7 @@ class DefinitionKey(OpaqueKey):
     KEY_TYPE = 'definition_key'
     __slots__ = ()
 
-    @abstractmethod
+    @abstractproperty
     def block_type(self):
         """
         The XBlock type of this definition.
@@ -111,6 +111,10 @@ class UsageKey(CourseObjectMixin, OpaqueKey):
         Return the :class:`DefinitionKey` for the XBlock containing this usage.
         """
         raise NotImplementedError()
+
+    @property
+    def block_type(self):
+        return self.category
 
 
 class OpaqueKeyReader(IdReader):
