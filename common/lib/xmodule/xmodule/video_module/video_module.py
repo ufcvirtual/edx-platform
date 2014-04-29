@@ -95,8 +95,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
     ]}
     js_module_name = "Video"
 
-
-    def refresh_grades(self):
+    def graders(self):
         """
         Select active graders from possible graders.
 
@@ -106,8 +105,14 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
         clear self.cumulative_score and clear score in database.
 
         Returns:
-            dumped list of field names and their values.
+            dumped dict of { grader field name: (score_status, grader value)} format,
+            where score_status is bool, and True if condition for that grader was
+            satisfied.
         """
+
+        if self.module_score and self.module_score == self.max_score():  # module have been scored
+            return json.dumps({})
+
         active_graders = {
             name: getattr(self, name)
             for name in self.fields.keys()
@@ -118,7 +123,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
         graders_values_changed = False
 
         if not graders_updated:
-            for grader_name, cumulative_score_value in self.cumulative_score:
+            for grader_name, cumulative_score_value in self.cumulative_score.items():
                 score_status, grader_value = cumulative_score_value
                 if grader_value != active_graders[grader_name]:
                     graders_values_changed = True
@@ -129,14 +134,10 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
                 grader_name: (False, grader_value)
                 for grader_name, grader_value in active_graders.items()
             }
-            #self.update_score(None)
 
         return json.dumps(self.cumulative_score)
 
     def get_html(self):
-
-        scores_status = self.refresh_grades()
-
         track_url = None
         transcript_download_format = self.transcript_download_format
 
@@ -212,8 +213,8 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             'grade_url': self.runtime.handler_url(self, 'grade_handler').rstrip('/?'),
             'has_score': json.dumps(self.has_score),
             'max_score': json.dumps(self.max_score()),
-            'module_score': json.dumps(self.module_score),
-            'scores_status': scores_status,
+            'module_score': json.dumps(self.module_score if self.module_score else 0),
+            'graders': self.graders(),
         })
 
 
