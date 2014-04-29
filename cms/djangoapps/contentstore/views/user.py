@@ -7,7 +7,7 @@ from django.views.decorators.http import require_POST
 from django_future.csrf import ensure_csrf_cookie
 from edxmako.shortcuts import render_to_response
 
-from xmodule.modulestore.django import modulestore, loc_mapper
+from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.keys import CourseKey
 from util.json_request import JsonResponse, expect_json
 from student.roles import CourseInstructorRole, CourseStaffRole

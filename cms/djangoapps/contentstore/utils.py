@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 from student.roles import CourseInstructorRole, CourseStaffRole
 from xmodule.contentstore.content import StaticContent
 from xmodule.contentstore.django import contentstore
-from xmodule.modulestore.django import loc_mapper, modulestore
+from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError
 from xmodule.modulestore.locations import SlashSeparatedCourseKey, Location
 from xmodule.modulestore.store_utilities import delete_course

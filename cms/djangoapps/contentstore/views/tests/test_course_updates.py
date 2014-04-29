@@ -233,7 +233,6 @@ class CourseUpdateTest(CourseTestCase):
     def test_post_course_update(self):
         """
         Test that a user can successfully post on course updates and handouts of a course
-        whose location in not in loc_mapper
         """
         course_key = SlashSeparatedCourseKey('Org1', 'Course_1', 'Run_1')
         course_update_url = self.create_update_url(course_key=course_key)

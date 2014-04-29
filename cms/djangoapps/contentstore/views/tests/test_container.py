@@ -30,12 +30,7 @@ class ContainerViewTestCase(CourseTestCase):
     def test_container_html(self):
         self._test_html_content(
             self.child_vertical,
-            expected_section_tag=(
-                '<section class="wrapper-xblock level-page is-hidden" '
-                'data-locator="{child_location}">'.format(
-                    child_location=unicode(self.child_vertical.location),
-                )
-            ),
+            expected_location_in_section_tag=self.child_vertical.location,
             expected_breadcrumbs=(
                 r'<a href="/unit/{unit_location}"\s*'
                 r'class="navigation-link navigation-parent">Unit</a>\s*'
@@ -69,26 +64,16 @@ class ContainerViewTestCase(CourseTestCase):
         )
         self._test_html_content(
             published_xblock_with_child,
-            expected_section_tag=(
-                '<section class="wrapper-xblock level-page is-hidden" '
-                'data-locator="{child_location}">'.format(
-                    child_location=unicode(published_xblock_with_child.location),
-                )
-            ),
+            expected_location_in_section_tag=published_xblock_with_child.location,
             expected_breadcrumbs=expected_breadcrumbs
         )
         self._test_html_content(
             draft_xblock_with_child,
-            expected_section_tag=(
-                '<section class="wrapper-xblock level-page is-hidden" '
-                'data-locator="{child_location}">'.format(
-                    child_location=unicode(draft_xblock_with_child.location),
-                )
-            ),
+            expected_location_in_section_tag=draft_xblock_with_child.location,
             expected_breadcrumbs=expected_breadcrumbs
         )
 
-    def _test_html_content(self, xblock, expected_section_tag, expected_breadcrumbs):
+    def _test_html_content(self, xblock, expected_location_in_section_tag, expected_breadcrumbs):
         """
         Get the HTML for a container page and verify the section tag is correct
         and the breadcrumbs trail is correct.
@@ -98,6 +83,14 @@ class ContainerViewTestCase(CourseTestCase):
         resp = self.client.get_html(url)
         self.assertEqual(resp.status_code, 200)
         html = resp.content
+        expected_section_tag = \
+            '<section class="wrapper-xblock level-page is-hidden" ' \
+            'data-locator="{child_location}" ' \
+            'data-course-key="{course_key}">'.format(
+                child_location=unicode(expected_location_in_section_tag),
+                course_key=unicode(expected_location_in_section_tag.course_key)
+            )
+
         self.assertIn(expected_section_tag, html)
         # Verify the navigation link at the top of the page is correct.
         self.assertRegexpMatches(html, expected_breadcrumbs)

@@ -18,7 +18,7 @@ from models.settings.course_metadata import CourseMetadata
 from xmodule.fields import Date
 
 from .utils import CourseTestCase
-from xmodule.modulestore.django import loc_mapper, modulestore
+from xmodule.modulestore.django import modulestore
 from contentstore.views.component import ADVANCED_COMPONENT_POLICY_KEY
 
 

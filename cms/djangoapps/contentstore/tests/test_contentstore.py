@@ -31,12 +31,11 @@ from xmodule.contentstore.django import contentstore, _CONTENTSTORE
 from xmodule.contentstore.utils import restore_asset_from_trashcan, empty_asset_trashcan
 from xmodule.exceptions import NotFoundError, InvalidVersionError
 from xmodule.modulestore import mongo
-from xmodule.modulestore.django import modulestore, loc_mapper
+from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError
 from xmodule.modulestore.inheritance import own_metadata
 from xmodule.modulestore.keys import UsageKey
 from xmodule.modulestore.locations import SlashSeparatedCourseKey
-from xmodule.modulestore.locator import BlockUsageLocator
 from xmodule.modulestore.store_utilities import clone_course, delete_course
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory, ItemFactory

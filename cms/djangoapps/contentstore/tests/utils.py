@@ -13,7 +13,6 @@ from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory, ItemFactory
 from contentstore.tests.modulestore_config import TEST_MODULESTORE
 from contentstore.utils import get_modulestore
-from xmodule.modulestore.django import loc_mapper
 
 
 def parse_json(response):
