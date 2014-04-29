@@ -38,11 +38,11 @@ from courseware.models import StudentModule
 import instructor_task.api
 from instructor.access import allow_access
 import instructor.views.api
-from instructor.views.api import _split_input_list, _msk_from_problem_urlname, common_exceptions_400
+from instructor.views.api import _split_input_list, common_exceptions_400
 from instructor_task.api_helper import AlreadyRunningError
 from xmodule.modulestore.locations import SlashSeparatedCourseKey
 
-from .test_tools import get_extended_due
+from .test_tools import msk_from_problem_urlname, get_extended_due
 
 
 @common_exceptions_400
@@ -112,14 +112,15 @@ class TestInstructorAPIDenyLevels(ModuleStoreTestCase, LoginEnrollmentTestCase):
         self.user = UserFactory.create()
         CourseEnrollment.enroll(self.user, self.course.id)
 
-        self.problem_urlname = 'robot-some-problem-urlname'
+        self.problem_location = msk_from_problem_urlname(
+            self.course.id,
+            'robot-some-problem-urlname'
+        )
+        self.problem_urlname = str(self.problem_location)
         _module = StudentModule.objects.create(
             student=self.user,
             course_id=self.course.id,
-            module_id=_msk_from_problem_urlname(
-                self.course.id,
-                self.problem_urlname
-            ),
+            module_id=self.problem_location,
             state=json.dumps({'attempts': 10}),
         )
 
@@ -1485,14 +1486,16 @@ class TestInstructorAPIRegradeTask(ModuleStoreTestCase, LoginEnrollmentTestCase)
         self.student = UserFactory()
         CourseEnrollment.enroll(self.student, self.course.id)
 
-        self.problem_urlname = 'robot-some-problem-urlname'
+        self.problem_location = msk_from_problem_urlname(
+            self.course.id,
+            'robot-some-problem-urlname'
+        )
+        self.problem_urlname = str(self.problem_location)
+
         self.module_to_reset = StudentModule.objects.create(
             student=self.student,
             course_id=self.course.id,
-            module_id=_msk_from_problem_urlname(
-                self.course.id,
-                self.problem_urlname
-            ),
+            module_id=self.problem_location,
             state=json.dumps({'attempts': 10}),
         )
 
@@ -1742,14 +1745,16 @@ class TestInstructorAPITaskLists(ModuleStoreTestCase, LoginEnrollmentTestCase):
         self.student = UserFactory()
         CourseEnrollment.enroll(self.student, self.course.id)
 
-        self.problem_urlname = 'robot-some-problem-urlname'
+        self.problem_location = msk_from_problem_urlname(
+            self.course.id,
+            'robot-some-problem-urlname'
+        )
+        self.problem_urlname = str(self.problem_location)
+
         self.module = StudentModule.objects.create(
             student=self.student,
             course_id=self.course.id,
-            module_id=_msk_from_problem_urlname(
-                self.course.id,
-                self.problem_urlname
-            ),
+            module_id=self.problem_location,
             state=json.dumps({'attempts': 10}),
         )
         mock_factory = MockCompletionInfo()
@@ -1809,7 +1814,7 @@ class TestInstructorAPITaskLists(ModuleStoreTestCase, LoginEnrollmentTestCase):
         with patch('instructor.views.api.get_task_completion_info') as mock_completion_info:
             mock_completion_info.side_effect = mock_factory.mock_get_task_completion_info
             response = self.client.get(url, {
-                'problem_urlname': self.problem_urlname,
+                'problem_location_str': self.problem_urlname,
             })
         self.assertEqual(response.status_code, 200)
 
@@ -1830,7 +1835,7 @@ class TestInstructorAPITaskLists(ModuleStoreTestCase, LoginEnrollmentTestCase):
         with patch('instructor.views.api.get_task_completion_info') as mock_completion_info:
             mock_completion_info.side_effect = mock_factory.mock_get_task_completion_info
             response = self.client.get(url, {
-                'problem_urlname': self.problem_urlname,
+                'problem_location_str': self.problem_urlname,
                 'unique_student_identifier': self.student.email,
             })
         self.assertEqual(response.status_code, 200)
@@ -1952,12 +1957,12 @@ class TestInstructorAPIHelpers(TestCase):
         course_id = SlashSeparatedCourseKey('MITx', '6.002x', '2013_Spring')
         name = 'L2Node1'
         output = 'i4x://MITx/6.002x/problem/L2Node1'
-        self.assertEqual(_msk_from_problem_urlname(course_id, name).to_deprecated_string(), output)
+        self.assertEqual(msk_from_problem_urlname(course_id, name).to_deprecated_string(), output)
 
     @raises(ValueError)
     def test_msk_from_problem_urlname_error(self):
         args = ('notagoodcourse', 'L2Node1')
-        _msk_from_problem_urlname(*args)
+        msk_from_problem_urlname(*args)
 
 
 @override_settings(MODULESTORE=TEST_DATA_MIXED_MODULESTORE)

@@ -30,6 +30,8 @@ from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.locations import SlashSeparatedCourseKey
 from xmodule.modulestore.exceptions import ItemNotFoundError
 from xmodule.html_module import HtmlDescriptor
+from xmodule.modulestore.keys import UsageKey
+from opaque_keys import InvalidKeyError
 from lms.lib.xblock.runtime import quote_slashes
 
 # Submissions is a Django app that is currently installed
@@ -165,22 +167,6 @@ def instructor_dashboard(request, course_id):
             writer.writerow(encoded_row)
         return response
 
-    def get_module_url(urlname, block_type='problem'):
-        """
-        Construct full URL for a module from its urlname.
-
-        Form is either urlname or modulename/urlname.  If no modulename
-        is provided, "problem" is assumed.
-        """
-        # remove whitespace
-        urlname = strip_if_string(urlname)
-
-        # tolerate an XML suffix in the urlname
-        if urlname[-4:] == ".xml":
-            urlname = urlname[:-4]
-
-        return course_key.make_usage_key(block_type, urlname)
-
     def get_student_from_identifier(unique_student_identifier):
         """Gets a student object using either an email address or username"""
         unique_student_identifier = strip_if_string(unique_student_identifier)
@@ -269,14 +255,14 @@ def instructor_dashboard(request, course_id):
         msg += dump_grading_context(course)
 
     elif "Rescore ALL students' problem submissions" in action:
-        problem_urlname = request.POST.get('problem_for_all_students', '')
-        problem_url = get_module_url(problem_urlname)
+        problem_location_str = strip_if_string(request.POST.get('problem_for_all_students', ''))
         try:
-            instructor_task = submit_rescore_problem_for_all_students(request, course_key, problem_url)
+            problem_location = UsageKey.from_string(problem_location_str)
+            instructor_task = submit_rescore_problem_for_all_students(request, course_key, problem_location)
             if instructor_task is None:
                 msg += '<font color="red">{text}</font>'.format(
                     text=_('Failed to create a background task for rescoring "{problem_url}".').format(
-                        problem_url=problem_url
+                        problem_url=problem_location_str
                     )
                 )
             else:
@@ -284,56 +270,57 @@ def instructor_dashboard(request, course_id):
                     request,
                     "rescore-all-submissions",
                     {
-                        "problem": problem_url,
+                        "problem": problem_location_str,
                         "course": course_key.to_deprecated_string()
                     },
                     page="idashboard"
                 )
-        except ItemNotFoundError as err:
+
+        except (InvalidKeyError, ItemNotFoundError) as err:
             msg += '<font color="red">{text}</font>'.format(
                 text=_('Failed to create a background task for rescoring "{problem_url}": problem not found.').format(
-                    problem_url=problem_url
+                    problem_url=problem_location_str
                 )
             )
         except Exception as err:  # pylint: disable=broad-except
             log.error("Encountered exception from rescore: {0}".format(err))
             msg += '<font color="red">{text}</font>'.format(
                 text=_('Failed to create a background task for rescoring "{url}": {message}.').format(
-                    url=problem_url, message=err.message
+                    url=problem_location_str, message=err.message
                 )
             )
 
     elif "Reset ALL students' attempts" in action:
-        problem_urlname = request.POST.get('problem_for_all_students', '')
-        problem_url = get_module_url(problem_urlname)
+        problem_location_str = strip_if_string(request.POST.get('problem_for_all_students', ''))
         try:
-            instructor_task = submit_reset_problem_attempts_for_all_students(request, course_key, problem_url)
+            problem_location = UsageKey.from_string(problem_location_str)
+            instructor_task = submit_reset_problem_attempts_for_all_students(request, course_key, problem_location)
             if instructor_task is None:
                 msg += '<font color="red">{text}</font>'.format(
-                    text=_('Failed to create a background task for resetting "{problem_url}".').format(problem_url=problem_url)
+                    text=_('Failed to create a background task for resetting "{problem_url}".').format(problem_url=problem_location_str)
                 )
             else:
                 track.views.server_track(
                     request,
                     "reset-all-attempts",
                     {
-                        "problem": problem_url,
+                        "problem": problem_location_str,
                         "course": course_key.to_deprecated_string()
                     },
                     page="idashboard"
                 )
-        except ItemNotFoundError as err:
+        except (InvalidKeyError, ItemNotFoundError) as err:
             log.error('Failure to reset: unknown problem "{0}"'.format(err))
             msg += '<font color="red">{text}</font>'.format(
                 text=_('Failed to create a background task for resetting "{problem_url}": problem not found.').format(
-                    problem_url=problem_url
+                    problem_url=problem_location_str
                 )
             )
         except Exception as err:  # pylint: disable=broad-except
             log.error("Encountered exception from reset: {0}".format(err))
             msg += '<font color="red">{text}</font>'.format(
                 text=_('Failed to create a background task for resetting "{url}": {message}.').format(
-                    url=problem_url, message=err.message
+                    url=problem_location_str, message=err.message
                 )
             )
 
@@ -344,16 +331,32 @@ def instructor_dashboard(request, course_id):
         if student is None:
             msg += message
         else:
-            problem_urlname = request.POST.get('problem_for_student', '')
-            problem_url = get_module_url(problem_urlname)
-            message, datatable = get_background_task_table(course_key, problem_url, student)
-            msg += message
+            problem_location_str = strip_if_string(request.POST.get('problem_for_student', ''))
+            try:
+                problem_location = UsageKey.from_string(problem_location_str)
+            except InvalidKeyError:
+                msg += '<font color="red">{text}</font>'.format(
+                    text=_('Could not find problem location "{url}".').format(
+                        url=problem_location_str
+                    )
+                )
+            else:
+                message, datatable = get_background_task_table(course_key, problem_location, student)
+                msg += message
 
     elif "Show Background Task History" in action:
-        problem_urlname = request.POST.get('problem_for_all_students', '')
-        problem_url = get_module_url(problem_urlname)
-        message, datatable = get_background_task_table(course_key, problem_url)
-        msg += message
+        problem_location = strip_if_string(request.POST.get('problem_for_all_students', ''))
+        try:
+            problem_location = UsageKey.from_string(problem_location_str)
+        except InvalidKeyError:
+            msg += '<font color="red">{text}</font>'.format(
+                text=_('Could not find problem location "{url}".').format(
+                    url=problem_location_str
+                )
+            )
+        else:
+            message, datatable = get_background_task_table(course_key, problem_location)
+            msg += message
 
     elif ("Reset student's attempts" in action or
           "Delete student state for module" in action or
@@ -362,128 +365,136 @@ def instructor_dashboard(request, course_id):
         unique_student_identifier = request.POST.get(
             'unique_student_identifier', ''
         )
-        problem_urlname = request.POST.get('problem_for_student', '')
-        module_state_key = get_module_url(problem_urlname)
-        # try to uniquely id student by email address or username
-        message, student = get_student_from_identifier(unique_student_identifier)
-        msg += message
-        student_module = None
-        if student is not None:
-
-            # Reset the student's score in the submissions API
-            # Currently this is used only by open assessment (ORA 2)
-            # We need to do this *before* retrieving the `StudentModule` model,
-            # because it's possible for a score to exist even if no student module exists.
-            if "Delete student state for module" in action:
-                try:
-                    sub_api.reset_score(
-                        anonymous_id_for_user(student, course_id),
-                        course_id,
-                        module_state_key,
-                    )
-                except sub_api.SubmissionError:
-                    # Trust the submissions API to log the error
-                    error_msg = _("An error occurred while deleting the score.")
-                    msg += "<font color='red'>{err}</font>  ".format(err=error_msg)
-
-            # find the module in question
-            try:
-                student_module = StudentModule.objects.get(
-                    student_id=student.id,
-                    course_id=course_key.to_deprecated_string(),
-                    module_state_key=module_state_key
+        problem_location_str = strip_if_string(request.POST.get('problem_for_student', ''))
+        try:
+            module_state_key = UsageKey.from_string(problem_location_str)
+        except InvalidKeyError:
+            msg += '<font color="red">{text}</font>'.format(
+                text=_('Could not find problem location "{url}".').format(
+                    url=problem_location_str
                 )
-                msg += _("Found module.  ")
-
-            except StudentModule.DoesNotExist as err:
-                error_msg = _("Couldn't find module with that urlname: {url}. ").format(url=problem_urlname)
-                msg += "<font color='red'>{err_msg} ({err})</font>".format(err_msg=error_msg, err=err)
-                log.debug(error_msg)
-
-        if student_module is not None:
-            if "Delete student state for module" in action:
-                # delete the state
-                try:
-                    student_module.delete()
-
-                    msg += "<font color='red'>{text}</font>".format(
-                        text=_("Deleted student module state for {state}!").format(state=module_state_key)
-                    )
-                    event = {
-                        "problem": module_state_key,
-                        "student": unique_student_identifier,
-                        "course": course_key.to_deprecated_string()
-                    }
-                    track.views.server_track(
-                        request,
-                        "delete-student-module-state",
-                        event,
-                        page="idashboard"
-                    )
-                except Exception as err:  # pylint: disable=broad-except
-                    error_msg = _("Failed to delete module state for {id}/{url}. ").format(
-                        id=unique_student_identifier, url=problem_urlname
-                    )
-                    msg += "<font color='red'>{err_msg} ({err})</font>".format(err_msg=error_msg, err=err)
-                    log.exception(error_msg)
-            elif "Reset student's attempts" in action:
-                # modify the problem's state
-                try:
-                    # load the state json
-                    problem_state = json.loads(student_module.state)
-                    old_number_of_attempts = problem_state["attempts"]
-                    problem_state["attempts"] = 0
-                    # save
-                    student_module.state = json.dumps(problem_state)
-                    student_module.save()
-                    event = {
-                        "old_attempts": old_number_of_attempts,
-                        "student": unicode(student),
-                        "problem": student_module.module_state_key,
-                        "instructor": unicode(request.user),
-                        "course": course_key.to_deprecated_string()
-                    }
-                    track.views.server_track(request, "reset-student-attempts", event, page="idashboard")
-                    msg += "<font color='green'>{text}</font>".format(
-                        text=_("Module state successfully reset!")
-                    )
-                except Exception as err:  # pylint: disable=broad-except
-                    error_msg = _("Couldn't reset module state for {id}/{url}. ").format(
-                        id=unique_student_identifier, url=problem_urlname
-                    )
-                    msg += "<font color='red'>{err_msg} ({err})</font>".format(err_msg=error_msg, err=err)
-                    log.exception(error_msg)
-            else:
-                # "Rescore student's problem submission" case
-                try:
-                    instructor_task = submit_rescore_problem_for_student(request, course_key, module_state_key, student)
-                    if instructor_task is None:
-                        msg += '<font color="red">{text}</font>'.format(
-                            text=_('Failed to create a background task for rescoring "{key}" for student {id}.').format(
-                                key=module_state_key, id=unique_student_identifier
-                            )
+            )
+        else:
+            # try to uniquely id student by email address or username
+            message, student = get_student_from_identifier(unique_student_identifier)
+            msg += message
+            student_module = None
+            if student is not None:
+                # Reset the student's score in the submissions API
+                # Currently this is used only by open assessment (ORA 2)
+                # We need to do this *before* retrieving the `StudentModule` model,
+                # because it's possible for a score to exist even if no student module exists.
+                if "Delete student state for module" in action:
+                    try:
+                        sub_api.reset_score(
+                            anonymous_id_for_user(student, course_key),
+                            course_key,
+                            module_state_key,
                         )
-                    else:
+                    except sub_api.SubmissionError:
+                        raise
+                        # Trust the submissions API to log the error
+                        error_msg = _("An error occurred while deleting the score.")
+                        msg += "<font color='red'>{err}</font>  ".format(err=error_msg)
+
+                # find the module in question
+                try:
+                    student_module = StudentModule.objects.get(
+                        student_id=student.id,
+                        course_id=course_key,
+                        module_id=module_state_key
+                    )
+                    msg += _("Found module.  ")
+
+                except StudentModule.DoesNotExist as err:
+                    error_msg = _("Couldn't find module with that urlname: {url}. ").format(url=problem_location_str)
+                    msg += "<font color='red'>{err_msg} ({err})</font>".format(err_msg=error_msg, err=err)
+                    log.debug(error_msg)
+
+            if student_module is not None:
+                if "Delete student state for module" in action:
+                    # delete the state
+                    try:
+                        student_module.delete()
+
+                        msg += "<font color='red'>{text}</font>".format(
+                            text=_("Deleted student module state for {state}!").format(state=module_state_key)
+                        )
+                        event = {
+                            "problem": problem_location_str,
+                            "student": unique_student_identifier,
+                            "course": course_key.to_deprecated_string()
+                        }
                         track.views.server_track(
                             request,
-                            "rescore-student-submission",
-                            {
-                                "problem": module_state_key,
-                                "student": unique_student_identifier,
-                                "course": course_key.to_deprecated_string()
-                            },
+                            "delete-student-module-state",
+                            event,
                             page="idashboard"
                         )
-                except Exception as err:  # pylint: disable=broad-except
-                    msg += '<font color="red">{text}</font>'.format(
-                        text=_('Failed to create a background task for rescoring "{key}": {id}.').format(
-                            key=module_state_key, id=err.message
+                    except Exception as err:  # pylint: disable=broad-except
+                        error_msg = _("Failed to delete module state for {id}/{url}. ").format(
+                            id=unique_student_identifier, url=problem_location_str
                         )
-                    )
-                    log.exception("Encountered exception from rescore: student '{0}' problem '{1}'".format(
-                        unique_student_identifier, module_state_key
-                    )
-                    )
+                        msg += "<font color='red'>{err_msg} ({err})</font>".format(err_msg=error_msg, err=err)
+                        log.exception(error_msg)
+                elif "Reset student's attempts" in action:
+                    # modify the problem's state
+                    try:
+                        # load the state json
+                        problem_state = json.loads(student_module.state)
+                        old_number_of_attempts = problem_state["attempts"]
+                        problem_state["attempts"] = 0
+                        # save
+                        student_module.state = json.dumps(problem_state)
+                        student_module.save()
+                        event = {
+                            "old_attempts": old_number_of_attempts,
+                            "student": unicode(student),
+                            "problem": student_module.module_state_key,
+                            "instructor": unicode(request.user),
+                            "course": course_key.to_deprecated_string()
+                        }
+                        track.views.server_track(request, "reset-student-attempts", event, page="idashboard")
+                        msg += "<font color='green'>{text}</font>".format(
+                            text=_("Module state successfully reset!")
+                        )
+                    except Exception as err:  # pylint: disable=broad-except
+                        error_msg = _("Couldn't reset module state for {id}/{url}. ").format(
+                            id=unique_student_identifier, url=problem_location_str
+                        )
+                        msg += "<font color='red'>{err_msg} ({err})</font>".format(err_msg=error_msg, err=err)
+                        log.exception(error_msg)
+                else:
+                    # "Rescore student's problem submission" case
+                    try:
+                        instructor_task = submit_rescore_problem_for_student(request, course_key, module_state_key, student)
+                        if instructor_task is None:
+                            msg += '<font color="red">{text}</font>'.format(
+                                text=_('Failed to create a background task for rescoring "{key}" for student {id}.').format(
+                                    key=module_state_key, id=unique_student_identifier
+                                )
+                            )
+                        else:
+                            track.views.server_track(
+                                request,
+                                "rescore-student-submission",
+                                {
+                                    "problem": module_state_key,
+                                    "student": unique_student_identifier,
+                                    "course": course_key.to_deprecated_string()
+                                },
+                                page="idashboard"
+                            )
+                    except Exception as err:  # pylint: disable=broad-except
+                        msg += '<font color="red">{text}</font>'.format(
+                            text=_('Failed to create a background task for rescoring "{key}": {id}.').format(
+                                key=module_state_key, id=err.message
+                            )
+                        )
+                        log.exception("Encountered exception from rescore: student '{0}' problem '{1}'".format(
+                            unique_student_identifier, module_state_key
+                        )
+                        )
 
     elif "Get link to student's progress page" in action:
         unique_student_identifier = request.POST.get('unique_student_identifier', '')

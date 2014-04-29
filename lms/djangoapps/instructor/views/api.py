@@ -69,7 +69,8 @@ from .tools import (
 )
 from xmodule.modulestore import Location
 from xmodule.modulestore.locations import SlashSeparatedCourseKey
-from xmodule.modulestore.keys import CourseKey
+from xmodule.modulestore.keys import UsageKey
+from opaque_keys import InvalidKeyError
 
 log = logging.getLogger(__name__)
 
@@ -765,7 +766,10 @@ def reset_student_attempts(request, course_id):
         if not has_access(request.user, 'instructor', course):
             return HttpResponseForbidden("Requires instructor access.")
 
-    module_state_key = _msk_from_problem_urlname(course_id, problem_to_reset)
+    try:
+        module_state_key = UsageKey.from_string(problem_to_reset)
+    except InvalidKeyError:
+        return HttpResponseBadRequest()
 
     response_payload = {}
     response_payload['problem_to_reset'] = problem_to_reset
@@ -824,7 +828,10 @@ def rescore_problem(request, course_id):
             "Cannot rescore with all_students and unique_student_identifier."
         )
 
-    module_state_key = _msk_from_problem_urlname(course_id, problem_to_reset)
+    try:
+        module_state_key = UsageKey.from_string(problem_to_reset)
+    except InvalidKeyError:
+        return HttpResponseBadRequest()
 
     response_payload = {}
     response_payload['problem_to_reset'] = problem_to_reset
@@ -908,23 +915,26 @@ def list_instructor_tasks(request, course_id):
 
     Takes optional query paremeters.
         - With no arguments, lists running tasks.
-        - `problem_urlname` lists task history for problem
-        - `problem_urlname` and `unique_student_identifier` lists task
+        - `problem_location_str` lists task history for problem
+        - `problem_location_str` and `unique_student_identifier` lists task
             history for problem AND student (intersection)
     """
     course_id = SlashSeparatedCourseKey.from_deprecated_string(course_id)
-    problem_urlname = strip_if_string(request.GET.get('problem_urlname', False))
+    problem_location_str = strip_if_string(request.GET.get('problem_location_str', False))
     student = request.GET.get('unique_student_identifier', None)
     if student is not None:
         student = get_student_from_identifier(student)
 
-    if student and not problem_urlname:
+    if student and not problem_location_str:
         return HttpResponseBadRequest(
-            "unique_student_identifier must accompany problem_urlname"
+            "unique_student_identifier must accompany problem_location_str"
         )
 
-    if problem_urlname:
-        module_state_key = _msk_from_problem_urlname(course_id, problem_urlname)
+    if problem_location_str:
+        try:
+            module_state_key = UsageKey.from_string(problem_location_str)
+        except InvalidKeyError:
+            return HttpResponseBadRequest()
         if student:
             # Specifying for a single student's history on this problem
             tasks = instructor_task.api.get_instructor_task_history(course_id, module_state_key, student)
@@ -1288,16 +1298,3 @@ def _split_input_list(str_list):
     new_list = [s for s in new_list if s != '']
 
     return new_list
-
-
-def _msk_from_problem_urlname(course_id, urlname):
-    """
-    Convert a 'problem urlname' (name that instructor's input into dashboard)
-    to a module state key (db field)
-    """
-    if not isinstance(course_id, CourseKey):
-        raise ValueError
-    if urlname.endswith(".xml"):
-        urlname = urlname[:-4]
-
-    return course_id.make_usage_key('problem', urlname)

@@ -17,6 +17,7 @@ from student.tests.factories import UserFactory
 from xmodule.fields import Date
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory, ItemFactory
+from xmodule.modulestore.keys import CourseKey
 
 from ..views import tools
 
@@ -344,3 +345,14 @@ def get_extended_due(course, unit, student):
     extended = state.get('extended_due', None)
     if extended:
         return DATE_FIELD.from_json(extended)
+
+def msk_from_problem_urlname(course_id, urlname, block_type='problem'):
+    """
+    Convert a 'problem urlname' to a module state key (db field)
+    """
+    if not isinstance(course_id, CourseKey):
+        raise ValueError
+    if urlname.endswith(".xml"):
+        urlname = urlname[:-4]
+
+    return course_id.make_usage_key(block_type, urlname)

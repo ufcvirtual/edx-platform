@@ -27,6 +27,7 @@ from xmodule.modulestore.locations import SlashSeparatedCourseKey
 
 from submissions import api as sub_api
 from student.models import anonymous_id_for_user
+from .test_tools import msk_from_problem_urlname
 
 
 class TestSettableEnrollmentState(TestCase):
@@ -286,6 +287,7 @@ class TestInstructorUnenrollDB(TestEnrollmentChangeBase):
         return self._run_state_change_test(before_ideal, after_ideal, action)
 
 
+@override_settings(MODULESTORE=TEST_DATA_MIXED_MODULESTORE)
 class TestInstructorEnrollmentStudentModule(TestCase):
     """ Test student module manipulations. """
     def setUp(self):
@@ -313,26 +315,33 @@ class TestInstructorEnrollmentStudentModule(TestCase):
 
     def test_delete_submission_scores(self):
         user = UserFactory()
-        course_id = 'ora2/1/1'
-        item_id = 'i4x://ora2/1/openassessment/b3dce2586c9c4876b73e7f390e42ef8f'
+        course = CourseFactory.create()
+        problem_location = msk_from_problem_urlname(
+            course.id,
+            'b3dce2586c9c4876b73e7f390e42ef8f',
+            block_type='openassessment'
+        )
 
         # Create a student module for the user
         StudentModule.objects.create(
-            student=user, course_id=course_id, module_state_key=item_id, state=json.dumps({})
+            student=user,
+            course_id=course.id,
+            module_state_key=problem_location,
+            state=json.dumps({})
         )
 
         # Create a submission and score for the student using the submissions API
         student_item = {
-            'student_id': anonymous_id_for_user(user, course_id),
-            'course_id': course_id,
-            'item_id': item_id,
+            'student_id': anonymous_id_for_user(user, course.id),
+            'course_id': course.id,
+            'item_id': problem_location,
             'item_type': 'openassessment'
         }
         submission = sub_api.create_submission(student_item, 'test answer')
         sub_api.set_score(submission['uuid'], 1, 2)
 
         # Delete student state using the instructor dash
-        reset_student_attempts(course_id, user, item_id, delete_module=True)
+        reset_student_attempts(course.id, user, problem_location, delete_module=True)
 
         # Verify that the student's scores have been reset in the submissions API
         score = sub_api.get_score(student_item)
