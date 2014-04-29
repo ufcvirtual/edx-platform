@@ -52,7 +52,7 @@ Table Formatting
 With a header row
 
 .. list-table::
-   :widths: 10 80
+   :widths: 15 15 70
    :header-rows: 1
  
    * - First Name
@@ -70,7 +70,7 @@ With a header row
 With a bolded first column
 
 .. list-table::
-   :widths: 10 80
+   :widths: 15 15 70
    :stub-columns: 1
  
    * - First Name
