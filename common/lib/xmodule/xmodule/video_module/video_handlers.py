@@ -266,8 +266,7 @@ class VideoStudentViewHandlers(object):
     def max_score(self):
         return self.weight if self.has_score else None
 
-    @XBlock.handler
-    def grade_handler(self, request, dispatch):
+    def update_score(self, score):
         """
         Save grade to database.
         """
@@ -277,22 +276,9 @@ class VideoStudentViewHandlers(object):
         if callable(self.system.get_real_user):  # We are in LMS not in Studio, in Studio it is None.
             real_user = self.system.get_real_user(anon_user_id)
         else:
-            return Response(501)  # Not implemented.
+            raise NotImplementedError
 
-        if not real_user:  # We can't save to database, as we do not have real user id.
-            return Response(400)  # Bad request.
-
-        grader_name = request.POST.get('grader_name', None)
-
-        if grader_name not in self.active_graders:
-            return Response(400)
-
-        self.cumulative_grade[grader_name] = True
-
-        if not all(self.cumulative_grade.values()):
-            return Response(son.dumps('0'), status=200)
-
-        score = self.max_score()
+        assert real_user is not None  # We can't save to database, as we do not have real user id.
 
         self.system.publish(
             self,
@@ -306,7 +292,30 @@ class VideoStudentViewHandlers(object):
 
         self.module_score = score
         log.debug("[Video]: Grade is saved.")
-        return Response(json.dumps(score), status=200)
+
+
+    @XBlock.handler
+    def grade_handler(self, request, dispatch):
+        """
+        Accumulate score from graders and save if all graders succeed.
+        """
+        grader_name = request.POST.get('grader_name', None)
+
+        if grader_name not in self.active_graders:
+            return Response(400)
+
+        self.cumulative_score[grader_name] = True
+
+        if not all(self.cumulative_score.values()):
+            return Response(status=200)
+
+        try:
+            self.update_score(self.max_score())
+        except NotImplementedError:
+            return Response(501)
+        except AssertionError:
+            return Response(500)
+
 
 
 class VideoStudioViewHandlers(object):

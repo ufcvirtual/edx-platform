@@ -96,28 +96,47 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
     js_module_name = "Video"
 
 
-    @property
-    def active_graders(self):
+    def refresh_grades(self):
         """
         Select active graders from possible graders.
 
         Fields that start with 'scored' are counted as possible graders.
 
-        If new active grader was set up, clear self.cumulative_score.
+        If grader was added or removed, or it's value was changed,
+        clear self.cumulative_score and clear score in database.
 
         Returns:
-            dumped list of field names.
+            dumped list of field names and their values.
         """
-        active_graders = [
-            name for name in self.fields.keys() if name.startswith('scored') and getattr(self, name)
-        ]
+        active_graders = {
+            name: getattr(self, name)
+            for name in self.fields.keys()
+            if name.startswith('scored') and getattr(self, name)
+        }
 
-        if sorted(self.cumulative_score.keys()) != sorted(active_graders):
-            self.cumulative_score = {grader_name: False for grader_name in active_graders}
+        graders_updated = sorted(self.cumulative_score) != sorted(active_graders)
+        graders_values_changed = False
 
-        return json.dumps(active_graders)
+        if not graders_updated:
+            for grader_name, cumulative_score_value in self.cumulative_score:
+                score_status, grader_value = cumulative_score_value
+                if grader_value != active_graders[grader_name]
+                    graders_values_changed = True
+                    break
+
+        if graders_updated or graders_values_changed:
+            self.cumulative_score = {
+                grader_name: (False, grader_value)
+                for grader_name, grader_value in active_graders
+            }
+            self.update_score(None)
+
+        return json.dumps(self.cumulative_score)
 
     def get_html(self):
+
+        scores_status = self.refresh_grades()
+
         track_url = None
         transcript_download_format = self.transcript_download_format
 
@@ -194,7 +213,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             'has_score': json.dumps(self.has_score),
             'max_score': json.dumps(self.max_score()),
             'module_score': json.dumps(self.module_score),
-            'active_graders': self.active_graders,
+            'scores_status': scores_status,
         })
 
 
