@@ -39,7 +39,11 @@ The following documentation is available:
   * Updated `Working with HTML Components`_ to reflect changes to the HTML
     component editor.
 
-  * Reorganized information about problems into `Creating Exercises and Tools`_ section.
+  * Reorganized information about problems into the `Creating Exercises and
+    Tools`_ section.
+  
+  * Added more information about collecting language and location data from
+    students to `Student Data`_.
       
 
 * `edX Data Documentation`_
@@ -61,6 +65,14 @@ edX Studio
 * The HTML component editor is updated to provide a raw HTML editing option. For
   more information, see `Working with HTML Components`_. (STUD-1562)
 
+* You can now upload a handout that is associated with a video directly in the
+  Video component editor. Open the **Advanced** tab in the Video component
+  editor, and use the **Upload** button to find and add a file from your
+  computer:
+  
+.. image:: images/upload_handout_video.png
+ :alt: Image of the Upload Handout section of the Video component editor.
+
 ***************************************
 edX Learning Management System
 ***************************************
@@ -69,6 +81,9 @@ edX Learning Management System
   error messages and erroneous characters in some email programs. All lines are
   now wrapped at 998 characters automatically. (LMS-1466)
 
-
+* Occasionally student submissions for MatLab problems are not graded
+  successfully and the MatLab grader times out. There is now a **Reset** button
+  that allows students to resubmit their answer without counting the
+  resubmission and another attempt of the problem.
 
 .. include:: links.rst
