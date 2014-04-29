@@ -103,14 +103,25 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
         return self.has_score
 
     @property
-    def grader_name(self):
-        if self.scored_on_end:
-            return "GradeOnEnd"
-        elif self.scored_on_percent is not None:
-            return "GradeOnPercent"
-        else:
-            return None
+    def active_graders(self):
+        """
+        Select active graders from possible graders.
 
+        Fields that start with scored are counted as grade rules.
+
+        If new active grader was set up, clear self.cumulative_score
+
+        Returns:
+            list of grader names
+        """
+        active_graders = [
+            name for name in self.fields.keys() if name.startswith('scored') and getattr(self, name)
+        ]
+
+        if sorted(self.cumulative_score.keys()) != sorted(active_graders):
+            self.cumulative_score = {grader_name: False for grader_name in active_graders}
+
+        return json.dumps(active_graders)
 
     def get_html(self):
         track_url = None
@@ -189,7 +200,7 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
             'has_score': json.dumps(self.has_score),
             'max_score': json.dumps(self.max_score()),
             'module_score': json.dumps(self.module_score),
-            'grader_name': self.grader_name,
+            'active_graders': self.active_graders,
         })
 
 

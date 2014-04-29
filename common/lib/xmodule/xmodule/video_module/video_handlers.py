@@ -271,7 +271,6 @@ class VideoStudentViewHandlers(object):
         """
         Save grade to database.
         """
-
         anon_user_id  = self.runtime.anonymous_student_id
         assert anon_user_id is not None
 
@@ -282,6 +281,16 @@ class VideoStudentViewHandlers(object):
 
         if not real_user:  # We can't save to database, as we do not have real user id.
             return Response(400)  # Bad request.
+
+        grader_name = request.POST.get('grader_name', None)
+
+        if grader_name not in self.active_graders:
+            return Response(400)
+
+        self.cumulative_grade[grader_name] = True
+
+        if not all(self.cumulative_grade.values()):
+            return Response( status=200)
 
         score = self.max_score()
 
