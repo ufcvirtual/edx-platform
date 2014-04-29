@@ -12,6 +12,8 @@ April, 2014
 
    * - Date
      - Change
+   * - 04/29/14
+     - Expanded the :ref:`Grades` chapter to include a topic on interpreting the score histograms for problems.
    * - 04/28/14
      - Updated :ref:`Show or Hide the Course Wiki Page` to include note about Wiki content being available after you hide the Wiki page.
    * - 04/26/14
