@@ -38,9 +38,10 @@ class TestImport(ModuleStoreTestCase):
         self.good_dir = tempfile.mkdtemp(dir=self.content_dir)
         os.makedirs(os.path.join(self.good_dir, "course"))
         with open(os.path.join(self.good_dir, "course.xml"), "w+") as f:
-            f.write('<course url_name="2013_Spring" org="edX" course="test_import_course"/>')
+            f.write('<course url_name="{0.run}" org="{0.org}" '
+                    'course="{0.course}"/>'.format(self.COURSE_KEY))
 
-        with open(os.path.join(self.good_dir, "course", "2013_Spring.xml"), "w+") as f:
+        with open(os.path.join(self.good_dir, "course", "{0.run}.xml".format(self.COURSE_KEY)), "w+") as f:
             f.write('<course></course>')
 
         # Create run changed course xml
