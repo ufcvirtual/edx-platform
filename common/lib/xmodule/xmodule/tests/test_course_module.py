@@ -49,7 +49,7 @@ class DummySystem(ImportSystem):
         )
 
 
-def get_dummy_course(start, announcement=None, is_new=None, advertised_start=None, end=None):
+def get_dummy_course(start, announcement=None, is_new=None, advertised_start=None, end=None, certs=False):
     """Get a dummy course"""
 
     system = DummySystem(load_error_modules=True)
@@ -69,13 +69,15 @@ def get_dummy_course(start, announcement=None, is_new=None, advertised_start=Non
                 {announcement}
                 {is_new}
                 {advertised_start}
-                {end}>
+                {end}
+                certificate_show_before_end={certs}>
             <chapter url="hi" url_name="ch" display_name="CH">
                 <html url_name="h" display_name="H">Two houses, ...</html>
             </chapter>
          </course>
          '''.format(org=ORG, course=COURSE, start=start, is_new=is_new,
-        announcement=announcement, advertised_start=advertised_start, end=end)
+        announcement=announcement, advertised_start=advertised_start, end=end,
+        certs=certs)
 
     return system.process_xml(start_xml)
 
@@ -98,10 +100,14 @@ class HasEndedMayCertifyTestCase(unittest.TestCase):
         """.format(org=ORG, course=COURSE)
         past_end = (datetime.now() - timedelta(days=12)).strftime("%Y-%m%dT%H:%M:00")
         future_end = (datetime.now() + timedelta(days=12)).strftime("%Y-%m%dT%H:%M:00")
-        self.past_show_certs = system.process_xml(sample_xml.format(end=past_end, cert=True))
-        self.past_noshow_certs = system.process_xml(sample_xml.format(end=past_end, cert=False))
-        self.future_show_certs = system.process_xml(sample_xml.format(end=future_end, cert=True))
-        self.future_noshow_certs = system.process_xml(sample_xml.format(end=future_end, cert=False))
+        self.past_show_certs = get_dummy_course("2012-01-01T12:00", org=ORG, course=COURSE, end=past_end, cert=True)
+        self.past_noshow_certs = get_dummy_course("2012-01-01T12:00", org=ORG, course=COURSE, end=past_end, cert=False)
+        self.future_show_certs = get_dummy_course("2012-01-01T12:00", org=ORG, course=COURSE, end=future_end, cert=True)
+        self.future_noshow_certs = get_dummy_course("2012-01-01T12:00", org=ORG, course=COURSE, end=future_end, cert=True)
+        #self.past_show_certs = system.process_xml(sample_xml.format(end=past_end, cert=True))
+        #self.past_noshow_certs = system.process_xml(sample_xml.format(end=past_end, cert=False))
+        #self.future_show_certs = system.process_xml(sample_xml.format(end=future_end, cert=True))
+        #self.future_noshow_certs = system.process_xml(sample_xml.format(end=future_end, cert=False))
 
     def test_has_ended(self):
         """Check that has_ended correctly tells us when a course is over."""
