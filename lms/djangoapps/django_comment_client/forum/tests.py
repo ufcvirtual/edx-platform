@@ -277,7 +277,7 @@ class UserProfileTestCase(ModuleStoreTestCase):
         request.user = self.student
         response = views.user_profile(
             request,
-            self.course.id,
+            self.course.id.to_deprecated_string(),
             self.profiled_user.id
         )
         mock_request.assert_any_call(
@@ -342,7 +342,7 @@ class UserProfileTestCase(ModuleStoreTestCase):
         with self.assertRaises(Http404):
             response = views.user_profile(
                 request,
-                self.course.id,
+                self.course.id.to_deprecated_string(),
                 -999
             )
 
@@ -362,7 +362,7 @@ class UserProfileTestCase(ModuleStoreTestCase):
         request.user = self.student
         response = views.user_profile(
             request,
-            self.course.id,
+            self.course.id.to_deprecated_string(),
             self.profiled_user.id
         )
         self.assertEqual(response.status_code, 405)
