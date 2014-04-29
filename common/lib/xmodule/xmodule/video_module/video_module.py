@@ -120,16 +120,16 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
         if not graders_updated:
             for grader_name, cumulative_score_value in self.cumulative_score:
                 score_status, grader_value = cumulative_score_value
-                if grader_value != active_graders[grader_name]
+                if grader_value != active_graders[grader_name]:
                     graders_values_changed = True
                     break
 
         if graders_updated or graders_values_changed:
             self.cumulative_score = {
                 grader_name: (False, grader_value)
-                for grader_name, grader_value in active_graders
+                for grader_name, grader_value in active_graders.items()
             }
-            self.update_score(None)
+            #self.update_score(None)
 
         return json.dumps(self.cumulative_score)
 
