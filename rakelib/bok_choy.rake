@@ -190,7 +190,7 @@ namespace :'test:bok_choy' do
     end
 
     desc "Process assets and set up database for bok-choy tests"
-    task :setup => [:check_services, :install_prereqs, BOK_CHOY_LOG_DIR] do
+    task :setup => [:install_prereqs, BOK_CHOY_LOG_DIR] do
 
         # Reset the database
         sh("#{REPO_ROOT}/scripts/reset-test-db.sh")
