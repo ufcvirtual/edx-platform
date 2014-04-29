@@ -453,7 +453,7 @@ View a Histogram of Scores for a Single Problem
 
 You can view a chart of the score distribution for a specified problem. 
 
-.. note:: In order to view the score distribution for a problem, you need its unique identifier. See :ref:`find_URL`.
+.. note:: To view the score distribution for a problem, you need its unique identifier. See :ref:`find_URL`.
 
 To display the distribution of scores for a problem:
 
@@ -465,10 +465,12 @@ To display the distribution of scores for a problem:
 
 #. In the Score Distribution section, select a problem by using its unique identifier. 
 
-   A histogram of scores for that problem displays.
+   The **Analytics** page updates to display a histogram of scores for that
+   problem.
 
    .. image:: ../Images/score_histogram.png
-     :alt: Graph of the number of students who got different scores for a selected problem
+     :alt: Graph of the number of students who received different scores for a
+         selected problem
 
 ..  **Question**: (sent to Olga 31 Jan 14) this is a tough UI to use: how do they correlate the codes in this drop-down with actual constructed problems? the copy-and-paste UI on the Student Admin page actually works a little better imo. LMS-2522
 
@@ -476,10 +478,12 @@ To display the distribution of scores for a problem:
 Interpret a Score Histogram
 ===================================================
 
-The histogram of scores for a selected problem provides the following information.
+The histogram of scores for a selected problem provides the following
+information.
 
    .. image:: ../Images/score_histogram_callouts.png
-     :alt: Graph of the number of students who got different scores for a selected problem
+     :alt: Histogram with indicators for the number of students scored value and
+         the x-axis numbers that indicate plotted scores
 
 * The x-axis indicates the number of points that students can receive for the
   problem, unweighted. Although decimal values are marked on the x-axis, each
@@ -490,15 +494,14 @@ The histogram of scores for a selected problem provides the following informatio
   problem.
 
 * Above the graph, a number of "students scored" displays. This number indicates
-  the total number of database records that exist for that problem: that is, the
-  number of students with state for the problem. In addition to students who
-  have answered the questions and checked their answers to receive a score, this
-  total also includes students who opened the problem but have not yet completed
-  it.
+  the total number of database records that exist for that problem. In addition
+  to students who have answered the questions and checked their answers to
+  receive a score, this total also includes students who have opened the problem
+  but have not yet completed it.
 
 * An automated process runs approximately weekly on the edX servers to update
   score histograms. This process runs less frequently than the process that
   updates the student answer distribution report, so at certain times during the
   course the number of students shown in a score histogram can be quite
-  different than the Count for the same problem in a student answer distribution
-  report.
+  different than the **Count** for the same problem in a student answer
+  distribution report.
