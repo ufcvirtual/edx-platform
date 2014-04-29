@@ -258,7 +258,7 @@ def instructor_dashboard(request, course_id):
         problem_location_str = strip_if_string(request.POST.get('problem_for_all_students', ''))
         try:
             problem_location = UsageKey.from_string(problem_location_str)
-            instructor_task = submit_rescore_problem_for_all_students(request, course_key, problem_location)
+            instructor_task = submit_rescore_problem_for_all_students(request, problem_location)
             if instructor_task is None:
                 msg += '<font color="red">{text}</font>'.format(
                     text=_('Failed to create a background task for rescoring "{problem_url}".').format(
@@ -294,7 +294,7 @@ def instructor_dashboard(request, course_id):
         problem_location_str = strip_if_string(request.POST.get('problem_for_all_students', ''))
         try:
             problem_location = UsageKey.from_string(problem_location_str)
-            instructor_task = submit_reset_problem_attempts_for_all_students(request, course_key, problem_location)
+            instructor_task = submit_reset_problem_attempts_for_all_students(request, problem_location)
             if instructor_task is None:
                 msg += '<font color="red">{text}</font>'.format(
                     text=_('Failed to create a background task for resetting "{problem_url}".').format(problem_url=problem_location_str)
@@ -392,7 +392,6 @@ def instructor_dashboard(request, course_id):
                             module_state_key,
                         )
                     except sub_api.SubmissionError:
-                        raise
                         # Trust the submissions API to log the error
                         error_msg = _("An error occurred while deleting the score.")
                         msg += "<font color='red'>{err}</font>  ".format(err=error_msg)
@@ -467,7 +466,7 @@ def instructor_dashboard(request, course_id):
                 else:
                     # "Rescore student's problem submission" case
                     try:
-                        instructor_task = submit_rescore_problem_for_student(request, course_key, module_state_key, student)
+                        instructor_task = submit_rescore_problem_for_student(request, module_state_key, student)
                         if instructor_task is None:
                             msg += '<font color="red">{text}</font>'.format(
                                 text=_('Failed to create a background task for rescoring "{key}" for student {id}.').format(
@@ -639,6 +638,9 @@ def instructor_dashboard(request, course_id):
         datatable = {'header': ['username', 'email'] + profkeys}
 
         def getdat(user):
+            """
+            Return a list of profile data for the given user.
+            """
             profile = user.profile
             return [user.username, user.email] + [getattr(profile, xkey, '') for xkey in profkeys]
 
@@ -657,7 +659,7 @@ def instructor_dashboard(request, course_id):
         if problem_to_dump[-4:] == ".xml":
             problem_to_dump = problem_to_dump[:-4]
         try:
-            module_state_key = course_key.make_usage_key(category='problem', name=problem_to_dump)
+            module_state_key = course_key.make_usage_key(block_type='problem', name=problem_to_dump)
             smdat = StudentModule.objects.filter(
                 course_id=course_key.to_deprecated_string(),
                 module_state_key=module_state_key
@@ -1567,7 +1569,7 @@ def _do_enroll_students(course, course_key, students, overload=False, auto_enrol
 
         try:
             # Not enrolled yet
-            cenroll = CourseEnrollment.enroll(user, course_key)
+            CourseEnrollment.enroll(user, course_key)
             status[student] = 'added'
 
             if email_students:

@@ -785,7 +785,7 @@ def reset_student_attempts(request, course_id):
             return HttpResponse(error_msg, status=500)
         response_payload['student'] = student_identifier
     elif all_students:
-        instructor_task.api.submit_reset_problem_attempts_for_all_students(request, course_id.to_deprecated_string(), module_state_key)
+        instructor_task.api.submit_reset_problem_attempts_for_all_students(request, module_state_key)
         response_payload['task'] = 'created'
         response_payload['student'] = 'All Students'
     else:
@@ -838,10 +838,10 @@ def rescore_problem(request, course_id):
 
     if student:
         response_payload['student'] = student_identifier
-        instructor_task.api.submit_rescore_problem_for_student(request, course_id.to_deprecated_string(), module_state_key, student)
+        instructor_task.api.submit_rescore_problem_for_student(request, module_state_key, student)
         response_payload['task'] = 'created'
     elif all_students:
-        instructor_task.api.submit_rescore_problem_for_all_students(request, course_id.to_deprecated_string(), module_state_key)
+        instructor_task.api.submit_rescore_problem_for_all_students(request, module_state_key)
         response_payload['task'] = 'created'
     else:
         return HttpResponseBadRequest()
