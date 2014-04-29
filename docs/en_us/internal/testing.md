@@ -181,6 +181,11 @@ you can do one of:
 Very handy: if you uncomment the `pdb=1` line in `setup.cfg`, it will drop you into pdb on error.  This lets you go up and down the stack and see what the values of the variables are.  Check out [the pdb documentation](http://docs.python.org/library/pdb.html)
 
 
+More on the `--failed` functionality: 
+* In order to use this, you must run the tests first. If you haven't already run the tests, or if no tests failed in the previous run, then tests called with the `--failed` switch will run all of the tests.  See more about this in the [nose documentation](http://nose.readthedocs.org/en/latest/plugins/testid.html#looping-over-failed-tests).
+* Note that `rake test:python` calls nosetests separately for cms and lms. This means that if tests failed only in lms on the previous run, then calling `rake test:pythoh[--failed]` will run all of the tests for cms in addition to the previously failing lms tests. If you want it to run only the failing tests for lms or cms, use the `rake test_lms[--failed]` or `rake test_cms[--failed]` commands. 
+
+
 ### Running Javascript Unit Tests
 
 We use Jasmine to run JavaScript unit tests.  To run all the JavaScript tests:
