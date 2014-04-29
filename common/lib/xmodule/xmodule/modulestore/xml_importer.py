@@ -107,7 +107,7 @@ def import_from_xml(
         default_class='xmodule.raw_module.RawDescriptor',
         load_error_modules=True, static_content_store=None,
         target_course_id=None, verbose=False, draft_store=None,
-        do_import_static=True):
+        do_import_static=True, create_new_course=False):
     """
     Import the specified xml data_dir into the "store" modulestore,
     using org and course as the location org and course.
@@ -129,6 +129,9 @@ def import_from_xml(
         time the course is loaded. Static content for some courses may also be
         served directly by nginx, instead of going through django.
 
+    : create_new_course:
+        If True, then courses whose ids already exist in the store are not imported.
+        The check for existing courses is case-insensitive.
     """
 
     xml_module_store = XMLModuleStore(
@@ -157,6 +160,16 @@ def import_from_xml(
             dest_course_id = target_course_id
         else:
             dest_course_id = course_id
+
+        if create_new_course:
+            if store.has_course(dest_course_id, ignore_case=True):
+                log.debug(
+                    "Skipping import of course with id, {0},"
+                    "since it collides with an existing one".format(dest_course_id)
+                )
+                continue
+            else:
+                store.create_course(dest_course_id.org, dest_course_id.offering)
 
         try:
             # turn off all write signalling while importing as this
