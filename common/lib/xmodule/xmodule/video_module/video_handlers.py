@@ -290,7 +290,7 @@ class VideoStudentViewHandlers(object):
         self.cumulative_grade[grader_name] = True
 
         if not all(self.cumulative_grade.values()):
-            return Response( status=200)
+            return Response(son.dumps('0'), status=200)
 
         score = self.max_score()
 
