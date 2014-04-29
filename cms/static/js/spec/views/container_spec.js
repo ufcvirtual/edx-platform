@@ -7,24 +7,23 @@ define([ "jquery", "js/spec_helpers/create_sinon", "URI", "js/views/container", 
 
             describe("Supports reordering components", function () {
 
-                var model, containerView, mockContainerHTML, respondWithMockXBlockFragment;
+                var model, containerView, mockContainerHTML, respondWithMockXBlockFragment,
+                    init, dragHandle, verifyRequest, verifyNumReorderCalls, respondToRequest,
 
-                // TODO: this will all need to be updated according to Andy's mock HTML,
-                // and locators should be draft.
-                var splitTestUrl = "/xblock/ccc.dd.ee/branch/draft/block/AB_Test";
+                    splitTestUrl = "/xblock/ccc.dd.ee/branch/draft/block/AB_Test",
 
-                var groupAUrl = "/xblock/ccc.dd.ee/branch/published/block/group_a";
-                var groupA = "ccc.dd.ee/branch/published/block/group_a";
-                var groupAText = "ccc.dd.ee/branch/published/block/html_4658c0f4c400";
-                var groupAVideo = "ccc.dd.ee/branch/published/block/group_a_video";
+                    groupAUrl = "/xblock/ccc.dd.ee/branch/published/block/group_a",
+                    groupA = "ccc.dd.ee/branch/published/block/group_a",
+                    groupAText = "ccc.dd.ee/branch/published/block/html_4658c0f4c400",
+                    groupAVideo = "ccc.dd.ee/branch/published/block/group_a_video",
 
-                var groupBUrl = "/xblock/ccc.dd.ee/branch/published/block/group_b";
-                var groupB = "ccc.dd.ee/branch/published/block/group_b";
-                var groupBText = "ccc.dd.ee/branch/published/block/html_b5c18016d991";
-                var groupBProblem = "ccc.dd.ee/branch/published/block/Checkboxes";
+                    groupBUrl = "/xblock/ccc.dd.ee/branch/published/block/group_b",
+                    groupB = "ccc.dd.ee/branch/published/block/group_b",
+                    groupBText = "ccc.dd.ee/branch/published/block/html_b5c18016d991",
+                    groupBProblem = "ccc.dd.ee/branch/published/block/Checkboxes";
 
                 // TODO: switch to using Andy's mock container view files (which uses mock xblocks).
-                mockContainerHTML = readFixtures('mock/mock-container.underscore');
+                mockContainerHTML = readFixtures('mock/mock-container-xblock.underscore');
 
                 respondWithMockXBlockFragment = function (requests, response) {
                     var requestIndex = requests.length - 1;
@@ -48,7 +47,7 @@ define([ "jquery", "js/spec_helpers/create_sinon", "URI", "js/views/container", 
                     containerView.remove();
                 });
 
-                var init = function (caller) {
+                init = function (caller) {
                     var requests = create_sinon.requests(caller);
                     containerView.render();
 
@@ -61,27 +60,28 @@ define([ "jquery", "js/spec_helpers/create_sinon", "URI", "js/views/container", 
                     return requests;
                 };
 
-                var dragHandle = function (index, dy) {
+                dragHandle = function (index, dy) {
                     containerView.$el.find(".drag-handle:eq(" + index + ")").simulate("drag", {dy: dy});
                 };
 
-                var verifyRequest = function (requests, reorderCallIndex, expectedURL, expectedChildren) {
+                verifyRequest = function (requests, reorderCallIndex, expectedURL, expectedChildren) {
+                    var request, children, i;
                     // 0th call is the response to the initial render call to get HTML.
-                    var request = requests[reorderCallIndex + 1];
+                    request = requests[reorderCallIndex + 1];
                     expect(request.url).toEqual(expectedURL);
-                    var children = (JSON.parse(request.requestBody)).children;
+                    children = (JSON.parse(request.requestBody)).children;
                     expect(children.length).toEqual(expectedChildren.length);
-                    for (var i = 0; i < children.length; i++) {
+                    for (i = 0; i < children.length; i++) {
                         expect(children[i]).toEqual(expectedChildren[i]);
                     }
                 };
 
-                var verifyNumReorderCalls = function (requests, expectedCalls) {
+                verifyNumReorderCalls = function (requests, expectedCalls) {
                     // Number of calls will be 1 more than expected because of the initial render call to get HTML.
                     expect(requests.length).toEqual(expectedCalls + 1);
                 };
 
-                var respondToRequest = function (requests, reorderCallIndex, status) {
+                respondToRequest = function (requests, reorderCallIndex, status) {
                     // Number of calls will be 1 more than expected because of the initial render call to get HTML.
                     requests[reorderCallIndex + 1].respond(status);
                 };
@@ -163,13 +163,14 @@ define([ "jquery", "js/spec_helpers/create_sinon", "URI", "js/views/container", 
                     });
 
                     it('hides saving message upon success', function () {
-                        var requests = init(this);
+                        var requests, savingOptions;
+                        requests = init(this);
                         // Drag text item in Group A to the top level (in first position).
                         dragHandle(1, -20);
                         expect(savingSpies.constructor).toHaveBeenCalled();
                         expect(savingSpies.show).toHaveBeenCalled();
                         expect(savingSpies.hide).not.toHaveBeenCalled();
-                        var savingOptions = savingSpies.constructor.mostRecentCall.args[0];
+                        savingOptions = savingSpies.constructor.mostRecentCall.args[0];
                         expect(savingOptions.title).toMatch(/Saving/);
 
                         respondToRequest(requests, 0, 200);
@@ -194,5 +195,5 @@ define([ "jquery", "js/spec_helpers/create_sinon", "URI", "js/views/container", 
                     });
                 });
             });
-       });
+        });
     });
