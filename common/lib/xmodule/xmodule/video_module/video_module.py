@@ -95,24 +95,18 @@ class VideoModule(VideoFields, VideoStudentViewHandlers, XModule):
     ]}
     js_module_name = "Video"
 
-    @property
-    def graded(self):
-        """
-        Alias of the `has_score` property
-        """
-        return self.has_score
 
     @property
     def active_graders(self):
         """
         Select active graders from possible graders.
 
-        Fields that start with scored are counted as grade rules.
+        Fields that start with 'scored' are counted as possible graders.
 
-        If new active grader was set up, clear self.cumulative_score
+        If new active grader was set up, clear self.cumulative_score.
 
         Returns:
-            list of grader names
+            dumped list of field names.
         """
         active_graders = [
             name for name in self.fields.keys() if name.startswith('scored') and getattr(self, name)
