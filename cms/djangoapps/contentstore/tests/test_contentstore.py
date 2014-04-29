@@ -1486,7 +1486,7 @@ class ContentStoreTest(ModuleStoreTestCase):
         resp = self._show_course_overview(course.id)
         self.assertContains(
             resp,
-            '<article class="courseware-overview" data-locator="slashes:MITx+999+Robot_Super_Course">',
+            '<article class="courseware-overview" data-locator="location:MITx+999+Robot_Super_Course+course+Robot_Super_Course" data-course-key="slashes:MITx+999+Robot_Super_Course">',
             status_code=200,
             html=True
         )
