@@ -503,6 +503,8 @@ function (HTML5Video, Resizer) {
         // timeline.
         this.videoPlayer.updatePlayTime(time);
 
+        debugger;
+
         this.el.trigger('ended', arguments);
     }
 
