@@ -263,37 +263,6 @@ class VideoStudentViewHandlers(object):
 
         return response
 
-    def max_score(self):
-        return self.weight if self.has_score else None
-
-    def update_score(self, score):
-        """
-        Save grade to database.
-        """
-        anon_user_id  = self.runtime.anonymous_student_id
-        assert anon_user_id is not None
-
-        if callable(self.system.get_real_user):  # We are in LMS not in Studio, in Studio it is None.
-            real_user = self.system.get_real_user(anon_user_id)
-        else:
-            raise NotImplementedError
-
-        assert real_user is not None  # We can't save to database, as we do not have real user id.
-
-        self.system.publish(
-            self,
-            'grade',
-            {
-                'value': score,
-                'max_value': self.max_score(),
-                'user_id': real_user.id,
-            }
-        )
-
-        self.module_score = score
-        log.debug("[Video]: Grade is saved.")
-
-
     @XBlock.handler
     def grade_handler(self, request, dispatch):
         """
