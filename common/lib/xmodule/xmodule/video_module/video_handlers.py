@@ -301,12 +301,12 @@ class VideoStudentViewHandlers(object):
         """
         grader_name = request.POST.get('grader_name', None)
 
-        if grader_name not in self.active_graders:
+        if grader_name not in self.graders():
             return Response(400)
 
-        self.cumulative_score[grader_name] = True
+        self.cumulative_score[grader_name] = (True, self.cumulative_score[grader_name][1])
 
-        if not all(self.cumulative_score.values()):
+        if not all([status for status, params in self.cumulative_score.values()]):
             return Response(status=200)
 
         if self.module_score and self.module_score == self.max_score():
