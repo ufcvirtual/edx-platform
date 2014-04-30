@@ -17,12 +17,18 @@ function (AbstractGrader) {
             return new GraderChooser(state, i18n);
         }
 
+        debugger;
+
         var graderName = state.config.graderName;
 
         if (state.config.hasScore) {
-            if (GraderChooser[graderName]) {
-                return new GraderChooser[graderName](state, i18n);
-            }
+            $.each(state.config.graders, function (graderName, graderConfig) {
+                debugger;
+            });
+
+            // if (GraderChooser[graderName]) {
+            //     return new GraderChooser[graderName](state, i18n);
+            // }
         }
 
         return $.Deferred().resolve().promise();
