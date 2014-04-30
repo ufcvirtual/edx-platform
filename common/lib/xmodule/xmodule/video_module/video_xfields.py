@@ -181,7 +181,7 @@ class VideoFields(object):
     weight = Float(
         display_name="Weight",
         help=(
-            "Enter the number of points possible for this component.  "
+            "Enter the number of points possible for this component."
             "The default value is 1.0.  "
             "This setting is only used when Scored is set to True."
         ),
@@ -190,8 +190,8 @@ class VideoFields(object):
         values={"min": 0},
     )
     cumulative_score = Dict(
-        help="Save result from particular graders",
-        display_name="Cumupative scores",
+        help="Accumulates results from particular graders.",
+        display_name="Cumulative scores.",
         scope=Scope.user_state,
         default={}
     )
