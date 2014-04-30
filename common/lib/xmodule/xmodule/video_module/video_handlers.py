@@ -270,8 +270,8 @@ class VideoStudentViewHandlers(object):
         """
         grader_name = request.POST.get('grader_name', None)
 
-        if grader_name not in self.graders():
-            return Response(400)
+        if not grader_name or grader_name not in self.graders():
+            return Response(status=400)
 
         self.cumulative_score[grader_name] = (True, self.cumulative_score[grader_name][1])
 
@@ -282,9 +282,11 @@ class VideoStudentViewHandlers(object):
             try:
                 self.update_score(self.weight * self.max_score())
             except NotImplementedError:
-                return Response(501)
+                return Response(status=501)
             except AssertionError:
-                return Response(500)
+                return Response(status=500)
+
+            return Response(status=200)
 
 
 class VideoStudioViewHandlers(object):

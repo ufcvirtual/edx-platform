@@ -704,3 +704,58 @@ class TestGetTranscript(TestVideo):
 
         with self.assertRaises(KeyError):
             self.item.get_transcript()
+
+
+class TestVideoGradeHandler(TestVideo):
+    """
+    Test video grade handler.
+    """
+
+    DATA = """
+        <video show_captions="true"
+        display_name="A Name"
+        has_score="True"
+        scored_on_end="True"
+        scored_on_percent="75"
+        >
+            <source src="example.mp4"/>
+            <source src="example.webm"/>
+        </video>
+    """
+
+    MODEL_DATA = {
+        'data': DATA
+    }
+
+    def setUp(self):
+        super(TestVideoGradeHandler, self).setUp()
+        self.item_descriptor.render('student_view')
+        self.item = self.item_descriptor.xmodule_runtime.xmodule_instance
+
+    def test_grade_handler(self):
+
+        # no grader name in graders
+        request = Request.blank('')
+        response = self.item.grade_handler(request=request, dispatch='')
+        self.assertEqual(response.status, '400 Bad Request')
+
+        request = Request.blank('', POST={'grader_name': 'unknown_grader'})
+        response = self.item.grade_handler(request=request, dispatch='')
+        self.assertEqual(response.status, '400 Bad Request')
+
+        test_grader_name = 'scored_on_end'
+        self.assertFalse(self.item.cumulative_score[test_grader_name][0])
+        request = Request.blank('', POST={'grader_name': test_grader_name})
+        response = self.item.grade_handler(request=request, dispatch='')
+        self.assertTrue(self.item.cumulative_score[test_grader_name][0])
+        self.assertEqual(response.status_code, 200)
+
+        test_grader_name = 'scored_on_percent'
+        self.assertFalse(self.item.cumulative_score[test_grader_name][0])
+        request = Request.blank('', POST={'grader_name': test_grader_name})
+        response = self.item.grade_handler(request=request, dispatch='')
+        self.assertTrue(self.item.cumulative_score[test_grader_name][0])
+        self.assertEqual(response.status_code, 501)  # NotImplemented
+
+        # TODO mock: same as in test_video_scoring and get 200 status_code
+
