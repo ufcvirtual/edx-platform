@@ -1,0 +1,948 @@
+// variables
+$header_bg: #35495d;
+$content_bg: #F5F7F7;
+$content_side_bg: #e9eced;
+$content_side_bg_open: #F6F6F6;
+$chapter_color: #A4ABAB;
+$course_nav: #3d5260;
+$course_nav_active: #4090CC;
+$course_nav_hover: #5b7181;
+$button_side: #668AAD;
+$button_side_hover_bg: #5A7181;
+$button_del: #EE3057;
+$button_del_hover: #D01F44;
+$inputs: #d6d6d6;
+$button_save_add: #40BDA3;
+$button_save_add_hover: #16A086;
+$discussion: #dfdfdf;
+$discussion-font: #737373;
+
+//mixin
+@mixin shadow(){
+	background-image:none;
+	box-shadow:none;
+	text-shadow: none;
+}
+
+@mixin buttonsdiscussion(){
+	@include shadow();
+
+	a.action-edit, a.action-openclose{
+			background: $course_nav;
+			color: white;
+			border: 0;
+			font-weight: normal;
+
+			.show-label{
+				color: white;
+			}
+
+			&:active{
+				border: 0;
+				box-shadow:none;
+			}
+				
+			&:hover{
+				background: $course_nav_hover;
+				color: white;
+				box-shadow:none;
+			}
+		}
+
+		a.action-delete{
+			background: $button_del;
+			color: white;
+			border: 0;
+			font-weight: normal;
+
+			&:active{
+				border: 0;
+				box-shadow:none;
+			}
+
+			&:hover{
+				background: $button_del_hover;
+				color: white;
+				box-shadow:none;
+			}
+		}
+
+}
+
+// general
+body {
+	background-color: white;
+	background-image: none;
+}
+
+// header
+header.global.slim {
+	background-color: $header_bg;
+	border-bottom: none;
+	
+	h2 {
+		color: white;
+		text-shadow: none;
+
+		span {
+			color: white;
+			text-shadow: none;
+		}
+	} 
+
+	.primary{
+		.user-link, .dropdown {
+			color: #656565;
+			text-shadow: none;
+			box-shadow: none;
+			background-image: none;
+			background-color: white;
+			border: 0px;
+		}
+	}
+}
+
+// content
+.content,
+div.course-wrapper section.course-content,
+div.info-wrapper section.updates,
+div.book-wrapper section.book,
+div.profile-wrapper section.course-info,
+div.gradebook-wrapper section.gradebook-content,
+.instructor-dashboard-wrapper section.instructor-dashboard-content,
+section.instructor-dashboard-content-2 {
+	padding: 1em 1.5em;
+
+	h1 {
+		padding-bottom: 0.5em;
+	} 
+}
+
+
+.content-wrapper {
+
+	.container {
+		padding-top: 10px;
+
+		& > div {
+			border-radius: 6px;
+			box-shadow: none;
+			border: none;
+		}
+
+		.profile-wrapper{
+			border: none;
+			background-color: $content_bg;
+
+			a{
+				color: $button_side;
+
+				&:hover{
+					color: #000;
+				}
+			}
+
+			header{
+				padding-bottom: 0;
+
+				h1{
+					font-weight: bold;
+				}
+			}
+		}
+
+		.info-wrapper, .course-wrapper, .handouts{
+			border: none;
+			background-color: $content_bg;
+
+			h1, h2, h3 {
+				font-weight: bold;
+				text-transform: none;
+
+				a{
+					color: #000;
+					font-weight: normal;
+				}
+			}
+
+			h1{
+				padding-bottom: 10px;
+			}
+			
+			h3{
+				a{
+					border-bottom: 1px solid #D5D3CE;
+				}
+			}
+
+			li{
+				h1{
+					font-size: 18px;
+					margin-bottom: 10px;
+					font-weight: normal;
+				}
+			}
+
+			.course-content{
+				a{
+					color: $button_side;
+
+					&:hover{
+						color: #000;
+					}
+				}
+
+				section.action .show .show-label{
+						font-weight: normal;
+					}
+
+				input.submit{
+					background: $button_save_add;
+					color: white;
+					border: 0;
+					box-shadow:none;
+					text-shadow: none;
+					font-weight: normal;
+
+					&:hover{
+						background: $button_save_add_hover;
+					}
+
+					&:focus{
+						outline: none;
+					}
+				}
+
+				button, .Check, .check.check, .new-post-btn, .new-post-cancel{
+					background: $course_nav;
+					color: white;
+					border: 0;
+					box-shadow:none;
+					text-shadow: none;
+					font-weight: normal;
+
+					.show-label{
+						color: white;
+					}
+
+					&:active{
+						border: 0;
+						box-shadow:none;
+					}
+				
+					&:hover{
+						background: $course_nav_hover;
+						color: white;
+						box-shadow:none;
+					}
+				}
+
+				.threads{
+					@include buttonsdiscussion();
+
+					.discussion-thread{
+						.moderator-actions{
+							.delete-icon, .edit-icon{
+								display: none;
+							}
+						}
+					}
+
+					.discussion-submit-post{
+						background: $course_nav;
+						color: white;
+						border: 0;
+						box-shadow:none;
+						text-shadow: none;
+						font-weight: normal;
+
+						.show-label{
+							color: white;
+						}
+
+						&:active{
+							border: 0;
+							box-shadow:none;
+						}
+				
+						&:hover{
+							background: $course_nav_hover;
+							color: white;
+							box-shadow:none;
+						}
+					}
+
+					.wmd-button-row{
+						height: 25px;
+					}
+				}
+
+
+			}	
+
+			div#accordion ul.ui-accordion-content{
+
+				li{
+					a{
+						color: #FFF;
+						margin: 0 9px 0;
+						
+						p, .subtitle{
+							color: $button_side;
+							font-size: 14px;
+							font-weight: normal;
+						}
+
+						&:hover {
+							background-color: $button_side_hover_bg;
+							color: white;
+							
+							p, .subtitle{
+								color: white;
+							}
+						}
+					}
+				}
+
+				.active {
+					a{
+						background-image: url("../images/graded.png");
+						background-color: $content_side_bg;
+						color: white;
+						border: none;
+
+						p, .subtitle {
+							color: white;
+						}
+
+						&:hover {
+							color: white;
+							p {
+								color: white !important;
+							}
+							.subtitle {
+								color: white;
+							}
+						}
+					}
+				}
+			}	
+
+
+
+			.handouts {
+				background-color: $content_side_bg;
+				border-radius: 0 6px 6px 0;
+				border-left: none;
+				padding: 0 24px;
+
+				h1 {
+					padding: 16px 0px 10px 0px;
+					font-size: 1.7em;
+					border-bottom: 1px solid #c8c8c8;
+				}
+
+				ol{
+					margin: 18px 0 0 0;
+
+					li{
+						margin: 0 26px 14px 5px;
+					}
+				}
+			}
+		}
+
+		.course-wrapper {
+			
+			.course-index {
+				border-right: none;
+				background-color: $content_side_bg;
+				
+
+				div#accordion {
+
+					.ui-icon{
+						top: 18px;
+					}
+
+					h3{
+						padding-bottom: 0;
+					}
+
+					nav .chapter {
+						background-color: $content_side_bg;
+						background-image: none;
+						padding: 7px 14px 7px;
+						
+						a{
+							border-bottom: 0;
+							color: $chapter_color;
+						}
+
+						&:hover{
+								background-color: $content_side_bg_open;
+							}
+					}
+
+					.chapter.is-open{ 
+						background-color: $content_side_bg_open;
+						li{
+
+							a{
+								border-bottom: 0;
+								color: $chapter_color;
+								background-repeat: no-repeat;
+								background-position: 210px 7px;
+
+								p:hover{
+									color: white;
+								}
+							}
+						}
+						h3{
+						
+							a, &:active{
+								color: #000;
+							}
+						}
+
+						.active p{
+							color: #000;
+						}
+					}				
+				}				
+			}
+		}
+
+		.static_tab_wrapper{
+			background-color: $content_bg;
+			padding: 16px 24px 16px 24px;
+
+			h1{
+				padding-bottom: 7px;
+				margin-bottom: 25px;
+				font-weight: bold;
+				font-size: 1.5em;
+			}
+
+			h2{
+				text-transform: none;
+			}
+		}
+
+		.discussion-body .moderator-actions a .edit-icon, .discussion-body .moderator-actions a .delete-icon{
+			display: none;
+		}
+	}
+
+	.wiki-wrapper {
+		border: none;
+		background-color: $content_bg;
+
+		header{
+			margin-bottom: 30px;
+
+			.add-article-btn{
+				box-shadow: none;
+				text-shadow: none;
+
+				&:hover{
+					box-shadow: none;
+				}
+
+				.icon-plus{
+					color: white;
+					padding-right: 5px;
+				}
+			}
+		}
+
+		.article-wrapper .main-article, .main-article{
+
+			#hint_id_content, #hint_id_summary{
+				font-size:14px;
+				position: static;
+			}
+
+			input, textarea, .CodeMirror{
+				box-shadow: none;
+				border: 1px solid $inputs;
+				background: white;
+			}
+
+			h1{
+				color: #000;
+				font-size: 24px;
+				font-weight: normal;
+			}
+
+			.alert{
+				border:none;
+			}
+
+			button{
+				background: $course_nav;
+				color: white;
+				border: 0;
+				box-shadow:none;
+				font-weight: normal;
+				text-shadow: none;
+
+				&:active{
+					border: 0;
+					box-shadow:none;
+				}
+				
+				&:hover{
+					background: $course_nav_hover;
+					color: white;
+					box-shadow:none;
+				}
+
+				.icon-eye-open, .icon-random, .icon-flag{
+					color: white;
+					padding-right: 5px;
+				}
+			}
+
+			.page-header{
+				margin: 30px 0px 10px 0px;
+			}
+
+			label{
+				font-size: 14px;
+				text-transform: none;
+				margin-bottom: 0px;
+			}
+
+			.modal{
+				background-color: $content_bg;
+				padding: 8px;
+
+				.modal-body{
+					background-color: white;
+
+					previewWindow{
+					font-family: "Open Sans", Verdana, Geneva, sans-serif, sans-serif;
+					line-height: 1.4em;
+					font-size: 14px;
+					color: #3c3c3c;
+					}
+				}
+			}
+		}
+
+		.delete .form-actions, .article-wrapper .main-article, .main-article{
+			.btn-large, .btn-group a {
+				background: $course_nav;
+				color: white;
+				border: 0;
+				box-shadow:none;
+				font-weight: normal;
+				text-shadow: none;
+
+				&:active{
+					border: 0;
+					box-shadow:none;
+				}
+
+				&:hover{
+					background: $course_nav_hover;
+					color: white;
+					box-shadow:none;		
+				}
+
+				.icon-ok, .icon-eye-open, .icon-plus, .icon-flag, .icon-circle-arrow-left, .icon-arrow-up{
+					color: white;
+					padding-right: 5px;
+				}
+			}
+
+			button.btn.btn-primary{
+				.icon-ok{
+					color: white;
+					padding-right: 5px;
+				}
+			}
+
+			.form-actions button:hover{
+				background: $course_nav_hover;
+				color: white;
+				box-shadow:none;		
+			}
+
+			.btn-danger{
+				background: $button_del;
+				color: white;
+				border: 0;
+				box-shadow:none;
+				font-weight: normal;
+				text-shadow: none;
+
+				.icon-trash{
+					color: white;
+					padding-right: 5px;					
+				}
+
+				&:active{
+					border: 0;
+					box-shadow:none;
+				}
+
+				&:hover{
+					background: $button_del_hover;
+					color: white;
+					box-shadow:none;
+				}				
+			}
+
+			.pull-right{
+				input{
+					border: 1px solid $inputs;
+				}
+			}
+
+		}
+
+		a {
+			color: $button_side;
+
+			&:hover{
+				color: #000;
+			}
+
+		}
+
+		ul.nav.nav-tabs{
+			a {
+				color: $button_side;
+
+				&:hover{
+					color:#000;
+				}
+			}
+		}
+
+		header{
+			background-color: transparent !important;
+
+			.breadcrumb{
+				font-size: 24px;
+
+			}
+
+			.global-functions{
+				a{
+					background: $course_nav;
+					color: white;
+					font-weight: normal;
+					border: 0;
+					border-radius: 6px;
+
+					&:hover{
+						background: $course_nav_hover;
+					}
+
+					&:active{
+						border: 0;
+						box-shadow:none;
+					}
+				}
+			}
+		}
+
+		.article-functions .nav-tabs{
+			li {
+
+				a{
+					padding: 10px 15px 10px 15px;
+					border-radius: 6px;
+
+					&:hover{
+						color: white;
+						background: $course_nav_hover;
+					}
+
+					.icon-home:before, .icon-edit:before{
+						display: none;
+					}
+				}
+			}
+
+			.active{
+				a{
+					background: white;
+					font-weight: normal;
+					color: black;
+					border: 1px solid #EAEAEA;
+				}
+			}
+		}
+
+		.btn-danger:hover{
+			color: white;				
+		}
+
+		.clearfix label{
+			color: $course_nav;
+			font-weight: normal;
+			font-size: 18px;
+		}
+
+		.main-article{
+			padding-top: 0;
+			float: left;
+		}
+
+		.article-functions .timestamp .label {
+	 	color: #000;
+		font-weight: bold;
+		font-size: 14px;
+	 	}
+	}
+
+	.discussion-column{
+		.discussion-submit-post{
+			background: $course_nav;
+			color: white;
+			border: 0;
+			box-shadow:none;
+			font-weight: normal;
+			text-shadow: none;
+
+			&:active{
+				border: 0;
+				box-shadow:none;
+			}
+
+			&:hover{
+				background: $course_nav_hover;
+				color: white;
+				box-shadow:none;		
+			}
+		}
+
+		.discussion-response{
+			a.posted-by{
+				color: $button_side;
+
+				&:hover{
+					color: black;
+				}
+			}
+		}
+	}
+
+}
+
+// course
+nav.course-material {
+	ol.course-tabs {
+		li {
+			a {
+				background-color: $course_nav;
+				color: white;
+				font-weight: normal;
+
+				&.active {
+					background-color: $course_nav_active;
+					@include shadow();
+					//@include linear-gradient($course_nav_active, $course_nav_active);
+				}
+
+				&:hover {
+					background-color: $course_nav_hover;
+					color: white;
+				}
+
+				&#staffstatus {
+					background-color: $content_side_bg;
+				}
+			}
+		}
+	}
+}
+
+nav.discussion.course-material{
+	.inner-wrapper{
+		.new-post-btn{
+			background-color: $button_save_add;
+			color: white;
+			border: 0;
+			font-weight: normal;
+			@include shadow();
+
+				&:active{
+					border: 0;
+					box-shadow:none;
+				}
+
+				&:hover{
+					background-color: $button_save_add_hover;
+					@include shadow();
+					color: white;		
+				}
+		}
+	}
+
+
+}
+
+.discussion-body{
+	.sidebar{
+		#sort-label{
+			text-shadow: none;
+		}
+
+		.sort-bar, a:link{
+			@include shadow();
+
+			a.active{
+				@include shadow();
+			}
+		}
+
+		.post-list{ 
+			a.active{
+				background-color: $course_nav_active;
+				@include shadow();
+
+				span.title{
+					color: white;
+				}
+
+				.votes-count, .comments-count, .comments-count:after{
+					background-image:none;
+					background-color: $discussion;
+					color: $discussion-font;
+				}
+
+				.comments-count:after{
+					background: url(../images/comment-icon-bottoms.png) no-repeat;
+					background-position: 0 -5px;
+				}
+			}
+			a.read:hover{
+				background-color: white;
+				@include shadow();
+
+				span.title{
+					color: $discussion-font;
+				}
+			}
+		}
+		
+		.post-list-wrapper{
+			margin-right: 1px;
+		}
+	}
+
+	.discussion-column{
+		@include buttonsdiscussion();
+
+		.discussion-post{
+			.posted-details a.username{
+				color: $button_side;
+
+				&:hover{
+					color: black;
+				}
+			}
+
+			.post-context a{
+				color: $button_side;
+
+				&:hover{
+					color: black;
+				}
+			}
+
+			.moderator-actions {
+				.edit-icon, .delete-icon {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.discussion{
+	.new-post-article{
+		.inner-wrapper{
+			.left-column{
+				a.topic_dropdown_button{
+				@include shadow();
+
+					&:hover{
+						background-color:white;
+						@include shadow();
+					}
+
+					&:active{
+						@include shadow();
+					}
+
+					.dropped{
+						@include shadow();
+					}
+				}
+			}
+
+			.right-column{
+				.submit{
+					background-color: $button_save_add;
+					color: white;
+					border: 0;
+					font-weight: normal;
+					@include shadow();
+
+					&:active{
+						border: 0;
+						box-shadow:none;
+					}
+
+					&:hover{
+						background-color: $button_save_add_hover;
+						@include shadow();
+						color: white;		
+					}
+
+					&:focus{
+						outline: none;
+					}
+				}
+
+				.new-post-cancel{
+					background: $course_nav;
+					color: white;
+					border: 0;
+					font-weight: normal;
+					@include shadow();
+
+					.show-label{
+						color: white;
+					}
+
+					&:active{
+						border: 0;
+						box-shadow:none;
+					}
+				
+					&:hover{
+						background: $course_nav_hover;
+						color: white;
+						box-shadow:none;
+					}
+
+					&:focus{
+						outline: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+body.discussion .new-post-article .left-column .topic_menu_wrapper{
+						box-shadow: none;
+					}

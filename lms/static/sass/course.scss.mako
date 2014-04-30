@@ -70,3 +70,6 @@
 
 // discussion
 @import "course/discussion/form-wmd-toolbar";
+
+// solar theme
+@import "solar.scss";

@@ -1,0 +1,1142 @@
+// variables
+$content_bg: #F5F7F7;
+$course_nav: #3d5260;
+$course_nav_active: #4090CC;
+$course_nav_hover: #5b7181;
+$link: #668aad;
+$link_hover: #000;
+$line: #c8c8c8;
+$button_save_add: #40BDA3;
+$button_save_add_hover: #16A086;
+$button_del: #EE3057;
+$button_del_hover: #D01F44;
+$border: #b0b6c2;
+
+//mixin
+@mixin bluebutton(){
+	background: $course_nav;
+	color: white;
+	border: 0;
+	box-shadow:none;
+	text-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+
+	.show-label{
+		color: white;
+	}
+
+	&:active{
+		border: 0;
+		box-shadow:none;
+	}
+				
+	&:hover{
+		background: $course_nav_hover;
+		color: white;
+		box-shadow:none;
+	}
+
+	&:focus{
+		outline: none;
+	}
+}
+
+@mixin greenbutton(){
+	background: $button_save_add;
+	color: white;
+	border: 0;
+	box-shadow:none;
+	text-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+
+	&:hover{
+		background: $button_save_add_hover;
+	}
+
+	&:focus{
+		outline: none;
+	}
+}
+
+@mixin shadow(){
+	background-image:none;
+	box-shadow:none;
+	text-shadow: none;
+}
+
+//codigo
+body{
+	background-color: white;
+}
+
+.wrapper-header{
+	background-color: #35495d;
+	border-bottom: none;
+
+	.wrapper-l, .wrapper-r{
+			background-color: #35495d;
+
+		.info-course{
+			border:0px;
+
+			a.course-link{
+				color: white;
+
+				&:hover{
+					color: white;
+				}
+			}
+		}
+
+		.nav-course, .nav-add, .nav-account, .nav-dd{
+			.title, .is-selected.title {
+				-webkit-transition: none;
+				transition: none;
+				border:0px;
+				box-shadow: none;
+
+				&:hover, &:active, {
+					color: white;
+					background-color: $course_nav_hover;
+				}
+			}
+			.icon-caret-down{
+				color: #CCC;
+				opacity: 1.25;
+			}
+
+			.is-selected.title{
+				-webkit-transition: none;
+				transition: none;
+				color: white;
+				background-color: $course_nav_hover;
+				box-shadow: none;
+			}
+
+			.wrapper.wrapper-nav-sub.is-shown{
+				.nav-sub{
+					box-shadow: none;
+					border-radius: 6px;
+
+					a{
+						font-size: 13px;
+						color: $link;
+
+						&:hover{
+							color: $link_hover;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.wrapper-mast{
+	.mast.has-actions.has-subtitle{
+		padding-bottom:0px;
+	}
+
+	header{
+		.page-header{
+			.subtitle{
+				font-size: 15px;
+			}
+		}
+
+
+		.nav-actions{
+			.nav-item{
+				.label{
+					font-size: 13px;
+				}
+			}
+
+
+			a.new-button{
+				@include greenbutton();
+			}
+			a.view-button{
+				@include bluebutton();
+			}
+		}
+	}
+}
+
+#content{
+	.inner-wrapper{
+		.unit-body{
+			box-shadow: none;
+
+			.component-actions{
+				.edit-button, .delete-button{
+					@include bluebutton();
+				}
+			}
+
+			.components{
+				.new-component-item{
+					box-shadow: none;
+
+					h5{
+						color: black;
+					}
+
+					.new-component-templates{
+						box-shadow: none;
+						
+						a{
+							color: $link;
+
+							&:hover{
+								color: white;
+								background: $course_nav_hover;
+							}
+						}
+
+						.cancel-button{
+							@include bluebutton();
+						}
+
+						.problem-type-tabs{
+							@include shadow();
+
+							.current, .ui-state-default{
+								@include shadow();
+							}
+						}
+					}
+				}
+			}
+
+			.wrapper-component-editor{
+				.component-edit-header{
+					border-bottom: 1px solid $border;
+					background-color: $content_bg;
+
+					.component-name, em{
+						color: black;
+					}
+
+					.mode.active-mode{
+						 a{
+							box-shadow: none;
+							background-image: none;
+							border: none;
+							color: white;
+							background-color: $course_nav;
+
+							&:hover{
+								background-color: $course_nav_hover;
+							}
+						}
+					}
+				}
+
+				.editor-tabs{
+					@include shadow();
+				}
+
+				.row.module-actions{
+					box-shadow:none;
+					border-top: 1px solid $border;
+
+					.save-button{
+						@include greenbutton();
+					}
+
+					.cancel-button{
+						@include bluebutton();
+					}
+				}
+			}
+
+			.field{
+				border-bottom:0px;
+
+				.wrapper-comp-setting{
+					input{
+						@include shadow();
+						background-color: white;
+					}
+				}
+
+				.tip{
+					margin-top: 15px;
+				}
+			}
+		}
+
+		.alert{
+			.alert-action{
+				@include shadow();
+				border: 0px;
+
+				&:hover{
+					box-shadow: none;
+				}
+			}
+		}
+	}
+}
+
+body.course.feature-upload .wrapper-dialog .dialog {
+	box-shadow: none;
+
+	.form-content{
+		box-shadow: none;
+	}
+
+	.actions{
+		a.button.action-secondary.action-cancel{
+			color: $link;
+
+			&:hover{
+				color: $link_hover;
+			}
+		}
+	}
+}
+
+body.course.feature-upload .wrapper-dialog .dialog form .actions .action-primary {
+	background-color: $course_nav;
+	@include shadow();
+	border:0px;
+	text-transform: none;
+	font-weight: normal;
+
+	&:hover{
+		background-color: $course_nav_hover;
+		box-shadow:none;
+	}
+
+	.action-primary.disabled{
+		background-color: #666 !important;
+		border:0px !important;
+		@include shadow();
+		font-weight: normal;
+	}
+}
+
+.wrapper-content{
+	.introduction{
+		a{
+			color: $link;
+
+			&:hover{
+				color: $link_hover;
+			}
+		}
+	}
+
+	.content-primary{
+		.no-textbook-content{
+			border-radius: 6px;
+			box-shadow: none;
+			background-color: $content_bg;
+
+			.button{
+				@include greenbutton();
+			}
+		}
+
+		.textbook{
+			box-shadow: none;
+			background-color: $content_bg;
+			border: 0px;
+
+			.edit-textbook{
+				input{
+					border: 1px solid $border;
+					@include shadow();
+					background-color: white;
+				}
+
+				button.action-add-chapter{
+					@include bluebutton();
+
+					&:hover{
+						border: 0px;
+					}
+				}
+
+				.chapters-fields .field-group .field .action-upload{
+					@include bluebutton();
+
+					&:hover{
+						border: 0px;
+					}
+				}
+
+				.chapters-fields .field-group .action-close{
+					color: $course_nav;
+
+					&:hover{
+						color: $course_nav_hover;
+					}
+				}
+
+				.actions{
+					background: none;
+					box-shadow: none;
+					border: 0px;
+
+					button.action-primary{
+						@include greenbutton();
+						text-transform: none;
+					}
+
+					button.action-secondary{
+						@include bluebutton();
+						text-transform: none;
+					}
+				}
+			}
+		}
+	}
+
+	.asset-library {
+		table tbody{
+			box-shadow:none;
+			border:0px;
+
+			tr{
+				&:hover{
+				background-color: white;
+				}
+
+				a.filename{
+					color: $link;
+
+					&:hover{
+						color: $link_hover
+					}
+				}
+
+				.action-button{
+					&:hover{
+						background-color:$course_nav_hover;
+					}
+				}
+
+				.action-item.action-lock .lock-checkbox:hover ~ .action-button {
+    				background-color: $course_nav_hover;
+    			}
+			}
+		}
+
+		table th{
+			padding: 10px 0px 10px 10px
+		}
+	}	
+}
+
+.view-uploads{
+	.upload-modal{
+		height: 320px;
+		width: 500px !important;
+
+		a.close-button{
+			color: $link;
+
+			&:hover{
+			color: black;
+			background: none;
+			}
+		}
+
+		.modal-body{
+			padding: 10px;
+
+			.embeddable{
+				margin: 30px 0px 30px 0px;
+
+				input{
+					box-shadow:none;
+					background-image: none;
+					background-color: white;
+				}
+			}
+
+			a.choose-file-button{
+				@include bluebutton();
+			}
+
+			h1.title{
+				margin: 0px 0px 30px 0px;
+			}
+		}
+	}
+}
+
+
+.inner-wrapper{
+	.courseware-section{
+		border: 0px;
+		border-radius: 6px;
+		margin-top: 0px;
+		box-shadow: none;
+		background-color: $content_bg;
+
+		header{
+			.item-details {
+				.section-name{
+					color: $link;
+					font-size: 20px;
+
+					:hover{
+						color: $link_hover;
+					}
+
+					.section-name-edit{
+						background: none;
+
+						.save-button{
+							@include greenbutton();
+						}
+
+						.cancel-button{
+							@include bluebutton();
+						}
+					}
+				}
+
+				.section-published-date{
+					background-color: none;
+
+					.edit-button{
+						@include bluebutton();
+						padding: 2px 15px 2px 15px;
+					}
+				}
+			}
+		}
+
+		.new-section-name-save{
+			@include greenbutton();
+		}
+
+		.new-section-name-cancel{
+			@include bluebutton();
+			color: white !important;
+		}
+
+		.subsection-list{
+			.list-header{
+				@include shadow;
+				border-radius: 6px 6px 0px 0px;
+				
+				.new-subsection-item{
+					@include greenbutton();
+
+					.new-folder-icon{
+						display: none;
+					}
+				}
+			}
+
+			.sortable-subsection-list{
+				border: 0px;
+
+				.section-item{
+					border-top: 0px;
+
+					:hover{
+						color: $link_hover;
+					}
+
+					.public-item, .private-item{
+						color: $link;
+
+						:hover{
+							color: $link_hover;
+						}
+					}
+
+					.subsection-name{
+						color: $link;
+						font-size: 13px;
+					}
+
+					&:hover {
+						background: white;
+					}
+
+					.status-label, .icon-ok{
+						color: $link;
+						font-size: 13px;
+
+						&:hover{
+							color: $link_hover;
+						}
+					}
+
+					ul.menu{
+						font-size: 13px;
+
+						a{
+							color: $link;
+
+							&:hover{
+								color: $link_hover;
+							}
+						}
+					}
+				}
+			}
+
+			.new-unit-item, ol a.new-unit-item{
+				@include greenbutton();
+				color: white;
+
+				.new-unit-icon{
+					display: none;
+				}
+			}
+
+			> ol .section-item.editing {
+        		background: white;
+
+        		.new-subsection-name-save{
+        			@include greenbutton();
+        		}
+
+        		.new-subsection-name-cancel{
+        			@include bluebutton();
+       				color: white !important;
+        		}
+      		}
+		}
+	}
+
+	.main-column{
+		.subsection-body{
+			box-shadow: none;
+			border-radius: 6px;
+			border: 0px;
+			background-color: $content_bg;
+
+			.subsection-name-input{
+				input{
+					@include shadow;
+					background-color: white;
+					border: 1px solid $border;
+				}
+			} 
+
+			.wrapper-dnd{
+				margin-bottom: 0px;
+
+				.sortable-unit-list{
+					.section-item{
+						&:hover{
+							background-color: white;
+						}
+
+						a.public-item, a.private-item {
+      						color: $link;
+
+							&:hover{
+								color: #000;
+							}
+						}
+					}
+
+					.section-item.editing {
+      						background-color: white;
+      				}
+
+      				.new-unit-item{
+      					@include greenbutton();
+
+      					.new-unit-icon{
+      						display: none;
+      					}
+      				}
+				}
+			}
+		}
+
+		.unit-body{
+			border: 0px;
+
+			.unit-name-input{
+				border-radius: 6px 6px 0px 0px;
+				background-color: $content_bg;
+				border-bottom: 1px solid $border;
+
+				input{
+					border: 1px solid $border;
+					@include shadow();
+					background-color: white;
+				}
+			}
+
+			.components{
+				li.component{
+					border: 1px solid $course_nav;
+
+					&:hover{
+						border: 1px solid $course_nav_hover;
+					}
+
+					.drag-handle{
+						background-color: $course_nav;
+						border: 1px solid $course_nav;
+
+						&:hover{
+							background-color: $course_nav_hover;
+							border: 1px solid $course_nav_hover;
+						}
+					}
+
+					.xblock{
+						.problem{
+							a{
+								color: $link;
+
+								&:hover{
+									color: $link_hover;
+								}
+							}
+
+							input.check, button.show{
+								@include bluebutton();
+								border-radius: 3px;
+								padding: 7px 18px;
+
+								.show-label{
+									font-weight: normal;
+								}
+							}
+
+							input{
+								@include shadow();
+								background-color: white;
+							}
+						}
+					}
+				}
+
+				.component-actions{
+					a{
+								color: $link;
+
+								&:hover{
+									color: $link_hover;
+								}
+							}
+
+					.edit-button{
+						@include greenbutton();
+
+						.edit-icon{
+							display: none;
+						}
+					}
+
+					.delete-button{
+						@include bluebutton();
+
+						.delete-icon{
+							display: none;
+						}
+					}
+				}
+
+				li.new-component-item {
+					border-radius: 0px 0px 6px 6px;
+
+					.new-component{
+						.new-component-type{
+							border:0px;
+							box-shadow: none;
+
+							a.single-template, a.multiple-templates{
+								@include greenbutton();
+							}
+						}
+					}
+				}
+
+				.discussion-module{
+					a.discussion-show, a.new-post-btn{
+						color: $link;
+						margin-right: 10px;
+
+						&:hover{
+							color: $link_hover;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.sidebar{
+		.unit-settings, .window{
+			border: 0px;
+			box-shadow: none;
+
+			.header{
+				@include shadow();
+				border-bottom: 0px;
+				font-size: 15px;
+				border-radius: 6px 6px 0px 0px;
+			}
+
+			.window-contents{
+				background-color: $content_bg;
+				border-radius: 0px 0px 6px 6px;
+
+				p{
+					font-size: 13px;
+				}
+
+				.row.visibility{
+					.visibility-select{
+						border: 1px solid $border;
+						font-size: 13px;
+						outline: none;
+					}
+				}
+
+				.row.status{
+					a{
+						color: $link;
+
+						&:hover{
+							color: #000;
+						}
+					}
+				}
+
+				.row.unit-actions{
+					margin-bottom: 0px;
+
+					a.delete-draft, a.delete-button{
+						margin: 0px; 
+						font-size: 13px;
+						background: $button_del;
+						color: white;
+						border: 0;
+						font-weight: normal;
+
+						&:active{
+							border: 0;
+							box-shadow:none;
+						}
+
+						&:hover{
+							background: $button_del_hover;
+							color: white;
+							box-shadow:none;
+						}
+					}
+
+					a.preview-button, a.view-button{
+						@include bluebutton();
+						margin: 0px;
+					}
+				}
+
+				.row.published-alert{
+					.edit-draft-message{
+						margin-bottom:0px;
+					}
+
+					a{
+						color: $link;
+
+						&:hover{
+							color: #000;
+						}
+					}
+				}
+
+				.row.wrapper-unit-id{
+					.label{
+						font-weight: 700;
+						font-size: 12px;
+					}
+
+					input{
+						border: 1px solid $border;
+						@include shadow();
+						background-color: white;
+					}
+
+					ol{
+						border: 1px solid $border;
+					}
+				}
+
+				.scheduled-date-input.row{
+					.datepair{
+						text-align: center;
+
+						input{
+							border: 1px solid $border;
+							@include shadow();
+							background-color: white;
+						}
+					}
+				}
+
+				.row.gradable{
+					a{
+						color: $link;
+
+						&:hover{
+							color: #000;
+						}
+					}
+
+					.gradable-status, .menu-toggle, .status-label{
+						color: $link;
+
+						a{
+							color: $link;
+
+							&:hover{
+								color: #000;
+							}
+						}
+					}
+
+					.due-date-input{
+						.datepair{
+							input{
+								@include shadow();
+								background-color: white;
+								border: 1px solid $border;
+							}
+
+							a.remove-date{
+								color: $link;
+
+								&:hover{
+									color: #000;
+								}
+							}
+						}
+					}
+				}
+
+				> ol ol ol .new-unit-item {
+    				@include greenbutton();
+
+    				.new-unit-icon{
+    					display: none;
+    				}
+				}
+
+				> ol {
+					.section-item{
+						&:hover{
+							background-color: white;
+						}
+
+						a.public-item, a.private-item {
+      						color: $link;
+
+							&:hover{
+								color: #000;
+							}
+						}
+					}
+
+					.section-item.editing {
+      					background-color: white;
+      				}
+      			}
+			}
+		}
+
+		.edit-handouts-form{
+			.row{
+				.save-button{
+					@include greenbutton();
+				}
+
+				.cancel-button{
+					@include bluebutton();
+				}
+			}
+		}
+	}
+
+
+	.course-info-wrapper{
+		.main-column{
+			border-radius: 6px 0px 0px 6px;
+			background-color: $content_bg;
+			border: 0px;
+			box-shadow: none;
+
+			.course-updates{
+				padding: 1em 1.5em;
+
+				.post-preview{
+					h1{
+						font-size: 18px;
+						margin-bottom: 10px;
+						padding-bottom: 10px;
+						font-weight: normal;
+					}
+
+					h2{
+						text-transform: capitalize;
+						margin-bottom: 0px;
+					}
+
+					.post-actions{
+						.edit-button{
+							@include greenbutton();
+
+							.edit-icon{
+								display: none;
+							}
+						}
+
+						.delete-button{
+							@include bluebutton();
+
+							.delete-icon{
+								display: none;
+							}
+						}
+					}
+				}
+
+				.editing{
+
+					.row{
+						.save-button{
+							@include greenbutton();
+						}
+
+						.cancel-button{
+							@include bluebutton();
+						}
+					}
+				}
+			}
+		}
+
+		.sidebar{
+			border-radius: 0px 6px 6px 0px;
+			border: 0px;
+			padding: 1em 1.5em;
+
+			h2{
+				padding: 16px 0px 15px 0px;
+				font-weight: bold;
+				border-bottom: 1px solid #c8c8c8;
+				margin-bottom: 15px;
+				font-size: 25px;
+			}
+
+			.edit-button{
+				@include greenbutton();
+				margin-top: 16px;
+
+				.edit-icon{
+					display: none;
+				}
+			}
+
+			li{
+				margin: 0 26px 14px 5px;
+			}	
+		}
+	}
+}
+
+.view-outline .edit-subsection-publish-settings{
+	width: 500px;
+
+	.settings{
+		padding: 20px;
+
+		.picker{
+			margin: 25px 0 25px;
+
+			.field:first-child{
+					margin-left: 70px;
+			}
+
+			input{
+				box-shadow:none;
+				background-image:none;
+			}
+		}
+	
+		.save-button{
+			@include greenbutton();
+		}
+
+		.cancel-button{
+			@include bluebutton();
+		}
+	}
+}
+
+#page-prompt{
+	.prompt{
+		border: 0px;
+		box-shadow: none;
+
+		.copy{
+			border-top-color: $course_nav;
+			background-color: $content_bg;
+
+			h2{
+				color: #000;
+			}
+
+			.message{
+				font-size: 15px;
+				color: #000;
+			}
+		}
+
+		.nav-actions{
+			background-color: $content_bg;
+			border: 0px;
+			box-shadow: none;
+			text-align: center;
+			padding: 0px 20px 20px 20px;
+
+			.action-primary{
+				font-size: 13px;
+				background: $button_del;
+				color: white;
+				border: 0;
+				font-weight: normal;
+
+				&:active{
+					border: 0;
+					box-shadow:none;
+				}
+
+				&:hover{
+					background: $button_del_hover;
+					color: white;
+					box-shadow:none;
+				}
+			}
+
+			.action-secondary{
+				font-size: 13px;
+				color: $link;
+
+				&:hover{
+					color: #000;
+				}
+			}
+		}
+	}
+}
