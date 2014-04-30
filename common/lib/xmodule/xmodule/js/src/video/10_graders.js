@@ -19,11 +19,22 @@ function (AbstractGrader) {
 
         debugger;
 
-        var graderName = state.config.graderName;
+        var graderName = state.config.graderName,
+            _this = this;
+
+        this.graderInstances = [];
 
         if (state.config.hasScore) {
             $.each(state.config.graders, function (graderName, graderConfig) {
+                var graderInstance;
+
                 debugger;
+
+                if (GraderChooser[graderName]) {
+                    graderInstance = new GraderChooser[graderName](state, i18n, graderConfig);
+
+                    _this.graderInstances.push(graderInstance);
+                }
             });
 
             // if (GraderChooser[graderName]) {
