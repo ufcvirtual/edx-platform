@@ -52,7 +52,14 @@ function (AbstractGrader) {
     GraderCollection.GradeOnEnd = AbstractGrader.extend({
         getGrader: function (element, state) {
             var dfd = $.Deferred();
-            element.on('ended', dfd.resolve);
+
+            element.on('ended', function () {
+                debugger;
+
+                dfd.resolve();
+            });
+
+            debugger;
 
             return dfd.promise();
         },
@@ -66,6 +73,8 @@ function (AbstractGrader) {
 
             // TODO: Implement success scenario.
             // element.on('ended', dfd.resolve);
+
+            debugger;
 
             return dfd.promise();
         },

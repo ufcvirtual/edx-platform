@@ -38,9 +38,10 @@ function() {
 
     AbstractGrader.prototype = {
         /** Initializes the module. */
-        initialize: function (state, i18n) {
+        initialize: function (state, i18n, graderConfig) {
             this.state = state;
             this.i18n = i18n;
+            this.graderConfig = graderConfig;
             this.el = this.state.el;
             this.maxScore = this.state.config.maxScore;
             this.score = this.state.config.score;
@@ -190,4 +191,3 @@ function() {
     return AbstractGrader;
 });
 }(RequireJS.define));
-
