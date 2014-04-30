@@ -272,7 +272,7 @@ if settings.COURSEWARE_ENABLED:
         url(r'^courses/(?P<course_id>[^/]+/[^/]+/[^/]+)/instructor$',
             'instructor.views.instructor_dashboard.instructor_dashboard_2', name="instructor_dashboard"),
         url(r'^courses/(?P<course_id>[^/]+/[^/]+/[^/]+)/instructor/api/',
-            include('instructor.views.api_urls')),
+            include('instructor.views.api_urls'), name='instructor_dashboard_api'),
         url(r'^courses/(?P<course_id>[^/]+/[^/]+/[^/]+)/gradebook$',
             'instructor.views.instructor_dashboard.spoc_gradebook', name='spoc_gradebook'),
 
