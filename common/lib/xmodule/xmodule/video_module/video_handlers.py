@@ -278,9 +278,9 @@ class VideoStudentViewHandlers(object):
         if not all([status for status, params in self.cumulative_score.values()]):
             return Response(status=200)
 
-        if self.module_score and self.module_score == self.max_score():
+        if not(self.module_score and self.module_score == self.weight * self.max_score()):
             try:
-                self.update_score(self.max_score())
+                self.update_score(self.weight * self.max_score())
             except NotImplementedError:
                 return Response(501)
             except AssertionError:
