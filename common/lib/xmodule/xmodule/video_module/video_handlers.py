@@ -286,7 +286,7 @@ class VideoStudentViewHandlers(object):
             except AssertionError:
                 return Response(status=500)
 
-            return Response(status=200)
+        return Response(status=200)
 
 
 class VideoStudioViewHandlers(object):
