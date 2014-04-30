@@ -44,6 +44,8 @@ class TestVideoScoring(BaseTestXmodule):
         with self.assertRaises(NotImplementedError):
             self.item.update_score(0.5)
 
+        # TODO: mock get_real_user and system publish here and check of updated module score.
+
     def test_graders_only_has_score(self):
         metadata = {
             'has_score': True,
