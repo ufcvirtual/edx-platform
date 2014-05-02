@@ -25,7 +25,8 @@ def url_class(is_active):
           <li>
         % endif
              <a href="${tab.link | h}" class="${url_class(tab.is_active)}">
-                 ${tab.name | h}
+                 ##${tab.name | h}
+                 ${_(tab.name)}
                  % if tab.is_active == True:
                    <span class="sr">, current location</span>
                  %endif
