@@ -100,6 +100,9 @@ urlpatterns = patterns('',  # nopep8
     url(r'^heartbeat$', include('heartbeat.urls')),
 )
 
+# SolarEDX API
+#urlpatterns += (url(r'^solaredx/', include('solaredx.urls')), )
+
 # User creation and updating views
 urlpatterns += patterns(
     '',
@@ -166,3 +169,4 @@ if settings.DEBUG:
 #pylint: disable=C0103
 handler404 = 'contentstore.views.render_404'
 handler500 = 'contentstore.views.render_500'
+
