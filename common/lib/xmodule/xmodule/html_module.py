@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import copy
 from fs.errors import ResourceNotFoundError
 import logging
@@ -226,17 +227,17 @@ class StaticTabFields(object):
     The overrides for Static Tabs
     """
     display_name = String(
-        display_name="Display Name",
-        help="This name appears in the horizontal navigation at the top of the page.",
+        display_name="Nome de Exibição",
+        help="Este nome será exibido na navegação horizontal no topo da página.",
         scope=Scope.settings,
-        default="Empty",
+        default="Vazio",
     )
     data = String(
         default=textwrap.dedent("""\
-            <p>This is where you can add additional pages to your courseware. Click the 'edit' button to begin editing.</p>
+            <p>Aqui você pode adicionar 'Páginas Adicionais' para o seu material didático. Clique no botão 'editar' para começar a editar.</p>
         """),
         scope=Scope.content,
-        help="HTML for the additional pages"
+        help="HTML para as páginas adicionais"
     )
 
 

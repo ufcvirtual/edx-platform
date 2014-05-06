@@ -2,7 +2,7 @@
 	<!-- FIXME what style should we use for initially hidden? --> <!-- TODO decide whether this should use codemirror -->
 	<form class="new-update-form">
 		<div class="row">
-			<label class="inline-label">Date:</label>
+			<label class="inline-label">Data:</label>
 			<!-- TODO replace w/ date widget and actual date (problem is that persisted version is "Month day" not an actual date obj -->
 			<input type="text" class="date" value="<%= updateModel.get('date') %>">
 		</div>
@@ -11,14 +11,14 @@
 		</div>
 		<div class="row">
 			<!-- cid rather than id b/c new ones have cid's not id's -->
-			<a href="#" class="save-button" name="<%= updateModel.cid %>">Save</a>
-			<a href="#" class="cancel-button" name="<%= updateModel.cid %>">Cancel</a>
+			<a href="#" class="save-button" name="<%= updateModel.cid %>">Salvar</a>
+			<a href="#" class="cancel-button" name="<%= updateModel.cid %>">Cancelar</a>
 		</div>
 	</form>
 	<div class="post-preview">
 		<div class="post-actions">
-			<a href="#" class="edit-button" name="<%- updateModel.cid %>"><span class="edit-icon"></span>Edit</a>
-			<a href="#" class="delete-button" name="<%- updateModel.cid %>"><span class="delete-icon"></span>Delete</a>
+			<a href="#" class="edit-button" name="<%- updateModel.cid %>"><span class="edit-icon"></span>Editar</a>
+			<a href="#" class="delete-button" name="<%- updateModel.cid %>"><span class="delete-icon"></span>Apagar</a>
 		</div>
 		<h2>
 			<span class="calendar-icon"></span><span class="date-display"><%=

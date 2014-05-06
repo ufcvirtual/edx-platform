@@ -1,6 +1,6 @@
-<a href="#" class="edit-button"><span class="edit-icon"></span>Edit</a>
+<a href="#" class="edit-button"><span class="edit-icon"></span>Editar</a>
 
-<h2 class="title">Course Handouts</h2>
+<h2 class="title">Apostilas do Curso</h2>
 <%if (model.get('data') != null) { %>
   <div class="handouts-content">
     <%= model.get('data') %>
@@ -13,7 +13,7 @@
     <textarea class="handouts-content-editor text-editor"></textarea>
   </div>
   <div class="row">
-    <a href="#" class="save-button">Save</a>
-    <a href="#" class="cancel-button">Cancel</a>
+    <a href="#" class="save-button">Salvar</a>
+    <a href="#" class="cancel-button">Cancelar</a>
   </div>
 </form>

@@ -22,3 +22,6 @@ msgstr ""
 # empty
 msgid "This is a key string."
 msgstr "Esta é uma sequência chave."
+
+msgid "Delete Component Confirmation"
+msgstr "Confirmação de exclusão de componente"

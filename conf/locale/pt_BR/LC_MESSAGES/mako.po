@@ -6207,6 +6207,18 @@ msgstr "Data de Início:"
 msgid "Looking for Help with Studio?"
 msgstr "Precisando de ajuda com o Studio?"
 
+msgid "Hide Studio Help"
+msgstr "Esconda a ajuda do Studio"
+
+msgid "Studio Support"
+msgstr "Suporte do Studio"
+
+msgid "Need help with Studio? Creating a course is complex, so we're here to help. Take advantage of our documentation, help center, as well as our edX101 introduction course for course authors."
+msgstr "Precisa de ajuda com Studio? A criação de um curso é complexo, por isso estamos aqui para ajudar. Aproveite a nossa documentação, central de ajuda, bem como o nosso curso introdução edX101 para os autores do curso."
+
+msgid "Download Studio Documentation"
+msgstr "Download da documentação do Studio"
+
 msgid "Studio Documentation"
 msgstr "Documentação do Studio"
 
@@ -6215,6 +6227,12 @@ msgstr "Centro de Ajuda do Studio"
 
 msgid "Contact Us"
 msgstr "Contate-nos"
+
+msgid "Contact us about Studio"
+msgstr "Contate-nos sobre Studio"
+
+msgid "Have problems, questions, or suggestions about Studio? We're also here to listen to any feedback you want to share."
+msgstr "Tem problemas, dúvidas ou sugestões sobre Studio? Nós também estamos aqui para ouvir qualquer comentário que você deseja compartilhar."
 
 msgid "My Courses"
 msgstr "Meus Cursos"
@@ -6264,3 +6282,110 @@ msgstr "Localização da Unidade"
 
 msgid "Unit Identifier:"
 msgstr "Identificador da Unidade:"
+
+# Strings de tipo de atividade Nao funcionam
+msgid "Homework"
+msgstr "Tarefa de Casa"
+
+msgid "Lab"
+msgstr "Laboratório"
+
+msgid "Midterm Exam"
+msgstr "Avaliação Parcial"
+
+msgid "Final Exam"
+msgstr "Avaliação Final"
+
+msgid "Not Graded"
+msgstr "Não avaliado"
+
+msgid "Add New Component"
+msgstr "Adicionar Novo Componente"
+
+msgid "This unit has been published. To make changes, you must {link_start}edit a draft{link_end}."
+msgstr "Esta unidade foi publicada. Para fazer alterações, você deve {link_start}editar o rascunho{link_end}."
+
+msgid "This is a draft of the published unit. To update the live version, you must {link_start}replace it with this draft{link_end}."
+msgstr "Este é o rascunho da unidade publicada. Para atualizar a versão publicada, você deve {link_start}substituí-la por este rascunho{link_end}."
+
+msgid "This unit is scheduled to be released to <strong>students</strong>"
+msgstr "Esta unidade está programada para ser lançada para os <strong>alunos</strong>"
+
+msgid "on {date}"
+msgstr "em {date}"
+
+msgid "with the subsection {link_start}{name}{link_end}"
+msgstr "com a subseção {link_start}{name}{link_end}"
+
+msgid "View the Live Version"
+msgstr "Ver a versão publicada"
+
+msgid "Delete Draft"
+msgstr "Apagar Rascunho"
+
+msgid "You are editing a draft."
+msgstr "Você está editando o rascunho."
+
+msgid "This unit was originally published on {date}."
+msgstr "Esta unidade foi originalmente publicada em {date}."
+
+msgid "Subsection Settings"
+msgstr "Configurações da Subseção"
+
+msgid "Units:"
+msgstr "Unidades:"
+
+msgid "Graded as:"
+msgstr "Classificada como:"
+
+msgid "Set a due date"
+msgstr "Definir data de entrega"
+
+msgid "Preview Drafts"
+msgstr "Pré-visualizar rascunho"
+
+msgid "Due Day"
+msgstr "Dia de entrega"
+
+msgid "Due Time"
+msgstr "Hora"
+
+msgid "Remove due date"
+msgstr "Remover data de entrega"
+
+# Course Updates
+msgid "Course Updates"
+msgstr "Atualizações do Curso"
+
+msgid "Course updates are announcements or notifications you want to share with your class. Other course authors have used them for important exam/date reminders, change in schedules, and to call out any important steps students need to be aware of."
+msgstr "Atualizações do curso são avisos ou notificações que você deseja compartilhar com a classe. Outros ministrantes os têm usado para fazer importantes lembretes, avaliações, mudanças de horários e para chamar quaisquer atividades importantes que os alunos precisam para estar cientes."
+
+msgid "New Update"
+msgstr "Nova Atualização"
+
+msgid "You have no handouts defined"
+msgstr "Você não definiu nenhuma apostila"
+
+# Static Pages
+msgid "Static Pages are additional pages that supplement your Courseware. Other course authors have used them to share a syllabus, calendar, handouts, and more."
+msgstr "Páginas estáticas são páginas adicionais que complementam o seu Plano de Curso. Outros ministrantes os têm usado para compartilhar um planos de estudos, calendários, folhetos e muito mais."
+
+msgid "New Page"
+msgstr "Nova Página"
+
+msgid "How do Static Pages look to students in my course?"
+msgstr "Como as Páginas Estáticas aparecem para os alunos do meu curso?"
+
+msgid "How Static Pages are Used in Your Course"
+msgstr "Como Páginas Estáticas são utilizadas no seu curso"
+
+msgid "These pages will be presented in your course's main navigation alongside Courseware, Course Info, Discussion, etc."
+msgstr "Estas páginas serão apresentadas na navegação principal do seu curso ao lado de Plano de Curso, Atualizações, Discussão, etc."
+
+msgid "Editing:"
+msgstr "Editando:"
+
+msgid "Are you sure you want to delete this component? This action cannot be undone."
+msgstr "Tem certeza de que deseja excluir este componente? Essa ação não pode ser desfeita."
+
+
