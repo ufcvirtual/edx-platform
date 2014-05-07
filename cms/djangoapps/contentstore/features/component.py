@@ -49,7 +49,7 @@ def see_a_multi_step_component(step, category):
 
         if category == 'HTML':
             html_matcher = {
-                'Text':
+                'Texto':
                     '\n    \n',
                 'Announcement':
                     '<p> Words of encouragement! This is a short note that most students will read. </p>',

@@ -6388,4 +6388,11 @@ msgstr "Editando:"
 msgid "Are you sure you want to delete this component? This action cannot be undone."
 msgstr "Tem certeza de que deseja excluir este componente? Essa ação não pode ser desfeita."
 
+# New Unit > Problem
+msgid "Common Problem Types"
+msgstr "Tipos de exercícios comuns"
+
+msgid "Advanced"
+msgstr "Avançado"
+
 

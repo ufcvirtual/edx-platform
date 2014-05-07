@@ -11061,3 +11061,14 @@ msgid ""
 msgstr ""
 "Tem certeza de que deseja excluir este componente? Essa ação não pode ser "
 "desfeita."
+
+# New Unit > Problem
+msgid "Common Problem Types"
+msgstr "Tipos de exercícios comuns"
+
+msgid "Advanced"
+msgstr "Avançcado"
+
+msgid "Announcement"
+msgstr "Aviso"
+

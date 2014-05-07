@@ -40,11 +40,11 @@ if Backbone?
       if @showed
         @$("section.discussion").slideUp()
         @toggleDiscussionBtn.removeClass('shown')
-        @toggleDiscussionBtn.find('.button-text').html("Show Discussion")
+        @toggleDiscussionBtn.find('.button-text').html("Exibir Fórum")
         @showed = false
       else
         @toggleDiscussionBtn.addClass('shown')
-        @toggleDiscussionBtn.find('.button-text').html("Hide Discussion")
+        @toggleDiscussionBtn.find('.button-text').html("Ocultar Fórum")
 
         if @retrieved
           @$("section.discussion").slideDown()
