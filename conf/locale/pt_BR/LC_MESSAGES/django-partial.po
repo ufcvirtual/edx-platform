@@ -3615,3 +3615,10 @@ msgstr "revisões"
 #: lms/templates/wiki/plugins/attachments/index.html:130
 msgid "There are no attachments for this article."
 msgstr "Não há anexos para este artigo."
+
+msgid "Upload completed"
+msgstr "Envio concluído"
+
+msgid "Uploading"
+msgstr "Enviando"
+

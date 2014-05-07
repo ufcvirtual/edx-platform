@@ -3791,7 +3791,7 @@ msgstr "Salvar alterações"
 
 #: lms/templates/wiki/edit.html:37
 msgid "Preview"
-msgstr "Pré-visualizar"
+msgstr "Pré-visualização"
 
 #. #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
 #. Translators: this is a control to allow users to exit out of this modal
@@ -4139,6 +4139,12 @@ msgstr "revisões"
 #: lms/templates/wiki/plugins/attachments/index.html:130
 msgid "There are no attachments for this article."
 msgstr "Não há anexos para este artigo."
+
+msgid "Upload completed"
+msgstr "Envio concluído"
+
+msgid "Uploading"
+msgstr "Enviando"
 
 # empty
 msgid "This is a key string."
@@ -11067,8 +11073,45 @@ msgid "Common Problem Types"
 msgstr "Tipos de exercícios comuns"
 
 msgid "Advanced"
-msgstr "Avançcado"
+msgstr "Avançado"
 
-msgid "Announcement"
-msgstr "Aviso"
+# Files & Uploads
+msgid "Date Added"
+msgstr "Data de Adição"
 
+msgid "What files are included here?"
+msgstr "Quais arquivos são incluídos aqui?"
+
+msgid ""
+"Any file you upload to the course will be listed here, including your course"
+" image, textbook chapters, and any files you add directly to this page."
+msgstr ""
+"Qualquer arquivo que você enviar para o curso será listados aqui, incluindo "
+"a imagem de seu curso, capítulos dos livros, e todos os arquivos que você "
+"adicionar diretamente nessa página."
+
+msgid "What can I do on this page?"
+msgstr "O que posso fazer nessa página?"
+
+msgid ""
+"You can click the file name to view or download the file, upload a new file,"
+" delete a file, and lock a file to prevent people who are not enrolled from "
+"accessing that specific file. You can also copy the location (URL) of a file"
+" to use elsewhere in your course."
+msgstr ""
+"Você pode clicar no nome do arquivo para visualizar ou baixar o arquivo, "
+"excluir um arquivo, e bloquear um arquivo para evitar que pessoas não "
+"matriculadas acessem esse arquivo em específico. Você também pode copiar a "
+"localização (URL) de um arquivo para usar em outro lugar no seu curso."
+
+msgid "Upload New File"
+msgstr "Enviar Novo Arquivo"
+
+msgid "Individual Unit"
+msgstr "Unidade individual"
+
+msgid "Individual Units"
+msgstr "Unidades individuais"
+
+msgid "Individual Problems"
+msgstr "Problemas individuais"
