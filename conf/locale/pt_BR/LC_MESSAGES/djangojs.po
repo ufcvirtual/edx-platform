@@ -219,7 +219,7 @@ msgstr "Esta ação não pode ser desfeita."
 
 #: cms/static/js/views/edit_chapter.js:55
 msgid "Upload a new PDF to “<%= name %>”"
-msgstr ""
+msgstr "Enviar um novo PDF à “<%= name %>”"
 
 #: cms/static/js/views/edit_textbook.js:63
 #: cms/static/js/views/overview_assignment_grader.js:62
@@ -254,7 +254,7 @@ msgstr ""
 
 #: cms/static/js/views/overview.js:96
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: cms/static/js/views/section_edit.js:50
 msgid "Your change could not be saved"
@@ -266,25 +266,27 @@ msgstr ""
 
 #: cms/static/js/views/show_textbook.js:31
 msgid "Delete “<%= name %>”?"
-msgstr ""
+msgstr "Excluir “<%= name %>”?"
 
 #: cms/static/js/views/show_textbook.js:33
 msgid ""
 "Deleting a textbook cannot be undone and once deleted any reference to it in"
 " your courseware's navigation will also be removed."
 msgstr ""
+"Excluir um livro não pode ser desfeito, e uma vez excluido qualquer referência"
+" a ele em sua navegação do curso também será removida."
 
 #: cms/static/js/views/show_textbook.js:40
 msgid "Deleting"
-msgstr ""
+msgstr "Excluindo"
 
 #: cms/static/js/views/uploads.js:104
 msgid "We're sorry, there was an error"
-msgstr ""
+msgstr "Nos desculpe mas ocorreu um erro"
 
 #: cms/static/js/views/validation.js:15
 msgid "You've made some changes"
-msgstr ""
+msgstr "Você realizou algumas alterações"
 
 #: cms/static/js/views/validation.js:16
 msgid "Your changes will not take effect until you save your progress."
@@ -330,7 +332,7 @@ msgstr ""
 
 #: cms/static/js/views/settings/main.js:257
 msgid "Files must be in JPEG or PNG format."
-msgstr ""
+msgstr "Os arquivos devem estar no formato JPEG ou PNG."
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js:523
 #: common/static/xmodule/modules/js/001-2e55a7856b776e9acad11e5914fecb1b.js:523
@@ -724,4 +726,56 @@ msgstr "Enviar Novo Arquivo"
 
 msgid "Uploading"
 msgstr "Enviando"
+
+msgid "Add your first textbook"
+msgstr "Adicionar seu primeiro livro"
+
+msgid "You haven't added any textbooks to this course yet."
+msgstr "Você ainda não adicionou nenhum livro neste curso."
+
+msgid "Textbook Name"
+msgstr "Nome do Livro"
+
+msgid "Introduction to Cookie Baking"
+msgstr "Introdução à Culinária"
+
+msgid "provide the title/name of the text book as you would like your students to see it"
+msgstr "forneça um título/nome para o livro da maneira que você deseja que os alunos vejam"
+
+msgid "Chapter Name"
+msgstr "Nome do Capítulo"
+
+msgid "Chapter %s"
+msgstr "Capítulo %s"
+
+msgid "provide the title/name of the chapter that will be used in navigating"
+msgstr "forneça um título/nome para o capítulo que será usado na navegação"
+
+msgid "Chapter Asset"
+msgstr "Arquivo do Capítulo"
+
+msgid "Upload PDF"
+msgstr "Enviar PDF"
+
+msgid "upload a PDF file or provide the path to a Studio asset file"
+msgstr "envie um arquivo PDF ou forneça o caminho caso o arquivo já esteja no Studio"
+
+msgid "path/to/introductionToCookieBaking-CH%d.pdf"
+msgstr "caminho/para/introducaoCulinaria-CH%d.pdf"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Add a Chapter"
+msgstr "Adicionar um Capítulo"
+
+msgid "Upload"
+msgstr "Enviar"
+
+msgid "View Live"
+msgstr "Visualizar"
+
+msgid "Success!"
+msgstr "Sucesso!"
+
 

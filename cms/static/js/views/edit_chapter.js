@@ -54,7 +54,7 @@ define(["backbone", "underscore", "underscore.string", "jquery", "gettext", "js/
             var msg = new FileUploadModel({
                 title: _.template(gettext("Upload a new PDF to “<%= name %>”"),
                     {name: section.escape('name')}),
-                message: "Files must be in PDF format.",
+                message: "Os arquivos devem estar no formato PDF.",
                 mimeTypes: ['application/pdf']
             });
             var that = this;

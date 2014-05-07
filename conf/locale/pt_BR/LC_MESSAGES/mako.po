@@ -6439,3 +6439,34 @@ msgstr "Unidades individuais"
 msgid "Individual Problems"
 msgstr "Problemas individuais"
 
+# Textbooks
+msgid "New Textbook"
+msgstr "Novo Livro"
+
+msgid "Why should I break my text into chapters?"
+msgstr "Por que eu deveria dividir meu texto em capítulos?"
+
+msgid ""
+"It's best practice to break your course's textbook into multiple chapters to"
+" reduce loading times for students. Breaking up textbooks into chapters can "
+"also help students more easily find topic-based information."
+msgstr ""
+"É melhor dividir o livro do seu curso em vários capítulos para reduzir o"
+" tempo de carregamento para os alunos. Dividindo o livro em capítulos também "
+"pode ajudar os alunos a encontrar mais facilmente informações baseadas em tópicos."
+
+msgid "What if my book isn't divided into chapters?"
+msgstr "E se o meu livro não estiver dividido em capítulos?"
+
+msgid ""
+"If you haven't broken your text into chapters, you can upload the entire "
+"text as a single chapter and enter a name of your choice in the Chapter Name"
+" field."
+msgstr ""
+"Caso você não tenha dividido o seu texto em capítulos, você pode adicioná-lo"
+" como um único capítulo e digitar um nome de sua escolha no campo Nome do "
+"Capítulo."
+
+msgid "Success"
+msgstr "Sucesso"
+
