@@ -1316,6 +1316,9 @@ msgstr "Redefinir"
 msgid "Show Answer"
 msgstr "Mostrar Resposta"
 
+msgid "Show Answer(s)"
+msgstr "Mostrar Resposta(s)"
+
 #: lms/templates/problem.html:26
 msgid "Reveal Answer"
 msgstr "Revelar Resposta"
@@ -6214,7 +6217,7 @@ msgid "Studio Support"
 msgstr "Suporte do Studio"
 
 msgid "Need help with Studio? Creating a course is complex, so we're here to help. Take advantage of our documentation, help center, as well as our edX101 introduction course for course authors."
-msgstr "Precisa de ajuda com Studio? A criação de um curso é complexo, por isso estamos aqui para ajudar. Aproveite a nossa documentação, central de ajuda, bem como o nosso curso introdução edX101 para os autores do curso."
+msgstr "Precisa de ajuda com Studio? A criação de um curso é complexo, por isso estamos aqui para ajudar. Aproveite a nossa documentação preparada para os autores de curso."
 
 msgid "Download Studio Documentation"
 msgstr "Download da documentação do Studio"
@@ -6476,3 +6479,10 @@ msgstr "Entre em contato e nos dê sua opinião"
 
 msgid "contact edX Staff with further questions"
 msgstr "entre em contato com a equipe Solar edX caso tenha alguma dúvida"
+
+msgid "Enroll in edX101"
+msgstr "Matricular em Introdução ao edX"
+
+msgid "This is a PDF Document"
+msgstr "Este é um documento PDF"
+

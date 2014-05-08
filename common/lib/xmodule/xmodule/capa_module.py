@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import cgi
 import datetime
 import hashlib
@@ -79,40 +80,40 @@ class CapaFields(object):
     Define the possible fields for a Capa problem
     """
     display_name = String(
-        display_name="Display Name",
-        help="This name appears in the horizontal navigation at the top of the page.",
+        display_name="Nome Exibido",
+        help="Esse nome aparece na barra de navegação horizontal na parte superior da página.",
         scope=Scope.settings,
         # it'd be nice to have a useful default but it screws up other things; so,
         # use display_name_with_default for those
         default="Atividade complexa em branco"
     )
-    attempts = Integer(help="Number of attempts taken by the student on this problem",
+    attempts = Integer(help="Número de tentativas feitas pelo aluno nesta atividade",
                        default=0, scope=Scope.user_state)
     max_attempts = Integer(
-        display_name="Maximum Attempts",
-        help=("Defines the number of times a student can try to answer this problem. "
-              "If the value is not set, infinite attempts are allowed."),
+        display_name="Máximo de Tentativas",
+        help=("Define o número de vezes que um aluno pode tentar responder a este problema."
+              "Se o valor não for definido, será permitido tentativas infinitas."),
         values={"min": 0}, scope=Scope.settings
     )
-    due = Date(help="Date that this problem is due by", scope=Scope.settings)
+    due = Date(help="Data limite de entrega desta atividade", scope=Scope.settings)
     graceperiod = Timedelta(
-        help="Amount of time after the due date that submissions will be accepted",
+        help="Tempo extra pare envio após a data limite",
         scope=Scope.settings
     )
     showanswer = String(
-        display_name="Show Answer",
-        help=("Defines when to show the answer to the problem. "
-              "A default value can be set in Advanced Settings."),
+        display_name="Mostrar Resposta",
+        help=("Define quando mostrar a resposta da atividade. "
+              "Um valor padrão pode ser definido em Configurações Avançadas."),
         scope=Scope.settings,
         default="finished",
         values=[
-            {"display_name": "Always", "value": "always"},
-            {"display_name": "Answered", "value": "answered"},
-            {"display_name": "Attempted", "value": "attempted"},
-            {"display_name": "Closed", "value": "closed"},
-            {"display_name": "Finished", "value": "finished"},
-            {"display_name": "Past Due", "value": "past_due"},
-            {"display_name": "Never", "value": "never"}]
+            {"display_name": "Sempre", "value": "always"},
+            {"display_name": "Respondida", "value": "answered"},
+            {"display_name": "Tentativa", "value": "attempted"},
+            {"display_name": "Fechada", "value": "closed"},
+            {"display_name": "Concluída", "value": "finished"},
+            {"display_name": "Após data final", "value": "past_due"},
+            {"display_name": "Nunca", "value": "never"}]
     )
     force_save_button = Boolean(
         help="Whether to force the save button to appear on the page",
@@ -120,17 +121,17 @@ class CapaFields(object):
         default=False
     )
     rerandomize = Randomization(
-        display_name="Randomization",
-        help="Defines how often inputs are randomized when a student loads the problem. "
-             "This setting only applies to problems that can have randomly generated numeric values. "
-             "A default value can be set in Advanced Settings.",
+        display_name="Randomização",
+        help="Define com que freqüência as entradas são aleatórias quando um aluno carrega a atividade. "
+             "Esta definição aplica-se apenas aos problemas que podem ter valores numéricos gerados aleatóriamente. "
+             "Um valor padrão pode ser definido em Configurações Avançadas.",
         default="never",
         scope=Scope.settings,
         values=[
-            {"display_name": "Always", "value": "always"},
-            {"display_name": "On Reset", "value": "onreset"},
-            {"display_name": "Never", "value": "never"},
-            {"display_name": "Per Student", "value": "per_student"}
+            {"display_name": "Sempre", "value": "always"},
+            {"display_name": "Ao reiniciar", "value": "onreset"},
+            {"display_name": "Nunca", "value": "never"},
+            {"display_name": "Por Aluno", "value": "per_student"}
         ]
     )
     data = String(help="XML data for the problem", scope=Scope.content, default="<problem></problem>")
@@ -141,9 +142,9 @@ class CapaFields(object):
     done = Boolean(help="Whether the student has answered the problem", scope=Scope.user_state)
     seed = Integer(help="Random seed for this student", scope=Scope.user_state)
     weight = Float(
-        display_name="Problem Weight",
-        help=("Defines the number of points each problem is worth. "
-              "If the value is not set, each response field in the problem is worth one point."),
+        display_name="Peso da Atividade",
+        help=("Define o número de pontos que vale para cada atividade. "
+              "Se o valor não for definido, cada campo de resposta na atividade valerá um ponto."),
         values={"min": 0, "step": .1},
         scope=Scope.settings
     )

@@ -60,7 +60,7 @@ msgstr "OK"
 #: cms/static/coffee/src/views/unit.js:169 cms/static/js/base.js:278
 #: cms/static/js/views/course_info_update.js:148
 msgid "Deleting&hellip;"
-msgstr ""
+msgstr "Excluindo&ellip;"
 
 #: cms/static/coffee/src/views/tabs.js:117
 #: cms/static/coffee/src/views/unit.js:192 cms/static/js/base.js:294
@@ -79,31 +79,31 @@ msgstr "Excluir este componente?"
 
 #: cms/static/coffee/src/views/unit.js:161
 msgid "Deleting this component is permanent and cannot be undone."
-msgstr ""
+msgstr "Excluir este componente é uma ação permanente e não pode ser desfeita"
 
 #: cms/static/coffee/src/views/unit.js:164
 msgid "Yes, delete this component"
-msgstr ""
+msgstr "Sim, excluir este componente"
 
 #: cms/static/js/base.js:70 lms/static/js/verify_student/photocapture.js:300
 msgid "This link will open in a new browser window/tab"
-msgstr ""
+msgstr "Este link abrirá em uma nova janela/aba do navegador"
 
 #: cms/static/js/base.js:73
 msgid "This link will open in a modal window"
-msgstr ""
+msgstr "Este link abrirá em uma janela modal"
 
 #: cms/static/js/base.js:262
 msgid "Delete this "
-msgstr ""
+msgstr "Excluir isto "
 
 #: cms/static/js/base.js:263
 msgid "Deleting this "
-msgstr ""
+msgstr "Excluindo isto "
 
 #: cms/static/js/base.js:266
 msgid "Yes, delete this "
-msgstr ""
+msgstr "Sim, excluir isto "
 
 #: cms/static/js/index.js:88
 msgid "Please do not use any spaces or special characters in this field."
@@ -117,7 +117,7 @@ msgstr ""
 
 #: cms/static/js/index.js:138
 msgid "Required field."
-msgstr ""
+msgstr "Campo obrigatório."
 
 #: cms/static/js/sock.js:22
 msgid "Hide Studio Help"
@@ -496,65 +496,67 @@ msgid ""
 "January February March April May June July August September October November"
 " December"
 msgstr ""
+"Janeiro Fevereiro Março Abril Maio Junho Julh Agosto Setembro Outubro Novembro"
+" Dezembro"
 
 #: lms/static/admin/js/calendar.js:27
 msgid "S M T W T F S"
-msgstr ""
+msgstr "D S T Q Q S S"
 
 #: lms/static/admin/js/collapse.js:8 lms/static/admin/js/collapse.js.c:19
 #: lms/static/admin/js/collapse.min.js:1
 msgid "Show"
-msgstr ""
+msgstr "Exibir"
 
 #: lms/static/admin/js/collapse.js:15 lms/static/admin/js/collapse.min.js:1
 msgid "Hide"
-msgstr ""
+msgstr "Ocultar"
 
 #: lms/static/admin/js/dateparse.js:33
 msgid "Sunday Monday Tuesday Wednesday Thursday Friday Saturday"
-msgstr ""
+msgstr "Domingo Segunda Terça Quarta Quinta Sexta Sábado"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:49
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:85
 msgid "Now"
-msgstr ""
+msgstr "Agora"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:53
 msgid "Clock"
-msgstr ""
+msgstr "Relógio"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:81
 msgid "Choose a time"
-msgstr ""
+msgstr "Escolha uma hora"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:86
 msgid "Midnight"
-msgstr ""
+msgstr "Meia-noite"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:87
 msgid "6 a.m."
-msgstr ""
+msgstr "6 a.m."
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:88
 msgid "Noon"
-msgstr ""
+msgstr "Meio-dia"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:144
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:197
 msgid "Today"
-msgstr ""
+msgstr "Hoje"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:148
 msgid "Calendar"
-msgstr ""
+msgstr "Calendário"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:195
 msgid "Yesterday"
-msgstr ""
+msgstr "Ontem"
 
 #: lms/static/admin/js/admin/DateTimeShortcuts.js:199
 msgid "Tomorrow"
-msgstr ""
+msgstr "Amanhã"
 
 #: lms/static/coffee/src/calculator.js:20
 msgid "Open Calculator"

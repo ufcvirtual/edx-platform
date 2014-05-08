@@ -317,7 +317,7 @@ class @Problem
       @$('[id^=answer_], [id^=solution_]').text ''
       @$('[correct_answer]').attr correct_answer: null
       @el.removeClass 'showed'
-      @$('.show-label').text 'Show Answer(s)'
+      @$('.show-label').text 'Exibir Resposta(s)'
 
       @el.find(".capa_inputtype").each (index, inputtype) =>
         display = @inputtypeDisplays[$(inputtype).attr('id')]

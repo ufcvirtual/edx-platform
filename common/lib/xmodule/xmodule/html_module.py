@@ -22,12 +22,12 @@ log = logging.getLogger("mitx.courseware")
 
 class HtmlFields(object):
     display_name = String(
-        display_name="Display Name",
-        help="This name appears in the horizontal navigation at the top of the page.",
+        display_name="Nome Exibido",
+        help="Esse nome aparece na barra de navegação horizontal na parte superior da página.",
         scope=Scope.settings,
         # it'd be nice to have a useful default but it screws up other things; so,
         # use display_name_with_default for those
-        default="Text"
+        default="Texto"
     )
     data = String(help="Html contents to display for this module", default=u"", scope=Scope.content)
     source_code = String(help="Source code for LaTeX documents. This feature is not well-supported.", scope=Scope.settings)
