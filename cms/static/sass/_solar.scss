@@ -1055,6 +1055,14 @@ body.course.feature-upload .wrapper-dialog .dialog form .actions .action-primary
 	}
 }
 
+.view-outline .courseware-section .subsection-list>ol .section-item .draft-item:after {
+	content:"- rascunho";
+}
+
+.view-outline .courseware-section .subsection-list>ol .section-item .private-item:after{
+	content:"- privado";
+}
+
 .view-outline .edit-subsection-publish-settings{
 	width: 500px;
 
