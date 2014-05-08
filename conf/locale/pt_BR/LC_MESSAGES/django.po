@@ -11147,3 +11147,7 @@ msgstr ""
 
 msgid "Success"
 msgstr "Sucesso"
+
+# Contact us
+msgid "Use our feedback tool, Tender, to share your feedback"
+msgstr "Entre em contato e nos dê sua opinião"

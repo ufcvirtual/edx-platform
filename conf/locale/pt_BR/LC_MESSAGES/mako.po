@@ -6470,3 +6470,9 @@ msgstr ""
 msgid "Success"
 msgstr "Sucesso"
 
+# Contact us
+msgid "Use our feedback tool, Tender, to share your feedback"
+msgstr "Entre em contato e nos dê sua opinião"
+
+msgid "contact edX Staff with further questions"
+msgstr "entre em contato com a equipe Solar edX caso tenha alguma dúvida"
