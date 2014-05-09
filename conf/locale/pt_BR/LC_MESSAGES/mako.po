@@ -1949,7 +1949,7 @@ msgstr "Velocidades"
 
 #: lms/templates/video.html:76
 msgid "Speed"
-msgstr "Velocidade"
+msgstr "Vel."
 
 #: lms/templates/video.html:82
 msgid "Volume"
