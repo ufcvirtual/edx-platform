@@ -1055,11 +1055,13 @@ body.course.feature-upload .wrapper-dialog .dialog form .actions .action-primary
 	}
 }
 
-.view-outline .courseware-section .subsection-list>ol .section-item .draft-item:after {
+.view-outline .courseware-section .subsection-list>ol .section-item .draft-item:after,
+.unit-location .window-contents > ol .section-item .draft-item:after {
 	content:"- rascunho";
 }
 
-.view-outline .courseware-section .subsection-list>ol .section-item .private-item:after{
+.view-outline .courseware-section .subsection-list>ol .section-item .private-item:after,
+.unit-location .window-contents > ol .section-item .private-item:after {
 	content:"- privado";
 }
 
@@ -1147,4 +1149,17 @@ body.course.feature-upload .wrapper-dialog .dialog form .actions .action-primary
 			}
 		}
 	}
+}
+
+.xmodule_display.xmodule_VideoModule div.video article.video-wrapper section.video-controls div.secondary-controls div.speeds {
+	& > a {
+		width: 155px;
+	}
+	ol.video_speed {
+		width: 172px;
+	}
+}
+
+.xmodule_display.xmodule_VideoModule div.video article.video-wrapper section.video-controls div.secondary-controls div.speeds ol.video_speeds {
+	width: 172px;
 }

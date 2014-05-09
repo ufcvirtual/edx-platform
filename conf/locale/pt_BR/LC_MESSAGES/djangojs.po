@@ -780,4 +780,39 @@ msgstr "Visualizar"
 msgid "Success!"
 msgstr "Sucesso!"
 
+# Video component
+msgid "Upload New Timed Transcript"
+msgstr "Enviar Nova Trilha de Legenda"
 
+msgid "Add more video sources"
+msgstr "Adicionar novas fontes de vídeo"
+
+msgid "To be sure all students can view the video, we recommend providing alternate versions of the same video: mp4, webm and youtube (if available)."
+msgstr "Para garantir que todos os alunos possam visualizar o vídeo, recomendamos prover versões alternativas do mesmo vídeo em vários formatos: mp4, webm e youtube (se disponível)"
+
+msgid "Import from YouTube"
+msgstr "Importar do YouTube"
+
+msgid "We don't have a timed transcript for this video on edX, but we found a transcript for this video on YouTube. Would you like to import it to edX?"
+msgstr "Nós não temos uma trilha de legenda para este vídeo no edX mas encontramos uma legenda deste vídeo no Youtube. Você gostaria de importa-la ao edX?"
+
+msgid "We have a timed transcript on edX for this video. You can upload a new .srt file to replace it or download to edit."
+msgstr "Nós temos uma legenda no edX para este vídeo. Você pode enviar um novo arquivo .srt para substituí-lo ou baixar para editá-lo."
+
+msgid "Download to Edit"
+msgstr "Baixar para Editar"
+
+msgid "Timed Transcript Found"
+msgstr "Trilha de Legenda Encontrada"
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Timed Transcript"
+msgstr "Trilha de Legenda"
+
+msgid "No Timed Transcript"
+msgstr "Sem Trilha de Legenda"
+
+msgid "We don't have a timed transcript for this video. Please upload a .srt file:"
+msgstr "Nós não temos uma trilha de legenda para este vídeo. Favor enviar um arquivo .srt."

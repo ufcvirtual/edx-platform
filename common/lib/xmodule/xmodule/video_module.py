@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # pylint: disable=W0223
 """Video is ungraded Xmodule for support video content.
 It's new improved video module, which support additional feature:
@@ -39,81 +40,81 @@ log = logging.getLogger(__name__)
 class VideoFields(object):
     """Fields for `VideoModule` and `VideoDescriptor`."""
     display_name = String(
-        display_name="Display Name", help="Display name for this module.",
+        display_name="Nome Exibido", help="Nome de identificação deste módulo.",
         default="Video",
         scope=Scope.settings
     )
     position = Integer(
-        help="Current position in the video",
+        help="Posição atual no vídeo",
         scope=Scope.user_state,
         default=0
     )
     show_captions = Boolean(
-        help="This controls whether or not captions are shown by default.",
-        display_name="Show Transcript",
+        help="Isto controla se as legendas devem ser exibidas ou não por padrão.",
+        display_name="Exibir Legenda",
         scope=Scope.settings,
         default=True
     )
     # TODO: This should be moved to Scope.content, but this will
     # require data migration to support the old video module.
     youtube_id_1_0 = String(
-        help="This is the Youtube ID reference for the normal speed video.",
-        display_name="Youtube ID",
+        help="Este é o ID de referência do Youtube para vídeo em velocidade normal.",
+        display_name="ID Youtube",
         scope=Scope.settings,
         default="OEoXaMPEzfM"
     )
     youtube_id_0_75 = String(
-        help="Optional, for older browsers: the Youtube ID for the .75x speed video.",
-        display_name="Youtube ID for .75x speed",
+        help="Opcional, para navegadores antigos: ID do Youtube para vídeo em velocidade .75x.",
+        display_name="ID Youtube para velocidade .75x",
         scope=Scope.settings,
         default=""
     )
     youtube_id_1_25 = String(
-        help="Optional, for older browsers: the Youtube ID for the 1.25x speed video.",
-        display_name="Youtube ID for 1.25x speed",
+        help="Opcional, para navegadores antigos: ID do Youtube para vídeo em velocidade 1.25x.",
+        display_name="ID Youtube para velocidade 1.25x",
         scope=Scope.settings,
         default=""
     )
     youtube_id_1_5 = String(
-        help="Optional, for older browsers: the Youtube ID for the 1.5x speed video.",
-        display_name="Youtube ID for 1.5x speed",
+        help="Opcional, para navegadores antigos: ID do Youtube para vídeo em velocidade 1.5x.",
+        display_name="ID Youtube para velocidade 1.5x",
         scope=Scope.settings,
         default=""
     )
     start_time = RelativeTime(  # datetime.timedelta object
-        help="Start time for the video (HH:MM:SS).",
-        display_name="Start Time",
+        help="Tempo de início do vídeo (HH:MM:SS).",
+        display_name="Tempo de Início",
         scope=Scope.settings,
         default=datetime.timedelta(seconds=0)
     )
     end_time = RelativeTime(  # datetime.timedelta object
-        help="End time for the video (HH:MM:SS).",
-        display_name="End Time",
+        help="Tempo de término do vídeo (HH:MM:SS).",
+        display_name="Tempo de Término",
         scope=Scope.settings,
         default=datetime.timedelta(seconds=0)
     )
     #front-end code of video player checks logical validity of (start_time, end_time) pair.
 
     source = String(
-        help="The external URL to download the video. This appears as a link beneath the video.",
-        display_name="Download Video",
+        help="URL externa para baixar o vídeo. Isto será exibido como link abaixo do vídeo.",
+        display_name="Baixar Vídeo",
         scope=Scope.settings,
         default=""
     )
     html5_sources = List(
-        help="A list of filenames to be used with HTML5 video. The first supported filetype will be displayed.",
-        display_name="Video Sources",
+        help="Lista de arquivos a serem utilizado com o vídeo HTML5. O primeiro formato de arquivo suportado será exibido.",
+        display_name="Fontes de Vídeo",
         scope=Scope.settings,
     )
     track = String(
-        help="The external URL to download the timed transcript track. This appears as a link beneath the video.",
-        display_name="Download Transcript",
+        help="URL externa para baixar a trilha de legenda. Isto será exibido como link abaixo do vídeo.",
+        display_name="Baixar Legenda",
         scope=Scope.settings,
         default=""
     )
     sub = String(
-        help="The name of the timed transcript track (for non-Youtube videos).",
-        display_name="HTML5 Transcript",
+        help="Nome da faixa de legenda (para vídeos que não sejam do Youtube).",
+        display_name="Legenda HTML5",
         scope=Scope.settings,
         default=""
     )
@@ -201,12 +202,12 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
 
     tabs = [
         {
-            'name': "Basic",
+            'name': "Basico",
             'template': "video/transcripts.html",
             'current': True
         },
         {
-            'name': "Advanced",
+            'name': "Avancado",
             'template': "tabs/metadata-edit-tab.html"
         }
     ]
@@ -309,8 +310,8 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
                 return ''
 
         video_url.update({
-            'help': _('A YouTube URL or a link to a file hosted anywhere on the web.'),
-            'display_name': 'Video URL',
+            'help': _('URL do YouTube ou link para um arquivo hospedado em algum local da web.'),
+            'display_name': 'URL do Vídeo',
             'field_name': 'video_url',
             'type': 'VideoList',
             'default_value': [get_youtube_link(youtube_id_1_0['default_value'])]
