@@ -307,7 +307,7 @@ msgstr "Salvar Alterações"
 
 #: cms/static/js/views/validation.js:134
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Suas alterações foram salvas."
 
 #: cms/static/js/views/settings/advanced.js:56
 msgid ""
@@ -317,7 +317,7 @@ msgstr ""
 
 #: cms/static/js/views/settings/advanced.js:105
 msgid "Your policy changes have been saved."
-msgstr ""
+msgstr "Suas alterações nas regras foram salvas."
 
 #: cms/static/js/views/settings/advanced.js:106
 msgid ""
@@ -328,7 +328,7 @@ msgstr ""
 
 #: cms/static/js/views/settings/main.js:256
 msgid "Upload your course image."
-msgstr ""
+msgstr "Enviar a imagem do seu curso."
 
 #: cms/static/js/views/settings/main.js:257
 msgid "Files must be in JPEG or PNG format."
@@ -337,27 +337,27 @@ msgstr "Os arquivos devem estar no formato JPEG ou PNG."
 #: common/lib/xmodule/xmodule/js/src/capa/display.js:523
 #: common/static/xmodule/modules/js/001-2e55a7856b776e9acad11e5914fecb1b.js:523
 msgid "unanswered"
-msgstr ""
+msgstr "não respondido"
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js:553
 #: common/static/xmodule/modules/js/001-2e55a7856b776e9acad11e5914fecb1b.js:553
 msgid "Status: unsubmitted"
-msgstr ""
+msgstr "Status: não enviado"
 
 #: common/lib/xmodule/xmodule/js/src/video/04_video_control.js:72
 #: common/static/xmodule/modules/js/005-1be5ba2ee27b6aa44e356c16369d41c8.js:72
 msgid "video slider"
-msgstr ""
+msgstr "slider de vídeo"
 
 #: common/lib/xmodule/xmodule/js/src/video/04_video_control.js:152
 #: common/static/xmodule/modules/js/005-1be5ba2ee27b6aa44e356c16369d41c8.js:152
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
 #: common/lib/xmodule/xmodule/js/src/video/04_video_control.js:157
 #: common/static/xmodule/modules/js/005-1be5ba2ee27b6aa44e356c16369d41c8.js:157
 msgid "Play"
-msgstr ""
+msgstr "Tocar"
 
 #: common/lib/xmodule/xmodule/js/src/video/04_video_control.js:180
 #: common/static/xmodule/modules/js/005-1be5ba2ee27b6aa44e356c16369d41c8.js:180
@@ -367,29 +367,29 @@ msgstr ""
 #: common/lib/xmodule/xmodule/js/src/video/04_video_control.js:194
 #: common/static/xmodule/modules/js/005-1be5ba2ee27b6aa44e356c16369d41c8.js:194
 msgid "Exit full browser"
-msgstr ""
+msgstr "Sair do navegador de tela cheia"
 
 #: common/lib/xmodule/xmodule/js/src/video/05_video_quality_control.js:66
 #: common/static/xmodule/modules/js/006-3abcac3b93be85d1c694682b75401837.js:66
 msgid "HD on"
-msgstr ""
+msgstr "HD ativo"
 
 #: common/lib/xmodule/xmodule/js/src/video/05_video_quality_control.js:72
 #: common/static/xmodule/modules/js/006-3abcac3b93be85d1c694682b75401837.js:72
 msgid "HD off"
-msgstr ""
+msgstr "HD desativo"
 
 #: common/lib/xmodule/xmodule/js/src/video/07_video_volume_control.js:72
 #: common/lib/xmodule/xmodule/js/src/video/07_video_volume_control.js:188
 #: common/static/xmodule/modules/js/008-809f0455776945572b5193e6f9156869.js:72
 #: common/static/xmodule/modules/js/008-809f0455776945572b5193e6f9156869.js:188
 msgid "Volume muted"
-msgstr ""
+msgstr "Volume mudo"
 
 #: common/lib/xmodule/xmodule/js/src/video/07_video_volume_control.js:189
 #: common/static/xmodule/modules/js/008-809f0455776945572b5193e6f9156869.js:189
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: common/lib/xmodule/xmodule/js/src/video/09_video_caption.js:235
 #: common/static/xmodule/modules/js/010-d999031737767982f98134bd2da2d5c3.js:235
@@ -399,17 +399,17 @@ msgstr ""
 #: common/lib/xmodule/xmodule/js/src/video/09_video_caption.js:719
 #: common/static/xmodule/modules/js/010-d999031737767982f98134bd2da2d5c3.js:719
 msgid "Turn on captions"
-msgstr ""
+msgstr "Ativar legenda"
 
 #: common/lib/xmodule/xmodule/js/src/video/09_video_caption.js:727
 #: common/static/xmodule/modules/js/010-d999031737767982f98134bd2da2d5c3.js:727
 msgid "Turn off captions"
-msgstr ""
+msgstr "Desativas legenda"
 
 #: lms/static/admin/js/SelectFilter2.js:45
 #, c-format
 msgid "Available %s"
-msgstr ""
+msgstr "Disponívels %s"
 
 #: lms/static/admin/js/SelectFilter2.js:46
 #, c-format
