@@ -6641,7 +6641,7 @@ msgstr "Visualizar Atualizações no Studio"
 
 #: lms/templates/courseware/info.html:40 lms/templates/courseware/info.html:49
 msgid "Course Updates &amp; News"
-msgstr "Atulizações e Notícias do Curso"
+msgstr "Atualizações e Notícias do Curso"
 
 #: lms/templates/courseware/info.html:52
 msgid "Handout Navigation"

@@ -341,7 +341,7 @@ class CourseFields(object):
                                       "action_text": "Edit Course Schedule &amp; Details",
                                       "action_external": False}]}
         ])
-    info_sidebar_name = String(scope=Scope.settings, default='Course Handouts')
+    info_sidebar_name = String(scope=Scope.settings, default='Apostilas do Curso')
     show_timezone = Boolean(
         help="True if timezones should be shown on dates in the courseware. Deprecated in favor of due_date_display_format.",
         scope=Scope.settings, default=True
