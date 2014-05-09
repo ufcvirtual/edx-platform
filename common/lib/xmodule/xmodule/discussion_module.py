@@ -13,7 +13,7 @@ class DiscussionFields(object):
     display_name = String(
         display_name="Nome Exibido",
         help="Nome de identificação deste módulo",
-        default="Fórum",
+        default="Forum",
         scope=Scope.settings
     )
     data = String(
