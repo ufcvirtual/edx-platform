@@ -6486,3 +6486,60 @@ msgstr "Matricular em Introdução ao edX"
 msgid "This is a PDF Document"
 msgstr "Este é um documento PDF"
 
+# Grading
+msgid "Overall Grade Range"
+msgstr "Faixa de Notas"
+
+msgid "Your overall grading scale for student final grades"
+msgstr "Sua escala geral de classificação para as notas finais dos alunos"
+
+msgid "Grading Rules &amp; Policies"
+msgstr "Regras e Políticas de Pontuação"
+
+msgid "Grace Period on Deadline:"
+msgstr "Período de Carência em Datas de Entrega:"
+
+msgid "Leeway on due dates"
+msgstr "Margem adicional de tempo para as datas de entrega"
+
+msgid "Assignment Types"
+msgstr "Tipos de Atividades"
+
+msgid "Categories and labels for any exercises that are gradable"
+msgstr "Categorias e rótulos para qualquer exercício que tiverem pontuação"
+
+msgid "Assignment Type Name"
+msgstr "Nome do Tipo de Atividade"
+
+msgid "New Assignment Type"
+msgstr "Novo Tipo de Atividade"
+
+msgid "Deadlines, requirements, and logistics around grading student work"
+msgstr "Prazo de entrega, requerimentos e logísticas sobre pontuação de trabalhos dos alunos"
+
+msgid "How will these settings be used?"
+msgstr "Como essas configurações serão utilizadas?"
+
+msgid "Your grading settings will be used to calculate students grades and performance."
+msgstr "Suas configurações de notas serão utilizadas para calcular as notas e perfomance dos alunos."
+
+msgid "Overall grade range will be used in students' final grades, which are calculated by the weighting you determine for each custom assignment type."
+msgstr "A faixa de notas será utilizada nas notas finais dos alunos, que são calculadas a partir dos pesos que você determinar em cada tipo de atividade."
+
+msgid "Grading Settings"
+msgstr "Configurações de Notas"
+
+# Navigation
+
+msgid "Details &amp; Schedule"
+msgstr "Calendário e Detalhes"
+
+msgid "Other Course Settings"
+msgstr "Outras Configurações do Curso"
+
+msgid "Help &amp; Account Navigation"
+msgstr "Ajuda e Navegação da Conta"
+
+msgid "Current Course"
+msgstr "Curso Atual"
+

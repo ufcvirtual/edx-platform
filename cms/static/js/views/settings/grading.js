@@ -273,7 +273,7 @@ var GradingView = ValidatingView.extend({
 
         // Munge existing grade labels?
         // If going from Pass/Fail to 3 levels, change to Pass to A
-        if (gradeLength === 1 && this.descendingCutoffs[0]['designation'] === 'Pass') {
+        if (gradeLength === 1 && this.descendingCutoffs[0]['designation'] === 'Aprovado') {
             this.descendingCutoffs[0]['designation'] = this.GRADES[0];
             this.setTopGradeLabel();
         }
@@ -293,7 +293,7 @@ var GradingView = ValidatingView.extend({
         domElement.remove();
 
         if (this.descendingCutoffs.length === 1 && this.descendingCutoffs[0]['designation'] === this.GRADES[0]) {
-            this.descendingCutoffs[0]['designation'] = 'Pass';
+            this.descendingCutoffs[0]['designation'] = 'Aprovado';
             this.setTopGradeLabel();
         }
         this.setFailLabel();
@@ -308,7 +308,7 @@ var GradingView = ValidatingView.extend({
     },
 
     failLabel: function() {
-        if (this.descendingCutoffs.length === 1) return 'Fail';
+        if (this.descendingCutoffs.length === 1) return 'Reprovado';
         else return 'F';
     },
     setFailLabel: function() {

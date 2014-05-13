@@ -290,16 +290,17 @@ msgstr "Você realizou algumas alterações"
 
 #: cms/static/js/views/validation.js:16
 msgid "Your changes will not take effect until you save your progress."
-msgstr ""
+msgstr "Suas alterações não serão efetuadas a não ser que você salve seu progresso."
 
 #: cms/static/js/views/validation.js:17
 msgid "You've made some changes, but there are some errors"
-msgstr ""
+msgstr "Você realizou algumas alterações mas existem alguns erros"
 
 #: cms/static/js/views/validation.js:18
 msgid ""
 "Please address the errors on this page first, and then save your progress."
 msgstr ""
+"Favor primeiro corrigir os erros desta páginas e depois salve seu progresso."
 
 #: cms/static/js/views/validation.js:106
 msgid "Save Changes"
@@ -816,3 +817,35 @@ msgstr "Sem Trilha de Legenda"
 
 msgid "We don't have a timed transcript for this video. Please upload a .srt file:"
 msgstr "Nós não temos uma trilha de legenda para este vídeo. Favor enviar um arquivo .srt."
+
+# Grading
+msgid "Assignment Type Name"
+msgstr "Nome do Tipo de Atividade"
+
+msgid "Abbreviation"
+msgstr "Abreviação"
+
+msgid "e.g. Homework, Midterm Exams"
+msgstr "ex.: Tarefa de Casa, Avaliação Parcial"
+
+msgid "e.g. HW, Midterm"
+msgstr "ex.: TC, AP"
+
+msgid "Weight of Total Grade"
+msgstr "Peso da Nota Total"
+
+msgid "as a percent, e.g. 40"
+msgstr "como porcentagem, ex.: 40"
+
+msgid "Total Number"
+msgstr "Número Total"
+
+msgid "total exercises assigned"
+msgstr "total de exercícios designados"
+
+msgid "Number of Droppable"
+msgstr "Número de Descartes"
+
+msgid "total exercises that won't be graded"
+msgstr "total de exercícios que não serão pontuados"
+
