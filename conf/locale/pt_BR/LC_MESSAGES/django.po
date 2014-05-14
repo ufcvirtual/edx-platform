@@ -11229,3 +11229,66 @@ msgstr "Ajuda e Navegação da Conta"
 
 msgid "Current Course"
 msgstr "Curso Atual"
+
+msgid "{course_name}'s Navigation:"
+msgstr "Navegação de {course_name}:"
+
+# Schedules & Details
+msgid "Basic Information"
+msgstr "Informações Básicas"
+
+msgid "The nuts and bolts of your course"
+msgstr "As informações essenciais do seu curso"
+
+msgid "Organization"
+msgstr "Instituição"
+
+msgid "Course Schedule"
+msgstr "Calendário do Curso"
+
+msgid "Dates that control when your course can be viewed."
+msgstr "Datas que controlam quando seu curso poderá ser visualizado."
+
+msgid "First day the course begins"
+msgstr "Dia de início do curso"
+
+msgid "Course Start Time"
+msgstr "Hora de Início do Curso"
+
+msgid "Course End Date"
+msgstr "Dia de Conclusão do Curso"
+
+msgid "Course End Time"
+msgstr "Hora de Conclusão do Curso"
+
+msgid "Last day your course is active"
+msgstr "O último dia em que seu curso estará ativo"
+
+msgid "Requirements"
+msgstr "Requisitos"
+
+msgid "Expectations of the students taking this course"
+msgstr "O que será esperado dos alunos ao participar deste curso"
+
+msgid "Hours of Effort per Week"
+msgstr "Horas de Estudo por Semana"
+
+msgid "Time spent on all course work"
+msgstr "Tempo a ser gasto estudando o material do curso"
+
+msgid ""
+"Your course's schedule settings determine when students can enroll in and "
+"begin a course."
+msgstr ""
+"As configurações de calendário do seu curso irá determinar quando seus "
+"alunos poderão iniciar o curso."
+
+msgid "Schedule &amp; Details Settings"
+msgstr "Configurações de Calendário & Detalhes"
+
+# mensagem ocultada pois não habilitaremos o catalogo de cursos nativo do edX
+msgid ""
+"Additionally, details provided on this page are also used in edX's catalog "
+"of courses, which new and returning students use to choose new courses to "
+"study."
+msgstr " "
