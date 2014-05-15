@@ -7189,11 +7189,11 @@ msgstr "{earned:.3n} de {total:.3n} pontos possíveis"
 
 #: lms/templates/courseware/progress.html:114
 msgid "Problem Scores: "
-msgstr "Notas dos Problemas:"
+msgstr "Notas das Atividades: "
 
 #: lms/templates/courseware/progress.html:114
 msgid "Practice Scores: "
-msgstr "Notas das atividades práticas:"
+msgstr "Notas das atividades práticas: "
 
 #: lms/templates/courseware/progress.html:121
 msgid "No problem scores in this section"

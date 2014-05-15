@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import abc
 import inspect
 import logging
@@ -365,11 +366,11 @@ class AssignmentFormatGrader(CourseGrader):
             breakdown = [{'percent': total_percent, 'label': total_label,
                           'detail': total_detail, 'category': self.category, 'prominent': True}, ]
         else:
-            total_detail = u"{section_type} Average = {percent:.0%}".format(
+            total_detail = u"{section_type} Média = {percent:.0%}".format(
                 percent=total_percent,
                 section_type=self.section_type
             )
-            total_label = u"{short_label} Avg".format(short_label=self.short_label)
+            total_label = u"Média {short_label}".format(short_label=self.short_label)
 
             if self.show_only_average:
                 breakdown = []

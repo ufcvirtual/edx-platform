@@ -72,7 +72,7 @@ ${progress_graph.body(grade_summary, course.grade_cutoffs, "grade-detail-graph",
                 %if section.get('due') is not None:
                   <%
                       formatted_string = get_time_display(section['due'], course.due_date_display_format)
-                      due_date = '' if len(formatted_string)==0 else _('due {date}'.format(date=formatted_string))
+                      due_date = '' if len(formatted_string)==0 else _('para {date}'.format(date=formatted_string))
                   %>
                   <em>
                   ${due_date}
@@ -82,7 +82,7 @@ ${progress_graph.body(grade_summary, course.grade_cutoffs, "grade-detail-graph",
 
               <section class="scores">
                 %if len(section['scores']) > 0:
-                  <h3> ${ "Problem Scores: " if section['graded'] else "Practice Scores: "} </h3>
+                  <h3> ${ "Notas das Atividades: " if section['graded'] else "Notas das atividades práticas: "} </h3>
                   <ol>
                     %for score in section['scores']:
                     <li>${"{0:.3n}/{1:.3n}".format(float(score.earned),float(score.possible))}</li>
