@@ -23,7 +23,7 @@
             assets_url = location.url_reverse('assets/', '')
       %>
       <h2 class="info-course">
-        <span class="sr">${_("Current Course:")}</span>
+        <span class="sr">${_("Current Course")}:</span>
         <a class="course-link" href="${index_url}">
           <span class="course-org">${context_course.display_org_with_default | h}</span><span class="course-number">${context_course.display_number_with_default | h}</span>
           <span class="course-title" title="${context_course.display_name_with_default}">${context_course.display_name_with_default}</span>
@@ -74,9 +74,9 @@
 ##                  <li class="nav-item nav-course-settings-team">
 ##                    <a href="${course_team_url}">${_("Course Team")}</a>
 ##                  </li>
-                  <li class="nav-item nav-course-settings-advanced">
-                    <a href="${reverse('course_advanced_settings', kwargs={'org' : ctx_loc.org, 'course' : ctx_loc.course, 'name': ctx_loc.name})}">${_("Advanced Settings")}</a>
-                  </li>
+##                  <li class="nav-item nav-course-settings-advanced">
+##                    <a href="${reverse('course_advanced_settings', kwargs={'org' : ctx_loc.org, 'course' : ctx_loc.course, 'name': ctx_loc.name})}">${_("Advanced Settings")}</a>
+##                  </li>
                 </ul>
               </div>
             </div>
