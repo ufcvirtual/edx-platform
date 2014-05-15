@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import re
 import cgi
@@ -48,10 +49,10 @@ def course_wiki_redirect(request, course_id):
 
     valid_slug = True
     if not course_slug:
-        log.exception("This course is improperly configured. The slug cannot be empty.")
+        log.exception("Este curso está configurado incorretamente. O espaçador não pode ser vazio.")
         valid_slug = False
     if re.match(r'^[-\w\.]+$', course_slug) is None:
-        log.exception("This course is improperly configured. The slug can only contain letters, numbers, periods or hyphens.")
+        log.exception("Este curso está configurado incorretamente. O espaçado pode conter apenas letras, números, pontos ou hífens.")
         valid_slug = False
 
     if not valid_slug:
@@ -96,8 +97,8 @@ def course_wiki_redirect(request, course_id):
             root,
             course_slug,
             title=course_slug,
-            content=cgi.escape(u"This is the wiki for **{0}**'s _{1}_.".format(course.display_org_with_default, course.display_name_with_default)),
-            user_message="Course page automatically created.",
+            content=cgi.escape(u"Essa é a wiki para _{1}_ de **{0}**.".format(course.display_org_with_default, course.display_name_with_default)),
+            user_message="Página de curso criada automaticamente.",
             user=None,
             ip_address=None,
             article_kwargs={'owner': None,
@@ -125,9 +126,9 @@ def get_or_create_root():
         pass
 
     starting_content = "\n".join((
-    "Welcome to the edX Wiki",
+    "Bem-vindo ao Wiki edX",
     "===",
-    "Visit a course wiki to add an article."))
+    "Visite um wiki de um curso para adicionar um artigo."))
 
     root = URLPath.create_root(title="Wiki",
                         content=starting_content)
