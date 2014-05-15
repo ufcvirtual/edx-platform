@@ -353,7 +353,7 @@ class AssignmentFormatGrader(CourseGrader):
         total_percent, dropped_indices = total_with_drops(breakdown, self.drop_count)
 
         for dropped_index in dropped_indices:
-            breakdown[dropped_index]['mark'] = {'detail': u"The lowest {drop_count} {section_type} scores are dropped."
+            breakdown[dropped_index]['mark'] = {'detail': u"A(s) {drop_count} nota(s) mais baixas de {section_type} são ignoradas."
                                                 .format(drop_count=self.drop_count, section_type=self.section_type)}
 
         if len(breakdown) == 1:
