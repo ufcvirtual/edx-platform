@@ -11292,3 +11292,136 @@ msgid ""
 "of courses, which new and returning students use to choose new courses to "
 "study."
 msgstr " "
+
+# Import
+msgid "Course Import"
+msgstr "Importar Curso"
+
+msgid "You may import existing course structure and content into Studio."
+msgstr "Você pode importar uma estrutura e conteúdo de curso para o Studio."
+
+msgid ""
+"Importing is not something to take lightly as the course content you "
+"successfully upload will be integrated into your course content and cannot "
+"be reversed."
+msgstr ""
+"Importar não é algo a ser feito levianamente pois conteúdo que você importar"
+" com sucesso será integrado ao conteúdo do seu curso e isso é irreversível."
+
+msgid ""
+"During the initial stages of the import process, please do not navigate away"
+" from this page."
+msgstr ""
+"Durante os estágios iniciais do processo de importação favor não navegar "
+"para outras páginas."
+
+msgid "Gzipped Tar Files (.tar.gz) Only"
+msgstr "Apenas arquivos .tar.gz"
+
+msgid ""
+"File uploads must be gzipped tar files (.tar.gz) containing, at a minimum, a"
+" {filename} file."
+msgstr ""
+"Arquivos devem estar como arquivos tar compactados com gzip (.tar.gz) "
+"contendo, no mínimo, um arquivo {filename}"
+
+msgid "Warning: Auto-generated Nodes"
+msgstr "Cuidado: Nós gerados automaticamente"
+
+msgid ""
+"Please note that if your course has any problems with auto-generated "
+"{nodename} nodes, re-importing your course could cause the loss of student "
+"data associated with those problems."
+msgstr ""
+"Note que se seu curso tiver problemas com nós {nodename} gerados "
+"automaticamente, re-importar seu curso pode causar a perda de dados de "
+"alunos associados a esses problemas."
+
+msgid "Select a File (.tar.gz format) to Replace Your Course Content"
+msgstr ""
+"Selecionar um arquivo (formato .tar.gz) para substituir o conteúdo de seu "
+"Curso"
+
+msgid "Choose File"
+msgstr "Escolher Arquivo"
+
+msgid "File Chosen:"
+msgstr "Arquivo Escolhido:"
+
+msgid "Course Import Status"
+msgstr "Estado de Importação do Curso"
+
+msgid "Transferring your file to our servers"
+msgstr "Transferindo seu arquivo para nossos servidores"
+
+msgid "Unpacking"
+msgstr "Descompactando"
+
+msgid ""
+"Expanding and preparing folder/file structure (You can now leave this page "
+"safely, but avoid making drastic changes to content until this import is "
+"complete)"
+msgstr ""
+"Expandindo e preparando a estrutura de pastas/arquvos (Você pode sair desta "
+"página em segurança, mas evite fazer mudanças drásticas no conteúdo até que "
+"a importar seja concluída"
+
+msgid "Verifying"
+msgstr "Verificando"
+
+msgid "Reviewing semantics, syntax, and required data"
+msgstr "Revisando semântica, sintaxe e dados requeridos"
+
+msgid "Updating Course"
+msgstr "Atualizando Curso"
+
+msgid ""
+"Integrating your imported content into this course. This may take a while "
+"with larger courses."
+msgstr ""
+"Integrando seu conteúdo importado neste curso. Isto pode demorar um pouco em"
+" cursos grandes."
+
+msgid "Your imported content has now been integrated into this course"
+msgstr "Seu conteúdo importado foi integrado a este curso"
+
+msgid "View Updated Outline"
+msgstr "Ver Estrutura de Curso Atualizada"
+
+msgid "Replace my course with the one above"
+msgstr "Substituir meu curso com o material acima"
+
+# Export
+msgid "Course Export"
+msgstr "Exportar Curso"
+
+msgid "About Exporting Courses"
+msgstr "Sobre a exportação de cursos"
+
+msgid ""
+"When exporting your course, you will receive a .tar.gz formatted file that "
+"contains the following course data:"
+msgstr ""
+"Ao exportar seu curso você receberá um arquivo no formato .tar.gz contendo "
+"os seguintes dados:"
+
+msgid "Course Structure (Sections and sub-section ordering)"
+msgstr "Estrutura do Curso (ordenamento de seções e subseções)"
+
+msgid "Course Assets"
+msgstr "Ativos do Curso"
+
+msgid ""
+"Your course export <strong>will not include</strong>: student data, "
+"forum/discussion data, course settings, certificates, grading information, "
+"or user data."
+msgstr ""
+"Seu curso exportado <strong>não incluirá</strong>: dados de alunos, dados de"
+" fórum/discussão, configurações do curso, certificados, informações de "
+"notas, ou dados de usuários."
+
+msgid "Download Files"
+msgstr "Transferir Arquivos"
+
+msgid "Export Course:"
+msgstr "Exportar Curso:"
